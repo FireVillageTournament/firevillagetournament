@@ -1,545 +1,431 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fire Village Tournament Registration</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #FF6B00;
-            --secondary: #FFD700;
-            --dark: #121212;
-            --light: #F8F8F8;
-            --accent: #FF3D00;
-        }
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--dark);
-            color: var(--light);
-            min-height: 100vh;
-        }
-        
-        .title-font {
-            font-family: 'Orbitron', sans-serif;
-        }
-        
-        .gradient-text {
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .input-field {
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .input-field:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.2);
-        }
-        
-        .btn-primary {
-            background: linear-gradient(90deg, var(--primary), #FF8C00);
-            transition: all 0.3s ease;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 107, 0, 0.4);
-        }
-        
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        
-        .error-message {
-            color: var(--accent);
-            font-size: 0.75rem;
-            margin-top: 0.25rem;
-            display: none;
-        }
-        
-        .input-error {
-            border-color: var(--accent) !important;
-            animation: shake 0.5s;
-        }
-        
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            20%, 60% { transform: translateX(-5px); }
-            40%, 80% { transform: translateX(5px); }
-        }
-        
-        .confirmation-overlay {
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(5px);
-        }
-        
-        .countdown {
-            font-family: 'Orbitron', sans-serif;
-        }
-        
-        @media (max-width: 768px) {
-            .mobile-stack {
-                flex-direction: column;
-            }
-            
-            .mobile-stack > * {
-                width: 100%;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register | Fire Village</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <style>
+    body {
+      background: #000;
+      font-family: 'Bebas Neue', cursive;
+    }
+    .video-background {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -1;
+      object-fit: cover;
+    }
+    .form-title {
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(45deg, #facc15, #f97316);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 2rem;
+      animation: glow 2s infinite alternate;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #facc15; }
+      to { text-shadow: 0 0 20px #f97316; }
+    }
+    .confirmation-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+    }
+    .confirmation-box {
+      background: #111;
+      border: 2px solid #facc15;
+      border-radius: 10px;
+      padding: 30px;
+      max-width: 500px;
+      text-align: center;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(250, 204, 21, 0.4); }
+      70% { box-shadow: 0 0 0 15px rgba(250, 204, 21, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(250, 204, 21, 0); }
+    }
+    .error-message {
+      color: #ef4444;
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+      display: none;
+    }
+    .input-error {
+      border-color: #ef4444 !important;
+      animation: shake 0.5s;
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-5px); }
+      40%, 80% { transform: translateX(5px); }
+    }
+    .team-member-box {
+      background: rgba(31, 41, 55, 0.7);
+      border: 1px solid #f59e0b;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    .remove-member {
+      background: #ef4444;
+      color: white;
+      border: none;
+      border-radius: 0.25rem;
+      padding: 0.25rem 0.5rem;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+    .add-member {
+      background: #10b981;
+      color: white;
+      border: none;
+      border-radius: 0.25rem;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      margin-bottom: 1rem;
+    }
+    .countdown {
+      color: #facc15;
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+  </style>
 </head>
-<body class="bg-gray-900">
-    <div class="container mx-auto px-4 py-8 max-w-4xl">
-        <!-- Header -->
-        <header class="text-center mb-10">
-            <div class="flex justify-center mb-4">
-                <div class="w-20 h-20 bg-gradient-to-r from-orange-500 to-yellow-400 rounded-full flex items-center justify-center">
-                    <i class="fas fa-fire text-3xl text-white"></i>
-                </div>
-            </div>
-            <h1 class="title-font text-4xl md:text-5xl mb-2 gradient-text">FIRE VILLAGE</h1>
-            <h2 class="text-xl md:text-2xl text-gray-300">TOURNAMENT REGISTRATION</h2>
-        </header>
 
-        <!-- Registration Form -->
-        <form id="registrationForm" class="bg-gray-800 rounded-xl shadow-2xl overflow-hidden p-6 md:p-8">
-            <!-- Team Information -->
-            <div class="mb-10">
-                <div class="flex items-center mb-6">
-                    <div class="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center mr-3">
-                        <span class="text-white font-bold">1</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-orange-400">TEAM INFORMATION</h3>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-gray-300 mb-2">Team Name *</label>
-                        <input type="text" name="team_name" required 
-                               class="w-full px-4 py-3 rounded-lg input-field text-white">
-                        <div id="team_name_error" class="error-message">Team name is required</div>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-gray-300 mb-2">Team Logo (Optional)</label>
-                        <div class="flex items-center">
-                            <label class="btn-secondary px-4 py-3 rounded-lg cursor-pointer flex items-center">
-                                <i class="fas fa-upload mr-2"></i>
-                                <span>Choose File</span>
-                                <input type="file" name="team_logo" accept="image/*" class="hidden">
-                            </label>
-                            <span id="file-name" class="ml-3 text-sm text-gray-400">No file selected</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Fire Village Tournament Registration</title>
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script>
-        // Initialize EmailJS (replace with your actual IDs)
-        emailjs.init('your_emailjs_user_id');
-        
-        function sendEmail(formData) {
-            return emailjs.send('your_emailjs_service_id', 'your_template_id', {
-                team_name: formData.team_name,
-                captain_name: formData.captain_name,
-                phone: formData.phone,
-                email: formData.email,
-                payment_method: formData.payment_method,
-                to_email: "firevillage.in@gmail.com"  // Auto-sends to your email
-            });
-        }
+<body class="bg-black text-white font-sans">
+  <!-- Video Background -->
+  <video autoplay muted loop class="video-background">
+    <source src="./assets/fire-bg-video.mp4" type="video/mp4">
+  </video>
 
-        function handleSubmit(e) {
-            e.preventDefault();
-            
-            // 1. Get form data
-            const formData = {
-                team_name: document.getElementById('team_name').value,
-                captain_name: document.getElementById('captain_name').value,
-                phone: document.getElementById('phone').value,
-                email: document.getElementById('email').value,
-                payment_method: document.querySelector('input[name="payment"]:checked').value
-            };
+  <!-- Navbar -->
+  <nav class="bg-gray-900 p-4 flex justify-between items-center shadow-md">
+    <img src="./assets/logo.png" alt="Fire Village Logo" class="h-12 w-auto">
+    <ul class="flex gap-4 text-sm md:text-base">
+      <li><a href="index.html" class="hover:text-yellow-400">Home</a></li>
+      <li><a href="leaderboard.html" class="hover:text-yellow-400">Leaderboard</a></li>
+      <li><a href="teams.html" class="hover:text-yellow-400">Teams</a></li>
+      <li><a href="register.html" class="text-yellow-400 font-semibold">Register</a></li>
+      <li><a href="contact.html" class="hover:text-yellow-400">Contact</a></li>
+    </ul>
+  </nav>
 
-            // 2. Send email
-            sendEmail(formData)
-                .then(() => {
-                    alert("Registration successful! Check your email.");
-                    window.location.href = "success.html"; // Redirect after success
-                })
-                .catch(error => {
-                    console.error("Email sending failed:", error);
-                    // Auto-report errors to your email
-                    emailjs.send('your_emailjs_service_id', 'error_template', {
-                        error: error.message,
-                        form_data: JSON.stringify(formData),
-                        to_email: "firevillage.in@gmail.com"
-                    });
-                    alert("Registration failed. Our team has been notified.");
-                });
-        }
-    </script>
-</head>
-<body>
-    <form onsubmit="handleSubmit(event)">
-        <!-- Your form fields here -->
-        <input type="text" id="team_name" required placeholder="Team Name">
-        <input type="text" id="captain_name" required placeholder="Captain Name">
-        <input type="tel" id="phone" required placeholder="WhatsApp Number">
-        <input type="email" id="email" required placeholder="Email">
-        
-        <div>
-            <input type="radio" name="payment" value="UPI" required> UPI
-            <input type="radio" name="payment" value="Paytm"> Paytm
+  <!-- Registration Form -->
+  <section class="p-6 md:p-10 max-w-3xl mx-auto bg-gray-900 bg-opacity-80 rounded-lg shadow-lg mt-10">
+    <h2 class="form-title text-center mb-6">🔥 Register Your Team 🔥</h2>
+    <form id="registrationForm" class="space-y-6">
+      <div>
+        <label class="block mb-1 text-yellow-300">Team Name *</label>
+        <input type="text" name="team_name" required 
+               class="w-full px-4 py-2 rounded bg-gray-800 border border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-400">
+        <div id="team_name_error" class="error-message"></div>
+      </div>
+
+      <div>
+        <label class="block mb-1 text-yellow-300">Captain Name *</label>
+        <input type="text" name="captain_name" required 
+               class="w-full px-4 py-2 rounded bg-gray-800 border border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-400">
+        <div id="captain_name_error" class="error-message"></div>
+      </div>
+
+      <div>
+        <label class="block mb-1 text-yellow-300">Free Fire UID (Captain) *</label>
+        <input type="text" name="captain_uid" required pattern="\d{10,12}" 
+               class="w-full px-4 py-2 rounded bg-gray-800 border border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-400">
+        <div id="captain_uid_error" class="error-message"></div>
+      </div>
+
+      <div>
+        <label class="block mb-1 text-yellow-300">Mobile Number (WhatsApp) *</label>
+        <input type="tel" name="phone" required pattern="[0-9]{10}" 
+               class="w-full px-4 py-2 rounded bg-gray-800 border border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-400">
+        <div id="phone_error" class="error-message"></div>
+      </div>
+
+      <div>
+        <label class="block mb-1 text-yellow-300">Email *</label>
+        <input type="email" name="email" required 
+               class="w-full px-4 py-2 rounded bg-gray-800 border border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-400">
+        <div id="email_error" class="error-message"></div>
+      </div>
+
+      <div>
+        <label class="block mb-1 text-yellow-300">Payment Method *</label>
+        <select name="payment_method" required 
+               class="w-full px-4 py-2 rounded bg-gray-800 border border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-400">
+          <option value="">Select Payment Method</option>
+          <option value="UPI">UPI</option>
+          <option value="Paytm">Paytm</option>
+          <option value="Google Pay">Google Pay</option>
+        </select>
+        <div id="payment_method_error" class="error-message"></div>
+      </div>
+
+      <div id="teamMembersContainer">
+        <h3 class="text-yellow-300 mb-2">Team Members</h3>
+        <div class="team-member-box">
+          <div class="mb-2">
+            <label class="block mb-1 text-yellow-300">Member 1 (Captain) *</label>
+            <input type="text" name="member1_name" placeholder="Name" required 
+                   class="w-full px-4 py-2 rounded bg-gray-800 border border-yellow-500 focus:outline-none mb-2">
+            <input type="text" name="member1_uid" placeholder="Free Fire UID" required pattern="\d{10,12}" 
+                   class="w-full px-4 py-2 rounded bg-gray-800 border border-yellow-500 focus:outline-none">
+          </div>
         </div>
-        
-        <button type="submit">Register Now</button>
+      </div>
+
+      <button type="button" id="addMemberBtn" class="add-member">+ Add Team Member</button>
+
+      <div class="mt-4">
+        <label class="flex items-center">
+          <input type="checkbox" name="terms" required 
+                 class="rounded bg-gray-800 border-yellow-500 text-yellow-500 focus:ring-yellow-500">
+          <span class="ml-2">I agree to the <a href="#" class="text-yellow-400 hover:underline">terms and conditions</a> *</span>
+        </label>
+        <div id="terms_error" class="error-message"></div>
+      </div>
+
+      <button type="submit" class="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 px-4 rounded transition transform hover:scale-105 duration-300">
+        <span id="submit-text">Submit Registration</span>
+        <span id="submit-spinner" class="hidden"><i class="fas fa-spinner fa-spin mr-2"></i> Processing...</span>
+      </button>
     </form>
-</body>
-</html>
-         
-                    
-                   
 
-    <!-- Confirmation Overlay -->
-    <div id="confirmationOverlay" class="fixed inset-0 z-50 flex items-center justify-center confimation-overlay hidden">
-        <div class="bg-gray-800 rounded-xl p-8 max-w-md w-full mx-4 border border-orange-500 transform transition-all duration-300 scale-95 opacity-0">
-            <div class="text-center">
-                <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <i class="fas fa-check text-white text-3xl"></i>
-                </div>
-                <h3 class="text-2xl font-bold text-green-400 mb-4">REGISTRATION SUCCESSFUL!</h3>
-                <p class="text-gray-300 mb-6">We've sent payment details to your email and WhatsApp.</p>
-                
-                <div class="bg-gray-700 rounded-lg p-4 mb-6">
-                    <p class="text-sm text-gray-400 mb-2">Payment must be completed within 24 hours</p>
-                    <p class="font-medium text-orange-400" id="confirmation-email"></p>
-                    <p class="font-medium text-orange-400" id="confirmation-phone"></p>
-                </div>
-                
-                <div class="countdown text-orange-400 mb-6">
-                    Redirecting in <span id="countdown">5</span> seconds...
-                </div>
-                
-                <p class="text-xs text-gray-500">Check spam folder if you don't see our email</p>
-            </div>
-        </div>
+    <div class="mt-8 text-sm text-gray-300 border-t pt-4">
+      <h3 class="text-yellow-400 mb-2 font-semibold">⚠ Important Notice:</h3>
+      <ul class="list-disc list-inside space-y-1">
+        <li>Registration will only be confirmed after payment verification</li>
+        <li>We're available 24/7 at <strong>firevillage.in@gmail.com</strong></li>
+        <li>Payment details will be sent to your email/WhatsApp</li>
+      </ul>
     </div>
+  </section>
 
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script>
-        // Initialize EmailJS
-        emailjs.init('YOUR_EMAILJS_USER_ID');
+  <!-- Confirmation Overlay -->
+  <div id="confirmationOverlay" class="confirmation-overlay">
+    <div class="confirmation-box">
+      <div class="text-green-500 text-5xl mb-4">
+        <i class="fas fa-check-circle"></i>
+      </div>
+      <h2 class="text-2xl font-bold text-yellow-400 mb-4">Registration Successful!</h2>
+      <p class="mb-4">Thank you for joining Fire Village!</p>
+      <div class="bg-gray-800 p-4 rounded-lg mb-6">
+        <p>We've sent payment details to:</p>
+        <p class="font-bold text-yellow-300" id="confirmation-email"></p>
+        <p class="font-bold text-yellow-300" id="confirmation-phone"></p>
+      </div>
+      <p class="text-sm text-gray-300 mb-4">Please complete payment within 24 hours to secure your spot.</p>
+      <div class="countdown">Redirecting to homepage in <span id="countdown">5</span> seconds...</div>
+    </div>
+  </div>
+
+  <footer class="bg-gray-900 bg-opacity-90 text-center text-sm py-6 mt-10 border-t border-gray-700">
+    &copy; 2025 Fire Village Tournament. All rights reserved.
+  </footer>
+
+  <script>
+    // Initialize EmailJS with your User ID
+    emailjs.init('YOUR_EMAILJS_USER_ID');
+    
+    // Team member counter
+    let memberCount = 1;
+    
+    // Add team member
+    document.getElementById('addMemberBtn').addEventListener('click', function() {
+      if (memberCount >= 4) {
+        alert('Maximum 4 team members allowed (including captain)');
+        return;
+      }
+      
+      memberCount++;
+      const memberBox = document.createElement('div');
+      memberBox.className = 'team-member-box';
+      memberBox.innerHTML = `
+        <div class="mb-2">
+          <label class="block mb-1 text-yellow-300">Member ${memberCount} *</label>
+          <input type="text" name="member${memberCount}_name" placeholder="Name" required 
+                 class="w-full px-4 py-2 rounded bg-gray-800 border border-yellow-500 focus:outline-none mb-2">
+          <input type="text" name="member${memberCount}_uid" placeholder="Free Fire UID" required pattern="\\d{10,12}" 
+                 class="w-full px-4 py-2 rounded bg-gray-800 border border-yellow-500 focus:outline-none">
+        </div>
+        <button type="button" class="remove-member" onclick="this.parentElement.parentElement.remove(); memberCount--;">Remove Member</button>
+      `;
+      document.getElementById('teamMembersContainer').appendChild(memberBox);
+    });
+
+    // Form validation and submission
+    document.getElementById('registrationForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      // Reset errors
+      document.querySelectorAll('.error-message').forEach(el => {
+        el.textContent = '';
+        el.style.display = 'none';
+      });
+      document.querySelectorAll('.input-error').forEach(el => el.classList.remove('input-error'));
+      
+      // Validate form
+      let isValid = true;
+      const formData = new FormData(this);
+      const formObject = Object.fromEntries(formData.entries());
+      
+      // Required fields validation
+      const requiredFields = ['team_name', 'captain_name', 'captain_uid', 'phone', 'email', 'payment_method', 'terms'];
+      for (const field of requiredFields) {
+        if (!formObject[field]) {
+          document.getElementById(`${field}_error`).textContent = 'This field is required';
+          document.getElementById(`${field}_error`).style.display = 'block';
+          document.querySelector(`[name="${field}"]`).classList.add('input-error');
+          isValid = false;
+        }
+      }
+      
+      // Validate UID format
+      const uidRegex = /^\d{10,12}$/;
+      if (!uidRegex.test(formObject.captain_uid)) {
+        document.getElementById('captain_uid_error').textContent = 'Please enter a valid 10-12 digit UID';
+        document.getElementById('captain_uid_error').style.display = 'block';
+        document.querySelector('[name="captain_uid"]').classList.add('input-error');
+        isValid = false;
+      }
+      
+      // Validate phone format
+      const phoneRegex = /^\d{10}$/;
+      if (!phoneRegex.test(formObject.phone)) {
+        document.getElementById('phone_error').textContent = 'Please enter a valid 10-digit mobile number';
+        document.getElementById('phone_error').style.display = 'block';
+        document.querySelector('[name="phone"]').classList.add('input-error');
+        isValid = false;
+      }
+      
+      // Validate email format
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formObject.email)) {
+        document.getElementById('email_error').textContent = 'Please enter a valid email address';
+        document.getElementById('email_error').style.display = 'block';
+        document.querySelector('[name="email"]').classList.add('input-error');
+        isValid = false;
+      }
+      
+      // Validate team members
+      for (let i = 1; i <= memberCount; i++) {
+        const name = formObject[`member${i}_name`];
+        const uid = formObject[`member${i}_uid`];
         
-        // Team member counter
-        let memberCount = 1;
+        if (!name || !uid) {
+          alert(`Please fill all details for Member ${i}`);
+          isValid = false;
+          break;
+        }
         
-        // File input display
-        document.querySelector('input[name="team_logo"]').addEventListener('change', function(e) {
-            const fileName = e.target.files[0]?.name || 'No file selected';
-            document.getElementById('file-name').textContent = fileName;
+        if (!uidRegex.test(uid)) {
+          alert(`Please enter a valid UID for Member ${i}`);
+          isValid = false;
+          break;
+        }
+      }
+      
+      if (!isValid) return;
+      
+      try {
+        // Show loading state
+        document.getElementById('submit-text').classList.add('hidden');
+        document.getElementById('submit-spinner').classList.remove('hidden');
+        
+        // Prepare team members data
+        const teamMembers = [];
+        for (let i = 1; i <= memberCount; i++) {
+          teamMembers.push({
+            name: formObject[`member${i}_name`],
+            uid: formObject[`member${i}_uid`]
+          });
+        }
+        
+        // Send email to admin (firevillage.in@gmail.com)
+        await emailjs.send('YOUR_EMAILJS_SERVICE_ID', 'YOUR_ADMIN_TEMPLATE_ID', {
+          team_name: formObject.team_name,
+          captain_name: formObject.captain_name,
+          captain_uid: formObject.captain_uid,
+          phone: formObject.phone,
+          email: formObject.email,
+          payment_method: formObject.payment_method,
+          team_members: JSON.stringify(teamMembers),
+          to_email: 'firevillage.in@gmail.com',
+          subject: 'New Registration: ' + formObject.team_name
         });
         
-        // Auto-fill first member from captain info
-        function setupMemberAutoFill() {
-            const captainName = document.querySelector('input[name="captain_name"]');
-            const captainUid = document.querySelector('input[name="captain_uid"]');
-            const captainLevel = document.querySelector('input[name="captain_level"]');
-            
-            captainName.addEventListener('input', updateMember1);
-            captainUid.addEventListener('input', updateMember1);
-            captainLevel.addEventListener('input', updateMember1);
-            
-            function updateMember1() {
-                document.querySelector('input[name="member1_name"]').value = captainName.value;
-                document.querySelector('input[name="member1_uid"]').value = captainUid.value;
-                document.querySelector('input[name="member1_level"]').value = captainLevel.value;
-            }
-            
-            // Initialize member container
-            document.getElementById('teamMembersContainer').innerHTML = `
-                <div class="team-member bg-gray-700 rounded-lg p-4 mb-4">
-                    <h4 class="text-orange-400 mb-3">Member 1 (Captain)</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div>
-                            <label class="block text-gray-300 text-sm mb-1">Name *</label>
-                            <input type="text" name="member1_name" required 
-                                   class="w-full px-3 py-2 rounded input-field text-white">
-                        </div>
-                        <div>
-                            <label class="block text-gray-300 text-sm mb-1">UID *</label>
-                            <input type="text" name="member1_uid" required pattern="\\d{10,12}"
-                                   class="w-full px-3 py-2 rounded input-field text-white">
-                        </div>
-                        <div>
-                            <label class="block text-gray-300 text-sm mb-1">Level *</label>
-                            <input type="number" name="member1_level" required min="1" max="70"
-                                   class="w-full px-3 py-2 rounded input-field text-white">
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-        
-        // Add team member
-        document.getElementById('addMemberBtn').addEventListener('click', function() {
-            if (memberCount >= 4) {
-                showAlert('Maximum 4 team members allowed');
-                return;
-            }
-            
-            memberCount++;
-            const memberBox = document.createElement('div');
-            memberBox.className = 'team-member bg-gray-700 rounded-lg p-4 mb-4';
-            memberBox.innerHTML = `
-                <div class="flex justify-between items-center mb-3">
-                    <h4 class="text-orange-400">Member ${memberCount}</h4>
-                    <button type="button" onclick="removeMember(this)" class="text-red-400 hover:text-red-300">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div>
-                        <label class="block text-gray-300 text-sm mb-1">Name *</label>
-                        <input type="text" name="member${memberCount}_name" required 
-                               class="w-full px-3 py-2 rounded input-field text-white">
-                    </div>
-                    <div>
-                        <label class="block text-gray-300 text-sm mb-1">UID *</label>
-                        <input type="text" name="member${memberCount}_uid" required pattern="\\d{10,12}"
-                               class="w-full px-3 py-2 rounded input-field text-white">
-                    </div>
-                    <div>
-                        <label class="block text-gray-300 text-sm mb-1">Level *</label>
-                        <input type="number" name="member${memberCount}_level" required min="1" max="70"
-                               class="w-full px-3 py-2 rounded input-field text-white">
-                    </div>
-                </div>
-            `;
-            document.getElementById('teamMembersContainer').appendChild(memberBox);
+        // Send confirmation email to user
+        await emailjs.send('YOUR_EMAILJS_SERVICE_ID', 'YOUR_USER_TEMPLATE_ID', {
+          team_name: formObject.team_name,
+          captain_name: formObject.captain_name,
+          to_email: formObject.email,
+          subject: 'Fire Village Registration Confirmation'
         });
         
-        // Remove team member
-        window.removeMember = function(button) {
-            button.closest('.team-member').remove();
-            memberCount--;
-            renumberMembers();
-        };
+        // Show confirmation
+        document.getElementById('confirmation-email').textContent = formObject.email;
+        document.getElementById('confirmation-phone').textContent = `+91 ${formObject.phone}`;
+        document.getElementById('confirmationOverlay').style.display = 'flex';
         
-        // Renumber members after removal
-        function renumberMembers() {
-            const members = document.querySelectorAll('.team-member');
-            members.forEach((member, index) => {
-                const header = member.querySelector('h4');
-                const inputs = member.querySelectorAll('input');
-                
-                // Update member number
-                const memberNum = index + 1;
-                header.textContent = `Member ${memberNum}${index === 0 ? ' (Captain)' : ''}`;
-                
-                // Update input names
-                inputs.forEach(input => {
-                    input.name = input.name.replace(/member\d+/, `member${memberNum}`);
-                });
-            });
-        }
+        // Start countdown
+        let seconds = 5;
+        const countdownElement = document.getElementById('countdown');
+        const countdownInterval = setInterval(() => {
+          seconds--;
+          countdownElement.textContent = seconds;
+          
+          if (seconds <= 0) {
+            clearInterval(countdownInterval);
+            window.location.href = 'index.html';
+          }
+        }, 1000);
         
-        // Show alert message
-        function showAlert(message) {
-            const alert = document.createElement('div');
-            alert.className = 'fixed top-4 right-4 bg-red-600 text-white px-4 py-2 rounded-lg shadow-lg flex items-center animate-fade-in';
-            alert.innerHTML = `
-                <i class="fas fa-exclamation-circle mr-2"></i>
-                <span>${message}</span>
-            `;
-            document.body.appendChild(alert);
-            
-            setTimeout(() => {
-                alert.classList.add('animate-fade-out');
-                setTimeout(() => alert.remove(), 300);
-            }, 3000);
-        }
+        // Reset form
+        this.reset();
+        memberCount = 1;
+        document.getElementById('teamMembersContainer').innerHTML = `
+          <h3 class="text-yellow-300 mb-2">Team Members</h3>
+          <div class="team-member-box">
+            <div class="mb-2">
+              <label class="block mb-1 text-yellow-300">Member 1 (Captain) *</label>
+              <input type="text" name="member1_name" placeholder="Name" required 
+                     class="w-full px-4 py-2 rounded bg-gray-800 border border-yellow-500 focus:outline-none mb-2">
+              <input type="text" name="member1_uid" placeholder="Free Fire UID" required pattern="\\d{10,12}" 
+                     class="w-full px-4 py-2 rounded bg-gray-800 border border-yellow-500 focus:outline-none">
+            </div>
+          </div>
+        `;
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('Error submitting form. Please try again or contact us directly.');
         
-        // Validate field
-        function validateField(field, errorId, validationFn) {
-            const value = field.value.trim();
-            const errorElement = document.getElementById(errorId);
-            
-            if (!value) {
-                field.classList.add('input-error');
-                errorElement.textContent = 'This field is required';
-                errorElement.style.display = 'block';
-                return false;
-            }
-            
-            if (validationFn && !validationFn(value)) {
-                field.classList.add('input-error');
-                errorElement.style.display = 'block';
-                return false;
-            }
-            
-            field.classList.remove('input-error');
-            errorElement.style.display = 'none';
-            return true;
-        }
-        
-        // Countdown timer
-        function startCountdown(seconds, callback) {
-            let count = seconds;
-            const countdownElement = document.getElementById('countdown');
-            
-            const timer = setInterval(() => {
-                countdownElement.textContent = count;
-                count--;
-                
-                if (count < 0) {
-                    clearInterval(timer);
-                    callback();
-                }
-            }, 1000);
-        }
-        
-        // Form submission
-        document.getElementById('registrationForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            // Validate all fields
-            let isValid = true;
-            
-            // Team Info
-            isValid = validateField(document.querySelector('[name="team_name"]'), 'team_name_error') && isValid;
-            
-            // Captain Info
-            isValid = validateField(document.querySelector('[name="captain_name"]'), 'captain_name_error') && isValid;
-            isValid = validateField(document.querySelector('[name="captain_uid"]'), 'captain_uid_error', 
-                value => /^\d{10,12}$/.test(value)) && isValid;
-            isValid = validateField(document.querySelector('[name="captain_level"]'), 'captain_level_error',
-                value => value >= 1 && value <= 70) && isValid;
-            
-            // Contact Info
-            isValid = validateField(document.querySelector('[name="phone"]'), 'phone_error', 
-                value => /^\d{10}$/.test(value)) && isValid;
-            isValid = validateField(document.querySelector('[name="email"]'), 'email_error', 
-                value => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) && isValid;
-            
-            // Payment Method
-            const paymentMethod = document.querySelector('[name="payment_method"]:checked');
-            if (!paymentMethod) {
-                document.getElementById('payment_method_error').style.display = 'block';
-                isValid = false;
-            } else {
-                document.getElementById('payment_method_error').style.display = 'none';
-            }
-            
-            // Terms
-            if (!document.querySelector('[name="terms"]').checked) {
-                document.getElementById('terms_error').style.display = 'block';
-                isValid = false;
-            } else {
-                document.getElementById('terms_error').style.display = 'none';
-            }
-            
-            // Validate team members
-            for (let i = 1; i <= memberCount; i++) {
-                const name = document.querySelector(`[name="member${i}_name"]`);
-                const uid = document.querySelector(`[name="member${i}_uid"]`);
-                const level = document.querySelector(`[name="member${i}_level"]`);
-                
-                if (!name || !uid || !level) continue;
-                
-                isValid = validateField(name, 'team_name_error') && isValid;
-                isValid = validateField(uid, 'captain_uid_error', 
-                    value => /^\d{10,12}$/.test(value)) && isValid;
-                isValid = validateField(level, 'captain_level_error',
-                    value => value >= 1 && value <= 70) && isValid;
-            }
-            
-            if (!isValid) {
-                showAlert('Please fill all required fields correctly');
-                return;
-            }
-            
-            try {
-                // Show loading state
-                document.getElementById('submit-text').classList.add('hidden');
-                document.getElementById('submit-spinner').classList.remove('hidden');
-                
-                // Prepare form data
-                const formData = new FormData(this);
-                const formObject = Object.fromEntries(formData.entries());
-                
-                // Prepare team members data
-                const teamMembers = [];
-                for (let i = 1; i <= memberCount; i++) {
-                    teamMembers.push({
-                        name: formObject[`member${i}_name`],
-                        uid: formObject[`member${i}_uid`],
-                        level: formObject[`member${i}_level`]
-                    });
-                }
-                
-                // Prepare email parameters
-                const emailParams = {
-                    team_name: formObject.team_name,
-                    captain_name: formObject.captain_name,
-                    captain_uid: formObject.captain_uid,
-                    captain_level: formObject.captain_level,
-                    phone: formObject.phone,
-                    email: formObject.email,
-                    payment_method: formObject.payment_method,
-                    team_members: JSON.stringify(teamMembers),
-                    to_email: 'firevillage.in@gmail.com',
-                    reply_to: formObject.email,
-                    subject: `New Registration: ${formObject.team_name}`
-                };
-                
-                // Send email
-                await emailjs.send('YOUR_EMAILJS_SERVICE_ID', 'YOUR_EMAILJS_TEMPLATE_ID', emailParams);
-                
-                // Show confirmation
-                document.getElementById('confirmation-email').textContent = formObject.email;
-                document.getElementById('confirmation-phone').textContent = `+91 ${formObject.phone}`;
-                
-                const overlay = document.getElementById('confirmationOverlay');
-                overlay.classList.remove('hidden');
-                setTimeout(() => {
-                    overlay.querySelector('div').classList.remove('scale-95', 'opacity-0');
-                }, 10);
-                
-                // Start countdown
-                startCountdown(5, () => {
-                    window.location.href = 'index.html';
-                });
-                
-            } catch (error) {
-                console.error('Error submitting form:', error);
-                showAlert('Error submitting form. Please try again or contact us.');
-            } finally {
-                document.getElementById('submit-text').classList.remove('hidden');
-                document.getElementById('submit-spinner').classList.add('hidden');
-            }
+        // Send error notification to admin
+        await emailjs.send('YOUR_EMAILJS_SERVICE_ID', 'YOUR_ERROR_TEMPLATE_ID', {
+          error: error.toString(),
+          form_data: JSON.stringify(formObject, null, 2),
+          to_email: 'firevillage.in@gmail.com',
+          subject: 'REGISTRATION FORM ERROR'
         });
-        
-        // Initialize form
-        setupMemberAutoFill();
-    </script>
+      } finally {
+        document.getElementById('submit-text').classList.remove('hidden');
+        document.getElementById('submit-spinner').classList.add('hidden');
+      }
+    });
+  </script>
 </body>
 </html>
