@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tournaments | Fire Village</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
+    .font-heading {
+      font-family: 'Orbitron', sans-serif;
+    }
+    .glow-text {
+      text-shadow: 0 0 10px #facc15, 0 0 20px #facc15;
+    }
+    .pulse-yellow {
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    .hover-glass {
+      backdrop-filter: blur(10px);
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .hover-row:hover {
+      background-color: rgba(253, 224, 71, 0.1);
+    }
+  </style>
+</head>
+
+<body class="bg-black text-white font-sans">
+  <!-- Navbar -->
+  <nav class="bg-gray-900 p-4 flex justify-between items-center shadow-md">
+    <img src="./assets/logo.png" alt="Fire Village Logo" class="h-12 w-auto">
+    <ul class="flex gap-4 text-sm md:text-base">
+      <li><a href="index.html" class="hover:text-yellow-400">Home</a></li>
+      <li><a href="tournaments.html" class="text-yellow-400 font-semibold">Tournaments</a></li>
+      <li><a href="leaderboard.html" class="hover:text-yellow-400">Leaderboard</a></li>
+      <li><a href="teams.html" class="hover:text-yellow-400">Teams</a></li>
+      <li><a href="register.html" class="hover:text-yellow-400">Register</a></li>
+      <li><a href="contact.html" class="hover:text-yellow-400">Contact</a></li>
+      <li><a href="about.html" class="hover:text-yellow-400">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- Tournaments Section -->
+  <section id="tournaments" class="relative py-20 px-6 text-center">
+    <video autoplay muted loop class="absolute inset-0 w-full h-full object-cover opacity-20 z-0">
+      <source src="tournament-bg.mp4" type="video/mp4">
+    </video>
+    <div class="relative z-10 max-w-6xl mx-auto">
+      <h2 class="text-4xl font-heading text-yellow-400 glow-text mb-10">🔥 Upcoming Tournaments</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="tournamentGrid">
+        <!-- Tournaments dynamically injected here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div id="modal" class="fixed inset-0 z-50 bg-black bg-opacity-80 hidden items-center justify-center">
+    <div class="bg-gray-900 p-8 rounded-xl max-w-md w-full">
+      <h3 id="modalTitle" class="text-yellow-400 text-2xl font-bold mb-4"></h3>
+      <p id="modalDate" class="text-gray-300 mb-2"></p>
+      <p id="modalPrize" class="text-yellow-300 mb-2"></p>
+      <p id="modalFormat" class="text-gray-400 mb-2"></p>
+      <p id="modalExtra" class="text-gray-400 mb-4"></p>
+      <button onclick="document.getElementById('modal').classList.add('hidden')" class="mt-4 px-4 py-2 bg-yellow-500 text-black rounded-full hover:bg-yellow-400">Close</button>
+    </div>
+  </div>
+
+  <!-- Divider -->
+  <div class="border-t border-yellow-600 my-10 w-4/5 mx-auto"></div>
+
+  <!-- Past Tournaments -->
+  <section class="px-6 md:px-10">
+    <h2 class="text-3xl font-heading text-yellow-400 glow-text mb-6">🏆 Past Tournaments</h2>
+    <div class="overflow-x-auto">
+      <table class="table-auto w-full text-left border-collapse">
+        <thead class="bg-yellow-500 text-black">
+          <tr>
+            <th class="p-4">Tournament</th>
+            <th class="p-4">Winner</th>
+            <th class="p-4">Runner-Up</th>
+            <th class="p-4">MVP</th>
+            <th class="p-4">Kills</th>
+          </tr>
+        </thead>
+        <tbody class="bg-gray-800 text-white">
+          <tr class="border-b border-gray-700 hover-row">
+            <td class="p-4">Fire Village Cup #1</td>
+            <td class="p-4 text-yellow-300">🏆 Team Bloodline</td>
+            <td class="p-4">🥈 Team Sexy's</td>
+            <td class="p-4">Shubham</td>
+            <td class="p-4">23</td>
+          </tr>
+          <tr class="border-b border-gray-700 hover-row">
+            <td class="p-4">Fire Village Cup #2</td>
+            <td class="p-4 text-yellow-300">🏆 Team Sword</td>
+            <td class="p-4">🥈 Elite Lord</td>
+            <td class="p-4">Deepanshu</td>
+            <td class="p-4">40</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-center text-sm py-6 mt-16 border-t border-gray-700">
+    <p>&copy; 2025 Fire Village Tournament. All rights reserved.</p>
+    <div class="mt-4 flex justify-center gap-6">
+      <a href="https://www.instagram.com/firevillagetournament" target="_blank" class="hover:text-yellow-400">Instagram</a>
+      <a href="https://www.youtube.com/@firevillagetournament" target="_blank" class="hover:text-yellow-400">YouTube</a>
+      <a href="https://www.facebook.com/firevillagetournament" target="_blank" class="hover:text-yellow-400">Facebook</a>
+    </div>
+  </footer>
+
+  <script>
+    const tournaments = [
+      {
+        title: 'Village Clash Cup',
+        date: 'Starts: April 25, 2025',
+        prize: '₹1,000',
+        format: 'Teams of 4, Free Fire Custom Room',
+        extra: 'Most Kills wins Bonus'
+      },
+      {
+        title: 'Battle Grounds Brawl',
+        date: 'Starts: May 3, 2025',
+        prize: '2,000',
+        format: 'Squad Elimination Match',
+        extra: 'Most Kills wins Bonus'
+      },
+      {
+        title: 'Solo King Showdown',
+        date: 'Starts: May 10, 2025',
+        prize: '₹5,000',
+        format: 'Solo Format, 3 Matches',
+        extra: 'Most Kills wins Bonus'
+      }
+    ];
+
+    const grid = document.getElementById("tournamentGrid");
+    tournaments.forEach(tour => {
+      const card = document.createElement("div");
+      card.className = "bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-yellow-500 hover:scale-105 transition-transform duration-300 hover-glass";
+      card.innerHTML = `
+        <h3 class="text-2xl font-bold text-yellow-400 mb-2">${tour.title}</h3>
+        <p class="text-gray-300 mb-1">📅 ${tour.date}</p>
+        <p class="text-gray-400 mb-4">🏆 Prize Pool: ${tour.prize}</p>
+        <div class="flex justify-center gap-4">
+          <a href="register.html" class="px-6 py-2 bg-yellow-500 text-black font-bold rounded-full hover:bg-yellow-400 transition pulse-yellow">Register Now</a>
+          <button onclick="showDetails(\"${tour.title}\", \"${tour.date}\", \"${tour.prize}\", \"${tour.format}\", \"${tour.extra}\")" class="px-4 py-2 bg-gray-700 text-white rounded-full hover:bg-gray-600">View Details</button>
+        </div>`;
+      grid.appendChild(card);
+    });
+
+    function showDetails(title, date, prize, format, extra) {
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modalDate').textContent = date;
+      document.getElementById('modalPrize').textContent = "Prize Pool: " + prize;
+      document.getElementById('modalFormat').textContent = "Format: " + format;
+      document.getElementById('modalExtra').textContent = extra;
+      document.getElementById('modal').classList.remove('hidden');
+    }
+  </script>
+</body>
+
+</html>
+

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register | Fire Village</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #000;
+      font-family: 'Bebas Neue', cursive;
+    }
+    .video-background {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -1;
+      object-fit: cover;
+    }
+    .form-title {
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(45deg, #facc15, #f97316);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 2rem;
+      animation: glow 2s infinite alternate;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #facc15; }
+      to { text-shadow: 0 0 20px #f97316; }
+    }
+  </style>
+</head>
+
+  <body class="bg-black text-white font-sans">
+    <!-- Navbar -->
+    <nav class="bg-gray-900 p-4 flex justify-between items-center shadow-md">
+      <img src="./assets/logo.png" alt="Fire Village Logo" class="h-12 w-auto">
+      <ul class="flex gap-4 text-sm md:text-base">
+        <li><a href="index.html" class="hover:text-yellow-400">Home</a></li>
+        <li><a href="tournaments.html" class="text-yellow-400 font-semibold">Tournaments</a></li>
+        <li><a href="leaderboard.html" class="hover:text-yellow-400">Leaderboard</a></li>
+        <li><a href="teams.html" class="hover:text-yellow-400">Teams</a></li>
+        <li><a href="register.html" class="hover:text-yellow-400">Register</a></li>
+        <li><a href="contact.html" class="hover:text-yellow-400">Contact</a></li>
+        <li><a href="about.html" class="hover:text-yellow-400">About</a></li>
+      </ul>
+    </nav>
+  
+
+  <section class="p-6 md:p-10 max-w-3xl mx-auto bg-gray-900 bg-opacity-80 rounded-lg shadow-lg mt-10">
+    <h2 class="form-title text-center mb-6">🔥 Register Your Team 🔥</h2>
+    <form action="https://formsubmit.co/firevillage.in@gmail.com" method="POST" enctype="multipart/form-data" class="space-y-6">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+
+      <div>
+        <label class="block mb-1 text-yellow-300">Team Name *</label>
+        <input type="text" name="Team Name" required class="w-full px-4 py-2 rounded bg-gray-800 border border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-400">
+      </div>
+
+      <div>
+        <label class="block mb-1 text-yellow-300">Free Fire UID (Captain) *</label>
+        <input type="text" name="FF UID (Captain)" required class="w-full px-4 py-2 rounded bg-gray-800 border border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-400">
+      </div>
+
+      <div>
+        <label class="block mb-1 text-yellow-300">Captain Name *</label>
+        <input type="text" name="Captain Name" required class="w-full px-4 py-2 rounded bg-gray-800 border border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-400">
+      </div>
+
+      <div>
+        <label class="block mb-1 text-yellow-300">Mobile Number *</label>
+        <input type="tel" name="Phone Number" required class="w-full px-4 py-2 rounded bg-gray-800 border border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-400">
+      </div>
+
+      <div>
+        <label class="block mb-1 text-yellow-300">Email *</label>
+        <input type="email" name="Email" required class="w-full px-4 py-2 rounded bg-gray-800 border border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-400">
+      </div>
+
+      <div>
+        <label class="block mb-1 text-yellow-300">Team Logo (Optional)</label>
+        <input type="file" name="Team Logo" accept="image/*" class="w-full px-4 py-2 rounded bg-gray-800 text-white border border-yellow-500 focus:outline-none">
+      </div>
+
+      <button type="submit" class="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded transition">Submit Registration</button>
+    </form>
+
+    <div class="mt-8 text-sm text-gray-300 border-t pt-4">
+      <h3 class="text-yellow-400 mb-2 font-semibold">⚠ Important Notice:</h3>
+      <ul class="list-disc list-inside space-y-1">
+        <li>Registration will only be confirmed after online payment.</li>
+        <li>Submit form at least 24 hours before match time.</li>
+        <li>If no response from our side, email us anytime or DM on Instagram.</li>
+        <li>We are active 24/7 at <strong>firevillage.in@gmail.com</strong>.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="bg-gray-900 bg-opacity-90 text-center text-sm py-6 mt-10 border-t border-gray-700">
+    &copy; 2025 Fire Village Tournament. All rights reserved.
+  </footer>
+</body>
+</html>
+<!-- Fire Village Bot -->
+<script>
+  function toggleBot() {
+    const bot = document.getElementById('chatBotBox');
+    bot.classList.toggle('hidden');
+  }
+</script>
+
+<style>
+  #chatBotBox {
+    font-family: Arial, sans-serif;
+  }
+
+  .chat-box {
+    width: 300px;
+    height: 400px;
+    position: fixed;
+    bottom: 90px;
+    right: 30px;
+    background: #1a1a1a;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 15px #facc15;
+    z-index: 9999;
+  }
+
+  .chat-header {
+    background: #facc15;
+    color: #000;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .chat-messages {
+    padding: 10px;
+    height: 300px;
+    overflow-y: auto;
+    color: #fff;
+    font-size: 14px;
+  }
+
+  .chat-input {
+    display: flex;
+    padding: 10px;
+    background: #111;
+  }
+
+  .chat-input input {
+    flex: 1;
+    border: none;
+    padding: 5px;
+    font-size: 14px;
+  }
+
+  .chat-input button {
+    background: #facc15;
+    color: #000;
+    font-weight: bold;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+
+  .bot-toggle {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #facc15;
+    color: #000;
+    padding: 10px 16px;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 9999;
+    box-shadow: 0 0 10px #facc15;
+  }
+</style>
+
+<div id="chatBotBox" class="chat-box hidden">
+  <div class="chat-header">Fire Village Bot</div>
+  <div class="chat-messages" id="chatArea">
+    <p><strong>Bot:</strong> Hello Gamer! Need help with tournament registration, payment, or timing?</p>
+    <p><strong>Bot:</strong> Type your question or click one of these:</p>
+    <p>- Registration help<br>- Payment info<br>- Match timing<br>- Instagram support</p>
+  </div>
+  <div class="chat-input">
+    <input type="text" id="userInput" placeholder="Type your question..." onkeydown="if(event.key === 'Enter') sendMessage()">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
+
+<div class="bot-toggle" onclick="toggleBot()">💬</div>
+
+<script>
+  function sendMessage() {
+    const input = document.getElementById('userInput');
+    const msg = input.value.trim();
+    if (!msg) return;
+
+    const chat = document.getElementById('chatArea');
+    chat.innerHTML += `<p><strong>You:</strong> ${msg}</p>`;
+
+    // Basic Bot Logic
+    let reply = "Sorry, I didn't get that.";
+
+    if (msg.toLowerCase().includes("register")) {
+      reply = "To register, go to the Register page and fill out your team details. Need help? Message us on Instagram @firevillage.in";
+    } else if (msg.toLowerCase().includes("payment")) {
+      reply = "All payments are online. Make sure to pay 24 hours before the match. For issues, contact firevillage.in@gmail.com.";
+    } else if (msg.toLowerCase().includes("timing") || msg.toLowerCase().includes("match")) {
+      reply = "Match timings will be shared via email 24 hours before. Check your inbox or spam folder.";
+    } else if (msg.toLowerCase().includes("instagram")) {
+      reply = "Sure! Drop us a message on Instagram: https://instagram.com/firevillage.in";
+    } else if (msg.toLowerCase().includes("email")) {
+      reply = "Our support email is firevillage.in@gmail.com. We reply 24/7!";
+    }
+
+    chat.innerHTML += `<p><strong>Bot:</strong> ${reply}</p>`;
+    input.value = "";
+    chat.scrollTop = chat.scrollHeight;
+  }
+</script>

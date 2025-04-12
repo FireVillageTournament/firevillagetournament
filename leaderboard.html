@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tournaments | Fire Village</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
+    .font-heading {
+      font-family: 'Orbitron', sans-serif;
+    }
+    .glow-text {
+      text-shadow: 0 0 10px #facc15, 0 0 20px #facc15;
+    }
+    .pulse-yellow {
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    .hover-glass {
+      backdrop-filter: blur(10px);
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .hover-row:hover {
+      background-color: rgba(253, 224, 71, 0.1);
+    }
+  </style>
+</head>
+
+<body class="bg-black text-white font-sans">
+  <!-- Navbar -->
+  <nav class="bg-gray-900 p-4 flex justify-between items-center shadow-md">
+    <img src="./assets/logo.png" alt="Fire Village Logo" class="h-12 w-auto">
+    <ul class="flex gap-4 text-sm md:text-base">
+      <li><a href="index.html" class="hover:text-yellow-400">Home</a></li>
+      <li><a href="tournaments.html" class="text-yellow-400 font-semibold">Tournaments</a></li>
+      <li><a href="leaderboard.html" class="hover:text-yellow-400">Leaderboard</a></li>
+      <li><a href="teams.html" class="hover:text-yellow-400">Teams</a></li>
+      <li><a href="register.html" class="hover:text-yellow-400">Register</a></li>
+      <li><a href="contact.html" class="hover:text-yellow-400">Contact</a></li>
+      <li><a href="about.html" class="hover:text-yellow-400">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- Leaderboard Section -->
+  <section class="py-20 px-6 text-center bg-black">
+    <h2 class="text-4xl font-heading text-yellow-400 glow-text mb-10">🏆 Live Leaderboard</h2>
+    <div class="overflow-x-auto">
+      <table class="table-auto w-full max-w-5xl mx-auto border-collapse text-white">
+        <thead class="bg-yellow-500 text-black">
+          <tr>
+            <th class="p-4">Rank</th>
+            <th class="p-4">Player Name</th>
+            <th class="p-4">Team</th>
+            <th class="p-4">Kills</th>
+            <th class="p-4">Points</th>
+          </tr>
+        </thead>
+        <tbody class="bg-gray-800">
+          <tr class="hover-row border-b border-gray-700">
+          <tr class="hover-row border-b border-gray-700">
+            <td class="p-4 text-yellow-300 font-bold">1</td>
+            <td class="p-4">Deepanshu</td>
+            <td class="p-4">Team Sword</td>
+            <td class="p-4">40</td>
+            <td class="p-4">400</td>
+          </tr>
+          <tr class="hover-row border-b border-gray-700">
+            <td class="p-4 text-yellow-300 font-bold">2</td>
+            <td class="p-4">Shubham</td>
+            <td class="p-4">Team Bloodline</td>
+            <td class="p-4">23</td>
+            <td class="p-4">230</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Important Note for Leaderboard -->
+  <section class="px-6 md:px-10 mt-10">
+    <div class="bg-gray-800 border-l-4 border-yellow-500 p-6 rounded-xl shadow-xl">
+      <h3 class="text-xl font-bold text-yellow-400 mb-2">📢 Important Leaderboard Note</h3>
+      <p class="text-gray-300 leading-relaxed">
+        Leaderboard par sirf wahi player add hoga jisne final match mein sabse zyada kills kiye honge.<br/>
+        Us player ko special prize bhi diya jayega.<br/><br/>
+        Har mahine jo bhi player top karta hai usko reward milega.<br/>
+        Agar koi player ek hi mahine mein 2 baar top karta hai toh usko bhi alag se prize milega.<br/>
+        Agar koi player 3 baar top karta hai, tab bhi reward diya jayega.<br/><br/>
+        💥 Isliye solo top par aane ke liye puri fight karo aur apna naam leaderboard par likhao! 💪🔥
+      </p>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-center text-sm py-6 mt-16 border-t border-gray-700">
+    <p>&copy; 2025 Fire Village Tournament. All rights reserved.</p>
+    <div class="mt-4 flex justify-center gap-6">
+      <a href="https://www.instagram.com/firevillagetournament" target="_blank" class="hover:text-yellow-400">Instagram</a>
+      <a href="https://www.youtube.com/@firevillagetournament" target="_blank" class="hover:text-yellow-400">YouTube</a>
+      <a href="https://www.facebook.com/firevillagetournament" target="_blank" class="hover:text-yellow-400">Facebook</a>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CUSTOM COMPONENTS */
+.btn-yellow {
+  @apply bg-fire-yellow text-black font-semibold px-6 py-2 rounded-full hover:bg-yellow-400 transition;
+}
+
+.section-heading {
+  @apply text-4xl font-bold text-fire-yellow mb-6;
+}
+
+.card-box {
+  @apply bg-gray-900 p-4 rounded-lg shadow-lg hover:shadow-yellow-500/50 transition;
+}

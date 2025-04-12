@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teams | Fire Village</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: url('./assets/background-video.mp4') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Bebas Neue', cursive;
+    }
+    .team-card {
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .team-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    }
+    .team-name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.75rem;
+      background: linear-gradient(45deg, #facc15, #f97316);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glow 2s infinite alternate;
+    }
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #facc15;
+      }
+      to {
+        text-shadow: 0 0 20px #f97316;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-black text-white font-sans">
+  <!-- Navbar -->
+  <nav class="bg-gray-900 p-4 flex justify-between items-center shadow-md">
+    <img src="./assets/logo.png" alt="Fire Village Logo" class="h-12 w-auto">
+    <ul class="flex gap-4 text-sm md:text-base">
+      <li><a href="index.html" class="hover:text-yellow-400">Home</a></li>
+      <li><a href="tournaments.html" class="text-yellow-400 font-semibold">Tournaments</a></li>
+      <li><a href="leaderboard.html" class="hover:text-yellow-400">Leaderboard</a></li>
+      <li><a href="teams.html" class="hover:text-yellow-400">Teams</a></li>
+      <li><a href="register.html" class="hover:text-yellow-400">Register</a></li>
+      <li><a href="contact.html" class="hover:text-yellow-400">Contact</a></li>
+      <li><a href="about.html" class="hover:text-yellow-400">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- Teams Section -->
+  <section class="p-6 md:p-10 bg-black bg-opacity-70">
+    <h2 class="text-4xl font-bold text-yellow-400 mb-10 text-center animate-pulse">🔥 All Participating Teams 🔥</h2>
+    <p class="text-center text-sm text-gray-300 italic mb-8">Note: Yeh sirf teams ka list hai. Rank leaderboard ke section mein diya gaya hai. Apna naam banane ke liye leaderboard check karo!</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <!-- Team Cards -->
+      <div class="bg-gray-900 rounded-xl p-6 shadow-lg team-card"><h3 class="team-name">NG Ray</h3></div>
+      <div class="bg-gray-900 rounded-xl p-6 shadow-lg team-card"><h3 class="team-name">Elight Lords</h3></div>
+      <div class="bg-gray-900 rounded-xl p-6 shadow-lg team-card"><h3 class="team-name">Old Legend</h3></div>
+      <div class="bg-gray-900 rounded-xl p-6 shadow-lg team-card"><h3 class="team-name">Define Aura</h3></div>
+      <div class="bg-gray-900 rounded-xl p-6 shadow-lg team-card"><h3 class="team-name">Bloodline</h3></div>
+      <div class="bg-gray-900 rounded-xl p-6 shadow-lg team-card"><h3 class="team-name">MarAog Mafia</h3></div>
+      <div class="bg-gray-900 rounded-xl p-6 shadow-lg team-card"><h3 class="team-name">Sword</h3></div>
+      <div class="bg-gray-900 rounded-xl p-6 shadow-lg team-card"><h3 class="team-name">XMasters</h3></div>
+      <div class="bg-gray-900 rounded-xl p-6 shadow-lg team-card"><h3 class="team-name">Not Way Esports</h3></div>
+      <div class="bg-gray-900 rounded-xl p-6 shadow-lg team-card"><h3 class="team-name">Team Godzilla</h3></div>
+      <div class="bg-gray-900 rounded-xl p-6 shadow-lg team-card"><h3 class="team-name">Flame Foxes</h3></div>
+      <div class="bg-gray-900 rounded-xl p-6 shadow-lg team-card"><h3 class="team-name">Team Death</h3></div>
+      <div class="bg-gray-900 rounded-xl p-6 shadow-lg team-card"><h3 class="team-name">Kings</h3></div>
+      <div class="bg-gray-900 rounded-xl p-6 shadow-lg team-card"><h3 class="team-name">Team OP</h3></div>
+      <div class="bg-gray-900 rounded-xl p-6 shadow-lg team-card"><h3 class="team-name">X Heros</h3></div>
+      <div class="bg-gray-900 rounded-xl p-6 shadow-lg team-card"><h3 class="team-name">Team Error</h3></div>
+      <div class="bg-gray-900 rounded-xl p-6 shadow-lg team-card"><h3 class="team-name">Sexy’s</h3></div>
+      <div class="bg-gray-900 rounded-xl p-6 shadow-lg team-card"><h3 class="team-name">Team Scary</h3></div>
+      <div class="bg-gray-900 rounded-xl p-6 shadow-lg team-card"><h3 class="team-name">The Warrior</h3></div>
+      <div class="bg-gray-900 rounded-xl p-6 shadow-lg team-card"><h3 class="team-name">The Sword</h3></div>
+      <div class="bg-gray-900 rounded-xl p-6 shadow-lg team-card"><h3 class="team-name">Team Crown</h3></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 bg-opacity-90 text-center text-sm py-6 mt-10 border-t border-gray-700">
+    &copy; 2025 Fire Village Tournament. All rights reserved.
+  </footer>
+</body>
+
+</html>
