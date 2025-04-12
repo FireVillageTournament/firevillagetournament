@@ -147,161 +147,77 @@
                     </div>
                 </div>
             </div>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fire Village Tournament Registration</title>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        // Initialize EmailJS (replace with your actual IDs)
+        emailjs.init('your_emailjs_user_id');
+        
+        function sendEmail(formData) {
+            return emailjs.send('your_emailjs_service_id', 'your_template_id', {
+                team_name: formData.team_name,
+                captain_name: formData.captain_name,
+                phone: formData.phone,
+                email: formData.email,
+                payment_method: formData.payment_method,
+                to_email: "firevillage.in@gmail.com"  // Auto-sends to your email
+            });
+        }
 
-            <!-- Captain Information -->
-            <div class="mb-10">
-                <div class="flex items-center mb-6">
-                    <div class="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center mr-3">
-                        <span class="text-white font-bold">2</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-orange-400">CAPTAIN DETAILS</h3>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div>
-                        <label class="block text-gray-300 mb-2">Captain Name *</label>
-                        <input type="text" name="captain_name" required 
-                               class="w-full px-4 py-3 rounded-lg input-field text-white">
-                        <div id="captain_name_error" class="error-message">Name is required</div>
-                    </div>
+        function handleSubmit(e) {
+            e.preventDefault();
+            
+            // 1. Get form data
+            const formData = {
+                team_name: document.getElementById('team_name').value,
+                captain_name: document.getElementById('captain_name').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                payment_method: document.querySelector('input[name="payment"]:checked').value
+            };
+
+            // 2. Send email
+            sendEmail(formData)
+                .then(() => {
+                    alert("Registration successful! Check your email.");
+                    window.location.href = "success.html"; // Redirect after success
+                })
+                .catch(error => {
+                    console.error("Email sending failed:", error);
+                    // Auto-report errors to your email
+                    emailjs.send('your_emailjs_service_id', 'error_template', {
+                        error: error.message,
+                        form_data: JSON.stringify(formData),
+                        to_email: "firevillage.in@gmail.com"
+                    });
+                    alert("Registration failed. Our team has been notified.");
+                });
+        }
+    </script>
+</head>
+<body>
+    <form onsubmit="handleSubmit(event)">
+        <!-- Your form fields here -->
+        <input type="text" id="team_name" required placeholder="Team Name">
+        <input type="text" id="captain_name" required placeholder="Captain Name">
+        <input type="tel" id="phone" required placeholder="WhatsApp Number">
+        <input type="email" id="email" required placeholder="Email">
+        
+        <div>
+            <input type="radio" name="payment" value="UPI" required> UPI
+            <input type="radio" name="payment" value="Paytm"> Paytm
+        </div>
+        
+        <button type="submit">Register Now</button>
+    </form>
+</body>
+</html>
+         
                     
-                    <div>
-                        <label class="block text-gray-300 mb-2">Free Fire UID *</label>
-                        <input type="text" name="captain_uid" required pattern="\d{10,12}"
-                               class="w-full px-4 py-3 rounded-lg input-field text-white"
-                               placeholder="10-12 digit UID">
-                        <div id="captain_uid_error" class="error-message">Valid UID required</div>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-gray-300 mb-2">Player Level *</label>
-                        <input type="number" name="captain_level" required min="1" max="70"
-                               class="w-full px-4 py-3 rounded-lg input-field text-white">
-                        <div id="captain_level_error" class="error-message">Level 1-70 required</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Contact Information -->
-            <div class="mb-10">
-                <div class="flex items-center mb-6">
-                    <div class="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center mr-3">
-                        <span class="text-white font-bold">3</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-orange-400">CONTACT INFORMATION</h3>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-gray-300 mb-2">WhatsApp Number *</label>
-                        <div class="flex">
-                            <span class="inline-flex items-center px-3 rounded-l-lg bg-gray-700 text-gray-300">+91</span>
-                            <input type="tel" name="phone" required pattern="[0-9]{10}"
-                                   class="w-full px-4 py-3 rounded-r-lg input-field text-white">
-                        </div>
-                        <div id="phone_error" class="error-message">Valid number required</div>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-gray-300 mb-2">Email *</label>
-                        <input type="email" name="email" required 
-                               class="w-full px-4 py-3 rounded-lg input-field text-white">
-                        <div id="email_error" class="error-message">Valid email required</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Team Members -->
-            <div class="mb-10">
-                <div class="flex items-center mb-6">
-                    <div class="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center mr-3">
-                        <span class="text-white font-bold">4</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-orange-400">TEAM MEMBERS</h3>
-                </div>
-                
-                <div id="teamMembersContainer">
-                    <!-- Member 1 (Captain) will be auto-filled from captain info -->
-                </div>
-                
-                <div class="mt-4 flex flex-wrap gap-4">
-                    <button type="button" id="addMemberBtn" class="btn-secondary px-6 py-3 rounded-lg">
-                        <i class="fas fa-plus mr-2"></i> Add Team Member
-                    </button>
-                    <span class="text-sm text-gray-400 self-center">(Max 4 members including captain)</span>
-                </div>
-            </div>
-
-            <!-- Payment Method -->
-            <div class="mb-10">
-                <div class="flex items-center mb-6">
-                    <div class="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center mr-3">
-                        <span class="text-white font-bold">5</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-orange-400">PAYMENT METHOD</h3>
-                </div>
-                
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <label class="payment-option">
-                        <input type="radio" name="payment_method" value="UPI" required class="hidden peer">
-                        <div class="bg-gray-700 p-4 rounded-lg border-2 border-transparent peer-checked:border-orange-500 hover:bg-gray-600 transition cursor-pointer">
-                            <div class="flex items-center">
-                                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                                    <i class="fab fa-google-pay text-blue-600"></i>
-                                </div>
-                                <span class="font-medium">UPI</span>
-                            </div>
-                        </div>
-                    </label>
-                    
-                    <label class="payment-option">
-                        <input type="radio" name="payment_method" value="Paytm" class="hidden peer">
-                        <div class="bg-gray-700 p-4 rounded-lg border-2 border-transparent peer-checked:border-orange-500 hover:bg-gray-600 transition cursor-pointer">
-                            <div class="flex items-center">
-                                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                                    <i class="fas fa-wallet text-blue-800"></i>
-                                </div>
-                                <span class="font-medium">Paytm</span>
-                            </div>
-                        </div>
-                    </label>
-                    
-                    <label class="payment-option">
-                        <input type="radio" name="payment_method" value="PhonePe" class="hidden peer">
-                        <div class="bg-gray-700 p-4 rounded-lg border-2 border-transparent peer-checked:border-orange-500 hover:bg-gray-600 transition cursor-pointer">
-                            <div class="flex items-center">
-                                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                                    <i class="fas fa-mobile-alt text-blue-400"></i>
-                                </div>
-                                <span class="font-medium">PhonePe</span>
-                            </div>
-                        </div>
-                    </label>
-                </div>
-                <div id="payment_method_error" class="error-message mt-2">Please select payment method</div>
-            </div>
-
-            <!-- Terms and Conditions -->
-            <div class="mb-8">
-                <label class="flex items-start">
-                    <input type="checkbox" name="terms" required 
-                           class="mt-1 rounded bg-gray-700 border-gray-600 text-orange-500 focus:ring-orange-500">
-                    <span class="ml-2 text-sm text-gray-300">
-                        I agree to the <a href="#" class="text-orange-400 hover:underline">terms and conditions</a> *
-                    </span>
-                </label>
-                <div id="terms_error" class="error-message">You must accept the terms</div>
-            </div>
-
-            <!-- Submit Button -->
-            <button type="submit" class="btn-primary w-full py-4 px-6 rounded-lg font-bold text-lg">
-                <span id="submit-text">REGISTER NOW</span>
-                <span id="submit-spinner" class="hidden">
-                    <i class="fas fa-spinner fa-spin mr-2"></i> Processing...
-                </span>
-            </button>
-        </form>
-    </div>
+                   
 
     <!-- Confirmation Overlay -->
     <div id="confirmationOverlay" class="fixed inset-0 z-50 flex items-center justify-center confimation-overlay hidden">
