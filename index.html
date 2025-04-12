@@ -4,10 +4,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fire Village Tournament</title>
+  <title>Fire Village Tournament - India's Premier Free Fire Esports Arena</title>
+  <meta name="description" content="India's #1 Village Free Fire Esports Tournament. Register your team now for competitive battles and win exciting prizes!">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="./assets/logo.png" type="image/png">
 
   <!-- TailwindCSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
   <!-- Tailwind Custom Theme -->
   <script>
     tailwind.config = {
@@ -17,7 +26,8 @@
             fire: {
               yellow: '#facc15',
               dark: '#0f0f0f',
-              gray: '#1f2937'
+              gray: '#1f2937',
+              red: '#ef4444'
             }
           },
           fontFamily: {
@@ -27,7 +37,8 @@
           animation: {
             float: "float 3s ease-in-out infinite",
             fadeInUp: "fadeInUp 1.2s ease-out forwards",
-            pulseMenu: "pulseMenu 1s ease-in-out infinite"
+            pulseMenu: "pulseMenu 1s ease-in-out infinite",
+            firePulse: "firePulse 2s ease-in-out infinite"
           },
           keyframes: {
             float: {
@@ -41,6 +52,10 @@
             pulseMenu: {
               '0%, 100%': { transform: 'scale(1)', opacity: 1 },
               '50%': { transform: 'scale(1.1)', opacity: 0.8 }
+            },
+            firePulse: {
+              '0%, 100%': { textShadow: '0 0 8px #facc15' },
+              '50%': { textShadow: '0 0 16px #f59e0b, 0 0 24px #ef4444' }
             }
           }
         }
@@ -51,19 +66,21 @@
 
 <body class="bg-black text-white font-sans scroll-smooth">
   <!-- Navbar -->
-  <nav class="bg-gray-900 px-6 py-4 flex justify-between items-center shadow-lg sticky top-0 z-50">
-    <img src="./assets/logo.png" alt="Fire Village Logo" class="h-12 w-auto">
-    <ul class="flex gap-6 text-base font-medium">
-      <li><a href="index.html" class="hover:text-yellow-400">Home</a></li>
-      <li><a href="tournaments.html" class="text-yellow-400 font-semibold">Tournaments</a></li>
-      <li><a href="leaderboard.html" class="hover:text-yellow-400">Leaderboard</a></li>
-      <li><a href="teams.html" class="hover:text-yellow-400">Teams</a></li>
-      <li><a href="register.html" class="hover:text-yellow-400">Register</a></li>
-      <li><a href="contact.html" class="hover:text-yellow-400">Contact</a></li>
-      <li><a href="about.html" class="hover:text-yellow-400">About</a></li>   
+  <nav class="bg-gray-900 px-4 sm:px-6 py-3 flex flex-col sm:flex-row justify-between items-center shadow-lg sticky top-0 z-50">
+    <div class="flex items-center">
+      <img src="./assets/logo.png" alt="Fire Village Logo" class="h-10 sm:h-12 w-auto">
+      <span class="ml-2 text-yellow-400 font-heading text-xl sm:text-2xl">FIRE VILLAGE</span>
+    </div>
+    <ul class="flex flex-wrap justify-center gap-3 sm:gap-6 text-sm sm:text-base font-medium mt-2 sm:mt-0">
+      <li><a href="index.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Home</a></li>
+      <li><a href="tournaments.html" class="bg-yellow-500 text-black font-bold px-3 py-1 rounded-full hover:bg-yellow-400 transition">Tournaments</a></li>
+      <li><a href="leaderboard.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Leaderboard</a></li>
+      <li><a href="teams.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Teams</a></li>
+      <li><a href="register.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Register</a></li>
+      <li><a href="contact.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Contact</a></li>
+      <li><a href="about.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">About</a></li>   
     </ul>
   </nav>
-  <body class="bg-black text-white font-sans">
   
   <!-- Hero Section -->
   <section id="home" class="relative h-screen w-full overflow-hidden">
@@ -72,37 +89,363 @@
       Your browser does not support the video tag.
     </video>
     <div class="absolute inset-0 flex flex-col justify-center items-center text-center px-4">
-      <img src="./assets/logo.png" alt="Fire Village Logo" class="h-28 mb-6 drop-shadow-lg animate-pulse">
-      <h1 class="text-5xl md:text-7xl font-bold text-yellow-400 font-heading drop-shadow-2xl">Fire Village Tournament</h1>
-      <p class="mt-6 text-lg md:text-2xl text-gray-300 max-w-3xl leading-relaxed">India’s #1 Village Free Fire Esports Arena – Unite. Compete. Rise. Show the Fire Within! 🔥</p>
-      <a href="register.html" class="mt-8 px-10 py-4 bg-yellow-500 text-black rounded-full text-xl font-bold hover:bg-yellow-400 transition duration-300 shadow-2xl animate-bounce">Join the Battle</a>
+      <img src="./assets/logo.png" alt="Fire Village Logo" class="h-20 sm:h-28 mb-4 sm:mb-6 drop-shadow-lg animate-pulse">
+      <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold text-yellow-400 font-heading drop-shadow-2xl animate-firePulse">FIRE VILLAGE TOURNAMENT</h1>
+      <p class="mt-4 sm:mt-6 text-base sm:text-lg md:text-2xl text-gray-300 max-w-2xl sm:max-w-3xl leading-relaxed">India's Premier Village Free Fire Esports Arena – Unite. Compete. Rise. Show the Fire Within! 🔥</p>
+      <div class="flex flex-col sm:flex-row gap-4 mt-6 sm:mt-8">
+        <a href="register.html" class="px-8 py-3 sm:px-10 sm:py-4 bg-yellow-500 text-black rounded-full text-lg sm:text-xl font-bold hover:bg-yellow-400 transition duration-300 shadow-2xl animate-bounce">Register Now</a>
+        <a href="#tournaments" class="px-8 py-3 sm:px-10 sm:py-4 bg-transparent border-2 border-yellow-500 text-yellow-400 rounded-full text-lg sm:text-xl font-bold hover:bg-yellow-500 hover:text-black transition duration-300 shadow-xl">View Tournaments</a>
+      </div>
+    </div>
+    <div class="absolute bottom-10 left-0 right-0 flex justify-center">
+      <a href="#tournaments" class="text-yellow-400 animate-bounce">
+        <i class="fas fa-chevron-down text-3xl"></i>
+      </a>
     </div>
   </section>
 
-  <!-- About Section -->
-  <section id="about" class="py-20 bg-fire-dark px-6 text-center">
+  <!-- Important Notice Banner -->
+  <div class="bg-fire-red py-3 px-4 text-center font-bold">
+    <p class="text-white">⚠️ IMPORTANT: Registration closes 24 hours before tournament. Payment must be completed in advance!</p>
+  </div>
+
+  <!-- Tournaments Section -->
+  <section id="tournaments" class="py-16 sm:py-20 px-6 bg-fire-dark">
     <div class="max-w-6xl mx-auto">
-      <h2 class="text-4xl font-heading text-yellow-400 mb-6">About Fire Village</h2>
-      <p class="text-gray-300 text-lg max-w-4xl mx-auto">Fire Village is not just a tournament — it’s a revolution empowering rural gamers to rise and shine. We bring intense Free Fire action from the villages to the national stage, celebrating every hero’s hustle and heart.</p>
+      <h2 class="text-3xl sm:text-4xl font-heading text-yellow-400 mb-8 text-center">Upcoming Tournaments</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Tournament Card 1 -->
+        <div class="bg-gray-800 rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition duration-300">
+          <div class="relative">
+            <img src="https://via.placeholder.com/600x400" alt="Tournament Banner" class="w-full h-48 object-cover">
+            <div class="absolute top-2 left-2 bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-bold">SQUAD</div>
+            <div class="absolute top-2 right-2 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold">₹2,500 PRIZE</div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-yellow-400 mb-2">Village Warriors Cup</h3>
+            <div class="flex items-center text-gray-300 mb-3">
+              <i class="far fa-calendar-alt mr-2"></i>
+              <span>15 June 2025</span>
+            </div>
+            <div class="flex items-center text-gray-300 mb-4">
+              <i class="far fa-clock mr-2"></i>
+              <span>7:00 PM IST</span>
+            </div>
+            <p class="text-gray-300 mb-4">Battle against the best village squads in this high-stakes tournament. Only the strongest will survive!</p>
+            <div class="flex justify-between items-center">
+              <span class="bg-gray-700 text-yellow-400 px-3 py-1 rounded-full text-sm">4v4</span>
+              <a href="register.html" class="bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded-full text-sm transition">Register Now</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Tournament Card 2 -->
+        <div class="bg-gray-800 rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition duration-300">
+          <div class="relative">
+            <img src="https://via.placeholder.com/600x400" alt="Tournament Banner" class="w-full h-48 object-cover">
+            <div class="absolute top-2 left-2 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-bold">SOLO</div>
+            <div class="absolute top-2 right-2 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold">₹1,000 PRIZE</div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-yellow-400 mb-2">Solo King Challenge</h3>
+            <div class="flex items-center text-gray-300 mb-3">
+              <i class="far fa-calendar-alt mr-2"></i>
+              <span>22 June 2025</span>
+            </div>
+            <div class="flex items-center text-gray-300 mb-4">
+              <i class="far fa-clock mr-2"></i>
+              <span>6:00 PM IST</span>
+            </div>
+            <p class="text-gray-300 mb-4">Prove you're the best solo player in the village! No teammates, just pure skill and strategy.</p>
+            <div class="flex justify-between items-center">
+              <span class="bg-gray-700 text-yellow-400 px-3 py-1 rounded-full text-sm">1v1</span>
+              <a href="register.html" class="bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded-full text-sm transition">Register Now</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Tournament Card 3 -->
+        <div class="bg-gray-800 rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition duration-300">
+          <div class="relative">
+            <img src="https://via.placeholder.com/600x400" alt="Tournament Banner" class="w-full h-48 object-cover">
+            <div class="absolute top-2 left-2 bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-bold">SQUAD</div>
+            <div class="absolute top-2 right-2 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold">₹1,500 PRIZE</div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-yellow-400 mb-2">Elite Village Championship</h3>
+            <div class="flex items-center text-gray-300 mb-3">
+              <i class="far fa-calendar-alt mr-2"></i>
+              <span>29 June 2025</span>
+            </div>
+            <div class="flex items-center text-gray-300 mb-4">
+              <i class="far fa-clock mr-2"></i>
+              <span>8:00 PM IST</span>
+            </div>
+            <p class="text-gray-300 mb-4">The ultimate test for elite village squads. Only the most skilled teams will claim the championship!</p>
+            <div class="flex justify-between items-center">
+              <span class="bg-gray-700 text-yellow-400 px-3 py-1 rounded-full text-sm">4v4</span>
+              <a href="register.html" class="bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded-full text-sm transition">Register Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-12">
+        <a href="tournaments.html" class="inline-block px-8 py-3 bg-yellow-500 hover:bg-yellow-400 text-black font-bold rounded-full transition duration-300 shadow-lg">
+          View All Tournaments <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Features Section -->
+  <section class="py-16 bg-gray-900">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-3xl sm:text-4xl font-heading text-yellow-400 mb-12 text-center">Why Choose Fire Village?</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Feature 1 -->
+        <div class="bg-fire-dark p-6 rounded-xl shadow-lg hover:shadow-yellow-500/30 transition duration-300">
+          <div class="text-yellow-400 text-4xl mb-4">
+            <i class="fas fa-trophy"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Big Prize Pools</h3>
+          <p class="text-gray-300">Compete for substantial cash prizes and in-game rewards in every tournament.</p>
+        </div>
+        
+        <!-- Feature 2 -->
+        <div class="bg-fire-dark p-6 rounded-xl shadow-lg hover:shadow-yellow-500/30 transition duration-300">
+          <div class="text-yellow-400 text-4xl mb-4">
+            <i class="fas fa-broadcast-tower"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Professional Streaming</h3>
+          <p class="text-gray-300">All matches streamed live on YouTube with professional commentary.</p>
+        </div>
+        
+        <!-- Feature 3 -->
+        <div class="bg-fire-dark p-6 rounded-xl shadow-lg hover:shadow-yellow-500/30 transition duration-300">
+          <div class="text-yellow-400 text-4xl mb-4">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Fair Play Guaranteed</h3>
+          <p class="text-gray-300">Strict anti-cheat measures and professional referees for fair competition.</p>
+        </div>
+        
+        <!-- Feature 4 -->
+        <div class="bg-fire-dark p-6 rounded-xl shadow-lg hover:shadow-yellow-500/30 transition duration-300">
+          <div class="text-yellow-400 text-4xl mb-4">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Village Community</h3>
+          <p class="text-gray-300">Connect with players from villages across India and build your esports network.</p>
+        </div>
+        
+        <!-- Feature 5 -->
+        <div class="bg-fire-dark p-6 rounded-xl shadow-lg hover:shadow-yellow-500/30 transition duration-300">
+          <div class="text-yellow-400 text-4xl mb-4">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Skill Development</h3>
+          <p class="text-gray-300">Improve your gameplay through competitive matches and learn from the best.</p>
+        </div>
+        
+        <!-- Feature 6 -->
+        <div class="bg-fire-dark p-6 rounded-xl shadow-lg hover:shadow-yellow-500/30 transition duration-300">
+          <div class="text-yellow-400 text-4xl mb-4">
+            <i class="fas fa-headset"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">24/7 Support</h3>
+          <p class="text-gray-300">Dedicated support team available via WhatsApp, Instagram and Email.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Registration Info Section -->
+  <section class="py-16 bg-yellow-500 text-black">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-3xl sm:text-4xl font-heading font-bold mb-8 text-center">How To Register</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Step 1 -->
+        <div class="bg-black text-white p-6 rounded-xl shadow-lg">
+          <div class="flex items-center mb-4">
+            <div class="bg-yellow-500 text-black font-bold rounded-full h-8 w-8 flex items-center justify-center mr-4">1</div>
+            <h3 class="text-xl font-bold text-yellow-400">Create Your Team</h3>
+          </div>
+          <p>Gather 4 players (for squad tournaments) or register individually for solo events. Choose a unique team name.</p>
+        </div>
+        
+        <!-- Step 2 -->
+        <div class="bg-black text-white p-6 rounded-xl shadow-lg">
+          <div class="flex items-center mb-4">
+            <div class="bg-yellow-500 text-black font-bold rounded-full h-8 w-8 flex items-center justify-center mr-4">2</div>
+            <h3 class="text-xl font-bold text-yellow-400">Fill Registration Form</h3>
+          </div>
+          <p>Complete the registration form with all team members' details including Free Fire UIDs and contact information.</p>
+        </div>
+        
+        <!-- Step 3 -->
+        <div class="bg-black text-white p-6 rounded-xl shadow-lg">
+          <div class="flex items-center mb-4">
+            <div class="bg-yellow-500 text-black font-bold rounded-full h-8 w-8 flex items-center justify-center mr-4">3</div>
+            <h3 class="text-xl font-bold text-yellow-400">Make Payment</h3>
+          </div>
+          <p>Pay the registration fee online before the deadline. You'll receive confirmation within 24 hours.</p>
+        </div>
+      </div>
+      
+      <div class="mt-12 bg-black text-white p-6 rounded-xl shadow-lg">
+        <h3 class="text-xl font-bold text-yellow-400 mb-4 text-center">📢 Important Registration Rules</h3>
+        <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <li class="flex items-start">
+            <i class="fas fa-check-circle text-yellow-400 mt-1 mr-2"></i>
+            <span>Registration closes 24 hours before tournament start time</span>
+          </li>
+          <li class="flex items-start">
+            <i class="fas fa-check-circle text-yellow-400 mt-1 mr-2"></i>
+            <span>All team members must provide valid Free Fire UIDs</span>
+          </li>
+          <li class="flex items-start">
+            <i class="fas fa-check-circle text-yellow-400 mt-1 mr-2"></i>
+            <span>Payment must be completed to confirm participation</span>
+          </li>
+          <li class="flex items-start">
+            <i class="fas fa-check-circle text-yellow-400 mt-1 mr-2"></i>
+            <span>No refunds after registration confirmation</span>
+          </li>
+          <li class="flex items-start">
+            <i class="fas fa-check-circle text-yellow-400 mt-1 mr-2"></i>
+            <span>Team name must be appropriate (offensive names will be rejected)</span>
+          </li>
+          <li class="flex items-start">
+            <i class="fas fa-check-circle text-yellow-400 mt-1 mr-2"></i>
+            <span>Each player can only register for one team per tournament</span>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="text-center mt-12">
+        <a href="register.html" class="inline-block px-8 py-3 bg-black hover:bg-gray-900 text-yellow-400 font-bold rounded-full transition duration-300 shadow-lg border-2 border-yellow-400">
+          Register Your Team Now <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+      </div>
     </div>
   </section>
 
   <!-- Founders Section -->
-  <section id="founders" class="py-20 bg-gray-900 text-center">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-4xl font-heading text-yellow-400 mb-10">Meet the Founders</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-6">
-        <div class="bg-black p-6 rounded-xl shadow-lg hover:scale-105 transform transition duration-300">
+  <section id="founders" class="py-16 bg-fire-dark text-center">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-3xl sm:text-4xl font-heading text-yellow-400 mb-12">Meet the Founders</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-gray-900 p-6 rounded-xl shadow-lg hover:shadow-yellow-500/30 transition duration-300">
+          <div class="h-40 w-40 mx-auto rounded-full overflow-hidden border-4 border-yellow-500 mb-4">
+            <img src="https://via.placeholder.com/200" alt="Aarush Sharma" class="h-full w-full object-cover">
+          </div>
           <h3 class="text-xl font-bold text-yellow-400 mb-2">Aarush Sharma</h3>
-          <p class="text-gray-300">Founder & Visionary. Creative mastermind behind the Fire Village movement, building bridges from rural talent to national glory.</p>
+          <p class="text-gray-300 mb-4">Founder & Visionary</p>
+          <p class="text-gray-400">Creative mastermind behind the Fire Village movement, building bridges from rural talent to national glory.</p>
+          <div class="flex justify-center mt-4 space-x-3">
+            <a href="#" class="text-yellow-400 hover:text-yellow-300"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-yellow-400 hover:text-yellow-300"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-yellow-400 hover:text-yellow-300"><i class="fab fa-linkedin"></i></a>
+          </div>
         </div>
-        <div class="bg-black p-6 rounded-xl shadow-lg hover:scale-105 transform transition duration-300">
+        <div class="bg-gray-900 p-6 rounded-xl shadow-lg hover:shadow-yellow-500/30 transition duration-300">
+          <div class="h-40 w-40 mx-auto rounded-full overflow-hidden border-4 border-yellow-500 mb-4">
+            <img src="https://via.placeholder.com/200" alt="Abhishek Sharma" class="h-full w-full object-cover">
+          </div>
           <h3 class="text-xl font-bold text-yellow-400 mb-2">Abhishek Sharma</h3>
-          <p class="text-gray-300">Co-Founder & Operations. Fueling the tournament mechanics with strategy, structure and discipline.</p>
+          <p class="text-gray-300 mb-4">Co-Founder & Operations</p>
+          <p class="text-gray-400">Fueling the tournament mechanics with strategy, structure and discipline.</p>
+          <div class="flex justify-center mt-4 space-x-3">
+            <a href="#" class="text-yellow-400 hover:text-yellow-300"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-yellow-400 hover:text-yellow-300"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-yellow-400 hover:text-yellow-300"><i class="fab fa-linkedin"></i></a>
+          </div>
         </div>
-        <div class="bg-black p-6 rounded-xl shadow-lg hover:scale-105 transform transition duration-300">
+        <div class="bg-gray-900 p-6 rounded-xl shadow-lg hover:shadow-yellow-500/30 transition duration-300">
+          <div class="h-40 w-40 mx-auto rounded-full overflow-hidden border-4 border-yellow-500 mb-4">
+            <img src="https://via.placeholder.com/200" alt="Uplaksh Sharma" class="h-full w-full object-cover">
+          </div>
           <h3 class="text-xl font-bold text-yellow-400 mb-2">Uplaksh Sharma</h3>
-          <p class="text-gray-300">Tech & Broadcast Head. Making the tournaments shine on YouTube and beyond with seamless streaming and support.</p>
+          <p class="text-gray-300 mb-4">Tech & Broadcast Head</p>
+          <p class="text-gray-400">Making the tournaments shine on YouTube and beyond with seamless streaming and support.</p>
+          <div class="flex justify-center mt-4 space-x-3">
+            <a href="#" class="text-yellow-400 hover:text-yellow-300"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-yellow-400 hover:text-yellow-300"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-yellow-400 hover:text-yellow-300"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="py-16 bg-gray-900">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-3xl sm:text-4xl font-heading text-yellow-400 mb-12 text-center">What Players Say</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Testimonial 1 -->
+        <div class="bg-fire-dark p-6 rounded-xl shadow-lg">
+          <div class="flex items-center mb-4">
+            <div class="h-12 w-12 rounded-full overflow-hidden mr-4">
+              <img src="https://via.placeholder.com/100" alt="Player" class="h-full w-full object-cover">
+            </div>
+            <div>
+              <h4 class="font-bold text-white">Rahul Singh</h4>
+              <div class="flex text-yellow-400">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <p class="text-gray-300 italic">"Fire Village gave me the platform to showcase my skills. The tournaments are well-organized and the competition is tough. Won ₹5000 in my first tournament!"</p>
+        </div>
+        
+        <!-- Testimonial 2 -->
+        <div class="bg-fire-dark p-6 rounded-xl shadow-lg">
+          <div class="flex items-center mb-4">
+            <div class="h-12 w-12 rounded-full overflow-hidden mr-4">
+              <img src="https://via.placeholder.com/100" alt="Player" class="h-full w-full object-cover">
+            </div>
+            <div>
+              <h4 class="font-bold text-white">Team Phantom</h4>
+              <div class="flex text-yellow-400">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+            </div>
+          </div>
+          <p class="text-gray-300 italic">"As a village team, we never thought we'd get this exposure. The live streaming with commentary made us feel like pros. Thanks Fire Village!"</p>
+        </div>
+        
+        <!-- Testimonial 3 -->
+        <div class="bg-fire-dark p-6 rounded-xl shadow-lg">
+          <div class="flex items-center mb-4">
+            <div class="h-12 w-12 rounded-full overflow-hidden mr-4">
+              <img src="https://via.placeholder.com/100" alt="Player" class="h-full w-full object-cover">
+            </div>
+            <div>
+              <h4 class="font-bold text-white">Priya Sharma</h4>
+              <div class="flex text-yellow-400">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <p class="text-gray-300 italic">"The support team helped me when I had payment issues. Very responsive on Instagram. I recommend all village players to join Fire Village tournaments."</p>
         </div>
       </div>
     </div>
@@ -110,158 +453,430 @@
 
   <!-- Contact Info -->
   <section class="py-16 bg-yellow-500 text-black text-center">
-    <h3 class="text-3xl font-heading font-bold mb-4">Stay Connected with Us</h3>
-    <p class="text-lg">🔥 Live Streaming on <a href="https://youtube.com/@firevillagetournament?si=0hiKOHboyZB2CikM" class="underline hover:text-white">YouTube</a><br>
-      📬 Contact us: <a href="mailto:firevillage.in@gmail.com" class="underline hover:text-white">firevillage.in@gmail.com</a><br>
-      📸 Follow updates on <a href="https://www.instagram.com/firevillage.in/" class="underline hover:text-white">Instagram</a></p>
+    <div class="max-w-6xl mx-auto px-6">
+      <h3 class="text-3xl font-heading font-bold mb-6">Stay Connected With Us</h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div class="bg-black text-white p-6 rounded-xl shadow-lg">
+          <div class="text-4xl text-yellow-400 mb-4">
+            <i class="fab fa-youtube"></i>
+          </div>
+          <h4 class="text-xl font-bold mb-2">YouTube</h4>
+          <p class="mb-4">Watch live tournaments and highlights</p>
+          <a href="https://youtube.com/@firevillagetournament?si=0hiKOHboyZB2CikM" class="inline-block px-4 py-2 bg-yellow-500 hover:bg-yellow-400 text-black font-bold rounded-full transition">Subscribe</a>
+        </div>
+        
+        <div class="bg-black text-white p-6 rounded-xl shadow-lg">
+          <div class="text-4xl text-yellow-400 mb-4">
+            <i class="fab fa-instagram"></i>
+          </div>
+          <h4 class="text-xl font-bold mb-2">Instagram</h4>
+          <p class="mb-4">Get updates and tournament announcements</p>
+          <a href="https://www.instagram.com/firevillage.in/" class="inline-block px-4 py-2 bg-yellow-500 hover:bg-yellow-400 text-black font-bold rounded-full transition">Follow</a>
+        </div>
+        
+        <div class="bg-black text-white p-6 rounded-xl shadow-lg">
+          <div class="text-4xl text-yellow-400 mb-4">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <h4 class="text-xl font-bold mb-2">Email</h4>
+          <p class="mb-4">For official inquiries and support</p>
+          <a href="mailto:firevillage.in@gmail.com" class="inline-block px-4 py-2 bg-yellow-500 hover:bg-yellow-400 text-black font-bold rounded-full transition">Email Us</a>
+        </div>
+      </div>
+      
+      <div class="bg-black text-white p-6 rounded-xl shadow-lg max-w-2xl mx-auto">
+        <h4 class="text-xl font-bold text-yellow-400 mb-4">📢 Important Contact Information</h4>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+          <div class="flex items-start">
+            <i class="fas fa-phone-alt text-yellow-400 mt-1 mr-3"></i>
+            <div>
+            <div>
+              <p class="font-bold">Official Email</p>
+              <p>firevillage.in@gmail.com</p>
+            </div>
+          </div>
+
   </section>
 
-  <footer class="bg-gray-900 text-center text-sm py-6 border-t border-gray-700">
-    &copy; 2025 Fire Village Tournament. All rights reserved.
+  <!-- FAQ Section -->
+  <section class="py-16 bg-fire-dark">
+    <div class="max-w-4xl mx-auto px-6">
+      <h2 class="text-3xl sm:text-4xl font-heading text-yellow-400 mb-12 text-center">Frequently Asked Questions</h2>
+      
+      <div class="space-y-4">
+        <!-- FAQ Item 1 -->
+        <div class="bg-gray-900 rounded-xl overflow-hidden shadow-lg">
+          <button class="faq-toggle w-full text-left p-6 flex justify-between items-center">
+            <h3 class="text-lg font-bold text-white">How do I register for tournaments?</h3>
+            <i class="fas fa-chevron-down text-yellow-400 transition-transform"></i>
+          </button>
+          <div class="faq-content px-6 pb-6 hidden">
+            <p class="text-gray-300">Go to the Register page, fill out the form with your team details, and complete the payment. You'll receive a confirmation email within 24 hours.</p>
+          </div>
+        </div>
+        
+        <!-- FAQ Item 2 -->
+        <div class="bg-gray-900 rounded-xl overflow-hidden shadow-lg">
+          <button class="faq-toggle w-full text-left p-6 flex justify-between items-center">
+            <h3 class="text-lg font-bold text-white">What payment methods are accepted?</h3>
+            <i class="fas fa-chevron-down text-yellow-400 transition-transform"></i>
+          </button>
+          <div class="faq-content px-6 pb-6 hidden">
+            <p class="text-gray-300">We accept UPI payments (Google Pay, PhonePe, PayTM), credit/debit cards, and net banking. Cash payments are not accepted.</p>
+          </div>
+        </div>
+        
+        <!-- FAQ Item 3 -->
+        <div class="bg-gray-900 rounded-xl overflow-hidden shadow-lg">
+          <button class="faq-toggle w-full text-left p-6 flex justify-between items-center">
+            <h3 class="text-lg font-bold text-white">Can I get a refund if I can't participate?</h3>
+            <i class="fas fa-chevron-down text-yellow-400 transition-transform"></i>
+          </button>
+          <div class="faq-content px-6 pb-6 hidden">
+            <p class="text-gray-300">Refunds are only possible if requested at least 48 hours before the tournament. After that, no refunds will be issued.</p>
+          </div>
+        </div>
+        
+        <!-- FAQ Item 4 -->
+        <div class="bg-gray-900 rounded-xl overflow-hidden shadow-lg">
+          <button class="faq-toggle w-full text-left p-6 flex justify-between items-center">
+            <h3 class="text-lg font-bold text-white">How are winners paid?</h3>
+            <i class="fas fa-chevron-down text-yellow-400 transition-transform"></i>
+          </button>
+          <div class="faq-content px-6 pb-6 hidden">
+            <p class="text-gray-300">Prize money is transferred via UPI or bank transfer within 7 working days after the tournament concludes.</p>
+          </div>
+        </div>
+        
+        <!-- FAQ Item 5 -->
+        <div class="bg-gray-900 rounded-xl overflow-hidden shadow-lg">
+          <button class="faq-toggle w-full text-left p-6 flex justify-between items-center">
+            <h3 class="text-lg font-bold text-white">What happens if a team member can't play?</h3>
+            <i class="fas fa-chevron-down text-yellow-400 transition-transform"></i>
+          </button>
+          <div class="faq-content px-6 pb-6 hidden">
+            <p class="text-gray-300">You can substitute one player by informing us at least 6 hours before the tournament starts. The new player must be registered.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-12">
+        <a href="contact.html" class="inline-block px-8 py-3 bg-yellow-500 hover:bg-yellow-400 text-black font-bold rounded-full transition duration-300 shadow-lg">
+          More Questions? Contact Us <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="py-20 bg-gradient-to-r from-yellow-600 to-yellow-500 text-center">
+    <div class="max-w-4xl mx-auto px-6">
+      <h2 class="text-3xl sm:text-5xl font-heading font-bold mb-6 text-black">Ready to Join the Battle?</h2>
+      <p class="text-lg sm:text-xl text-gray-900 mb-8">Register your team today and compete against the best village players in India!</p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="register.html" class="px-8 py-4 bg-black hover:bg-gray-900 text-yellow-400 font-bold rounded-full transition duration-300 shadow-2xl">
+          Register Now <i class="fas fa-user-plus ml-2"></i>
+        </a>
+        <a href="tournaments.html" class="px-8 py-4 bg-transparent border-2 border-black text-black hover:bg-black hover:text-yellow-400 font-bold rounded-full transition duration-300 shadow-xl">
+          View Tournaments <i class="fas fa-calendar-alt ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-gray-900 pt-12 pb-6">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <div class="flex items-center mb-4">
+            <img src="./assets/logo.png" alt="Fire Village Logo" class="h-10 w-auto mr-2">
+            <span class="text-yellow-400 font-heading text-xl">FIRE VILLAGE</span>
+          </div>
+          <p class="text-gray-400">India's Premier Village Free Fire Esports Arena. Unite. Compete. Rise.</p>
+          <div class="flex space-x-4 mt-4">
+            <a href="https://www.instagram.com/firevillage.in/" class="text-gray-400 hover:text-yellow-400"><i class="fab fa-instagram text-xl"></i></a>
+            <a href="https://youtube.com/@firevillagetournament?si=0hiKOHboyZB2CikM" class="text-gray-400 hover:text-yellow-400"><i class="fab fa-youtube text-xl"></i></a>
+            <a href="#" class="text-gray-400 hover:text-yellow-400"><i class="fab fa-facebook text-xl"></i></a>
+            <a href="#" class="text-gray-400 hover:text-yellow-400"><i class="fab fa-twitter text-xl"></i></a>
+          </div>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-bold text-yellow-400 mb-4">Quick Links</h4>
+          <ul class="space-y-2">
+            <li><a href="index.html" class="text-gray-400 hover:text-yellow-400 transition">Home</a></li>
+            <li><a href="tournaments.html" class="text-gray-400 hover:text-yellow-400 transition">Tournaments</a></li>
+            <li><a href="leaderboard.html" class="text-gray-400 hover:text-yellow-400 transition">Leaderboard</a></li>
+            <li><a href="teams.html" class="text-gray-400 hover:text-yellow-400 transition">Teams</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-bold text-yellow-400 mb-4">Information</h4>
+          <ul class="space-y-2">
+            <li><a href="about.html" class="text-gray-400 hover:text-yellow-400 transition">About Us</a></li>
+            <li><a href="rules.html" class="text-gray-400 hover:text-yellow-400 transition">Rules & Regulations</a></li>
+            <li><a href="prizes.html" class="text-gray-400 hover:text-yellow-400 transition">Prizes</a></li>
+            <li><a href="faq.html" class="text-gray-400 hover:text-yellow-400 transition">FAQ</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-bold text-yellow-400 mb-4">Contact Us</h4>
+          <ul class="space-y-2">
+            <li class="flex items-start">
+              <i class="fas fa-envelope text-yellow-400 mt-1 mr-2"></i>
+              <a href="mailto:firevillage.in@gmail.com" class="text-gray-400 hover:text-yellow-400 transition">firevillage.in@gmail.com</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 pt-6 flex flex-col md:flex-row justify-between items-center">
+        <p class="text-gray-500 text-sm mb-4 md:mb-0">&copy; 2025 Fire Village Tournament. All rights reserved.</p>
+        <div class="flex space-x-6">
+      </div>
+    </div>
   </footer>
-</body>
 
-<!-- Fire Village Bot -->
-<script>
-  function toggleBot() {
-    const bot = document.getElementById('chatBotBox');
-    bot.classList.toggle('hidden');
-  }
+  <!-- Back to Top Button -->
+  <button id="backToTop" class="fixed bottom-6 right-6 bg-yellow-500 hover:bg-yellow-400 text-black p-3 rounded-full shadow-lg transition opacity-0 invisible">
+    <i class="fas fa-arrow-up"></i>
+  </button>
 
-  function sendMessage() {
-    const input = document.getElementById('userInput');
-    const msg = input.value.trim();
-    if (!msg) return;
+  <!-- Fire Village Bot -->
+  <div id="chatBotBox" class="chat-box hidden">
+    <div class="chat-header">🔥 Fire Village Support Bot 🔥</div>
+    <div class="chat-messages" id="chatArea">
+      <p><strong>Bot:</strong> 🎮 Welcome to Fire Village Tournament!</p>
+      <p><strong>Bot:</strong> I can help with registration, payments, tournament details, and more. Ask me anything!</p>
+      <p><strong>Bot:</strong> Try: "How to register?", "Payment methods", "Tournament schedule", "Team rules"</p>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="userInput" placeholder="Type your question..." onkeydown="if(event.key === 'Enter') sendMessage()">
+      <button onclick="sendMessage()">Send <i class="fas fa-paper-plane ml-1"></i></button>
+    </div>
+  </div>
 
-    const chat = document.getElementById('chatArea');
-    chat.innerHTML += `<p><strong>You:</strong> ${msg}</p>`;
+  <div class="bot-toggle" onclick="toggleBot()">
+    <i class="fas fa-headset"></i>
+    <span class="ml-2">Need Help?</span>
+  </div>
 
-    let reply = "Oops! Bot confused 😅 Ask something else ya bro!";
-    const lowMsg = msg.toLowerCase();
-
-    if (lowMsg.includes("register")) {
-      reply = "🔥 Registration easy hai! Jaao Register page pe, fill karo form and team ready! Koi dikkat? Insta DM @firevillage.in";
-    } else if (lowMsg.includes("payment")) {
-      reply = "💸 Payment online hoga! Match se 24 hours pehle kar lena. Issue ho toh mail: firevillage.in@gmail.com ya Insta msg!";
-    } else if (lowMsg.includes("match") || lowMsg.includes("timing")) {
-      reply = "🕒 Match timing aayegi 24 hours pehle email pe. Inbox aur spam dono check karna!";
-    } else if (lowMsg.includes("instagram")) {
-      reply = "📱 Insta DM anytime for help: https://instagram.com/firevillage.in";
-    } else if (lowMsg.includes("email")) {
-      reply = "📧 Email 24/7 active hai: firevillage.in@gmail.com. Help chahiye toh yahi contact karo!";
-    } else if (lowMsg.includes("logo")) {
-      reply = "🖼️ Team logo optional hai – but agar upload karoge toh look aur bhi pro lagega!";
-    } else if (lowMsg.includes("uid")) {
-      reply = "🎯 Captain ka Free Fire UID zaroori hai! Please sahi likhna – galti se disqualify na ho!";
-    } else if (lowMsg.includes("advance") || lowMsg.includes("pro")) {
-      reply = "🔥 Advance level gaming? You're a PRO bro! Get ready to slay 🔥🔥🔥";
-    } else if (lowMsg.includes("start") || lowMsg.includes("hello") || lowMsg.includes("hi") || lowMsg.includes("helo")) {
-      reply = "🎮 Welcome to Fire Village Arena, Warrior! Tum ho next champion? Ask anything and let’s go pro!";
-    } else if (lowMsg.includes("rules") || lowMsg.includes("notice")) {
-      reply = "📢 Important Notice: Payment sirf online hai. Aur 24 hours pehle complete karo. Response na aaye toh mail ya Insta msg drop karo!";
-    } else if (lowMsg.includes("team size")) {
-      reply = "👥 Minimum 4 players required! Aur sabka info form mein fill karo. Sahi UID hona zaroori hai.";
-    } else if (lowMsg.includes("prize") || lowMsg.includes("winning")) {
-      reply = "🏆 Prize pool details coming soon! Follow Insta aur stay tuned!";
-    } else if (lowMsg.includes("support") || lowMsg.includes("help")) {
-      reply = "👨‍💻 Hum yahin hain 24/7 support ke liye! Insta ya email pe ping karo. Chill and play!";
+  <style>
+    .chat-box {
+      width: 320px;
+      height: 460px;
+      position: fixed;
+      bottom: 90px;
+      right: 30px;
+      background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 15px #facc15;
+      z-index: 9999;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+    
+    .chat-box.show {
+      transform: translateY(0);
+      opacity: 1;
     }
 
-    chat.innerHTML += `<p><strong>Bot:</strong> ${reply}</p>`;
-    input.value = "";
-    chat.scrollTop = chat.scrollHeight;
-  }
-</script>
+    .chat-header {
+      background: #facc15;
+      color: #000;
+      font-weight: bold;
+      padding: 12px;
+      text-align: center;
+      font-size: 16px;
+      letter-spacing: 1px;
+    }
 
-<style>
-  #chatBotBox {
-    font-family: 'Segoe UI', sans-serif;
-  }
+    .chat-messages {
+      padding: 12px;
+      height: 320px;
+      overflow-y: auto;
+      color: #fff;
+      font-size: 14px;
+    }
+    
+    .chat-messages p {
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    
+    .chat-messages strong {
+      color: #facc15;
+    }
 
-  .chat-box {
-    width: 320px;
-    height: 460px;
-    position: fixed;
-    bottom: 90px;
-    right: 30px;
-    background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 0 15px #facc15;
-    z-index: 9999;
-  }
+    .chat-input {
+      display: flex;
+      padding: 10px;
+      background: #111;
+    }
 
-  .chat-header {
-    background: #facc15;
-    color: #000;
-    font-weight: bold;
-    padding: 12px;
-    text-align: center;
-    font-size: 16px;
-    letter-spacing: 1px;
-  }
+    .chat-input input {
+      flex: 1;
+      border: none;
+      padding: 8px 12px;
+      font-size: 14px;
+      background: #222;
+      color: white;
+      border-radius: 6px;
+      outline: none;
+    }
 
-  .chat-messages {
-    padding: 12px;
-    height: 320px;
-    overflow-y: auto;
-    color: #fff;
-    font-size: 14px;
-  }
+    .chat-input button {
+      background: #facc15;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      padding: 8px 14px;
+      margin-left: 8px;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+    
+    .chat-input button:hover {
+      background: #f59e0b;
+    }
 
-  .chat-input {
-    display: flex;
-    padding: 10px;
-    background: #111;
-  }
+    .bot-toggle {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #facc15;
+      color: #000;
+      padding: 12px 18px;
+      border-radius: 50px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 9999;
+      box-shadow: 0 0 15px rgba(250, 204, 21, 0.5);
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+    
+    .bot-toggle:hover {
+      background: #f59e0b;
+      transform: scale(1.05);
+    }
+    
+    #backToTop {
+      transition: all 0.3s ease;
+    }
+    
+    #backToTop.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .faq-toggle .fa-chevron-down {
+      transition: transform 0.3s ease;
+    }
+    
+    .faq-toggle.active .fa-chevron-down {
+      transform: rotate(180deg);
+    }
+    
+    .faq-content {
+      transition: all 0.3s ease;
+    }
+  </style>
 
-  .chat-input input {
-    flex: 1;
-    border: none;
-    padding: 6px;
-    font-size: 14px;
-    background: #222;
-    color: white;
-    border-radius: 6px;
-  }
+  <script>
+    // Back to Top Button
+    const backToTopButton = document.getElementById('backToTop');
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTopButton.classList.add('visible');
+        backToTopButton.classList.remove('opacity-0', 'invisible');
+      } else {
+        backToTopButton.classList.remove('visible');
+        backToTopButton.classList.add('opacity-0', 'invisible');
+      }
+    });
+    
+    backToTopButton.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    // FAQ Toggle
+    document.querySelectorAll('.faq-toggle').forEach(button => {
+      button.addEventListener('click', () => {
+        const content = button.nextElementSibling;
+        button.classList.toggle('active');
+        content.classList.toggle('hidden');
+      });
+    });
+    
+    // Chat Bot Toggle
+    function toggleBot() {
+      const bot = document.getElementById('chatBotBox');
+      bot.classList.toggle('hidden');
+      bot.classList.toggle('show');
+    }
 
-  .chat-input button {
-    background: #facc15;
-    color: #000;
-    font-weight: bold;
-    border: none;
-    padding: 6px 12px;
-    margin-left: 6px;
-    cursor: pointer;
-    border-radius: 6px;
-  }
+    function sendMessage() {
+      const input = document.getElementById('userInput');
+      const msg = input.value.trim();
+      if (!msg) return;
 
-  .bot-toggle {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background: #facc15;
-    color: #000;
-    padding: 12px 18px;
-    border-radius: 50px;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 9999;
-    box-shadow: 0 0 10px #facc15;
-  }
-</style>
+      const chat = document.getElementById('chatArea');
+      chat.innerHTML += `<p><strong>You:</strong> ${msg}</p>`;
 
-<div id="chatBotBox" class="chat-box hidden">
-  <div class="chat-header">🔥 Fire Village Bot 🔥</div>
-  <div class="chat-messages" id="chatArea">
-    <p><strong>Bot:</strong> 🎮 Welcome Pro Player to Fire Village!</p>
-    <p><strong>Bot:</strong> Tum ready ho toh tournament bhi ready hai! Pucho jo puchna hai – Registration, Payment, Insta support ya kuch bhi!</p>
-    <p><strong>Bot:</strong> Try: "register", "payment", "match timing", "team logo", "email", "uid", "rules"</p>
-  </div>
-  <div class="chat-input">
-    <input type="text" id="userInput" placeholder="Ask your question..." onkeydown="if(event.key === 'Enter') sendMessage()">
-    <button onclick="sendMessage()">Send</button>
-  </div>
-</div>
+      let reply = "I'm not sure about that. Please contact our support team for more specific questions.";
+      const lowMsg = msg.toLowerCase();
 
-<div class="bot-toggle" onclick="toggleBot()">💬</div>
+      if (lowMsg.includes("register") || lowMsg.includes("sign up")) {
+        reply = "To register: 1) Go to Register page 2) Fill the form 3) Pay the entry fee. You'll get confirmation within 24 hours. Need help? DM us on Instagram!";
+      } else if (lowMsg.includes("payment") || lowMsg.includes("pay")) {
+        reply = "We accept UPI (Google Pay/PhonePe), cards, and net banking. Payment must be completed 24 hours before tournament. Issues? WhatsApp +91 XXXXXXXXXX";
+      } else if (lowMsg.includes("match") || lowMsg.includes("timing") || lowMsg.includes("schedule")) {
+        reply = "Match timing is emailed 24 hours before. Also check Instagram @firevillage.in. Be online 30 minutes early for check-in!";
+      } else if (lowMsg.includes("instagram") || lowMsg.includes("insta") || lowMsg.includes("dm")) {
+        reply = "📱 Fastest support on Instagram DM: <a href='https://www.instagram.com/firevillage.in/' class='text-yellow-400 underline'>@firevillage.in</a>. We reply within 2 hours!";
+      } else if (lowMsg.includes("email") || lowMsg.includes("mail")) {
+        reply = "📧 Official email: firevillage.in@gmail.com (response within 24 hours). For urgent issues, WhatsApp is better!";
+      } else if (lowMsg.includes("logo") || lowMsg.includes("image")) {
+        reply = "Team logo is optional but recommended (200x200px, JPG/PNG). Upload during registration or email us later.";
+      } else if (lowMsg.includes("uid") || lowMsg.includes("id")) {
+        reply = "All players must provide correct Free Fire UID (found in profile). Wrong UID = disqualification! Check carefully.";
+      } else if (lowMsg.includes("rule") || lowMsg.includes("regulation")) {
+        reply = "Key rules: 1) No hacks/cheats 2) Respect opponents 3) Stable internet required. Full rules at <a href='rules.html' class='text-yellow-400 underline'>Rules Page</a>";
+      } else if (lowMsg.includes("prize") || lowMsg.includes("win") || lowMsg.includes("reward")) {
+        reply = "💰 Prize amounts vary per tournament (usually ₹5,000-₹50,000). Paid via UPI/Bank within 7 days. Check tournament details for exact amounts!";
+      } else if (lowMsg.includes("team") || lowMsg.includes("member")) {
+        reply = "Squad = 4 players (1 substitute allowed). Solo = individual. Team changes allowed until 6 hours before match.";
+      } else if (lowMsg.includes("refund") || lowMsg.includes("cancel")) {
+        reply = "Refunds only if requested 48+ hours before tournament. Later requests can't be processed. Payment issues? Contact us immediately!";
+      } else if (lowMsg.includes("start") || lowMsg.includes("hello") || lowMsg.includes("hi") || lowMsg.includes("helo")) {
+        reply = "🎮 Welcome to Fire Village! I'm your tournament assistant. Ask about: registration, payments, schedules, rules, or prizes!";
+      } else if (lowMsg.includes("contact") || lowMsg.includes("support") || lowMsg.includes("help")) {
+        reply = "Quick support options:<br>1) Instagram DM: <a href='https://www.instagram.com/firevillage.in/' class='text-yellow-400 underline'>@firevillage.in</a><br>2) Email: firevillage.in@gmail.com";
+      }
+
+      chat.innerHTML += `<p><strong>Bot:</strong> ${reply}</p>`;
+      input.value = "";
+      chat.scrollTop = chat.scrollHeight;
+    }
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>
