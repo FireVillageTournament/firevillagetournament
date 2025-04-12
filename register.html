@@ -33,28 +33,59 @@
       from { text-shadow: 0 0 10px #facc15; }
       to { text-shadow: 0 0 20px #f97316; }
     }
+    .confirmation-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+    }
+    .confirmation-box {
+      background: #111;
+      border: 2px solid #facc15;
+      border-radius: 10px;
+      padding: 30px;
+      max-width: 500px;
+      text-align: center;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(250, 204, 21, 0.4); }
+      70% { box-shadow: 0 0 0 15px rgba(250, 204, 21, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(250, 204, 21, 0); }
+    }
   </style>
 </head>
 
-  <body class="bg-black text-white font-sans">
-    <!-- Navbar -->
-    <nav class="bg-gray-900 p-4 flex justify-between items-center shadow-md">
-      <img src="./assets/logo.png" alt="Fire Village Logo" class="h-12 w-auto">
-      <ul class="flex gap-4 text-sm md:text-base">
-        <li><a href="index.html" class="hover:text-yellow-400">Home</a></li>
-        <li><a href="tournaments.html" class="text-yellow-400 font-semibold">Tournaments</a></li>
-        <li><a href="leaderboard.html" class="hover:text-yellow-400">Leaderboard</a></li>
-        <li><a href="teams.html" class="hover:text-yellow-400">Teams</a></li>
-        <li><a href="register.html" class="hover:text-yellow-400">Register</a></li>
-        <li><a href="contact.html" class="hover:text-yellow-400">Contact</a></li>
-        <li><a href="about.html" class="hover:text-yellow-400">About</a></li>
-      </ul>
-    </nav>
-  
+<body class="bg-black text-white font-sans">
+  <!-- Video Background -->
+  <video autoplay muted loop class="video-background">
+    <source src="./assets/fire-bg-video.mp4" type="video/mp4">
+  </video>
 
+  <!-- Navbar -->
+  <nav class="bg-gray-900 p-4 flex justify-between items-center shadow-md">
+    <img src="./assets/logo.png" alt="Fire Village Logo" class="h-12 w-auto">
+    <ul class="flex gap-4 text-sm md:text-base">
+      <li><a href="index.html" class="hover:text-yellow-400">Home</a></li>
+      <li><a href="tournaments.html" class="text-yellow-400 font-semibold">Tournaments</a></li>
+      <li><a href="leaderboard.html" class="hover:text-yellow-400">Leaderboard</a></li>
+      <li><a href="teams.html" class="hover:text-yellow-400">Teams</a></li>
+      <li><a href="register.html" class="hover:text-yellow-400">Register</a></li>
+      <li><a href="contact.html" class="hover:text-yellow-400">Contact</a></li>
+      <li><a href="about.html" class="hover:text-yellow-400">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- Registration Form -->
   <section class="p-6 md:p-10 max-w-3xl mx-auto bg-gray-900 bg-opacity-80 rounded-lg shadow-lg mt-10">
     <h2 class="form-title text-center mb-6">🔥 Register Your Team 🔥</h2>
-    <form action="https://formsubmit.co/firevillage.in@gmail.com" method="POST" enctype="multipart/form-data" class="space-y-6">
+    <form id="registrationForm" class="space-y-6">
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_template" value="table">
 
@@ -102,131 +133,79 @@
     </div>
   </section>
 
+  <!-- Confirmation Overlay -->
+  <div id="confirmationOverlay" class="confirmation-overlay">
+    <div class="confirmation-box">
+      <h2 class="text-2xl font-bold text-yellow-400 mb-4">🎉 Registration Successful! 🎉</h2>
+      <p class="mb-4">Thank you for joining Fire Village Tournament!</p>
+      <p class="mb-6">We'll contact you within 24 hours to confirm your registration and provide payment details.</p>
+      <p class="text-sm text-gray-300 mb-4">Check your email (and spam folder) for our confirmation message.</p>
+      <button onclick="closeConfirmation()" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-6 rounded">
+        Continue to Tournament Info
+      </button>
+    </div>
+  </div>
+
   <footer class="bg-gray-900 bg-opacity-90 text-center text-sm py-6 mt-10 border-t border-gray-700">
     &copy; 2025 Fire Village Tournament. All rights reserved.
   </footer>
-</body>
-</html>
-<!-- Fire Village Bot -->
-<script>
-  function toggleBot() {
-    const bot = document.getElementById('chatBotBox');
-    bot.classList.toggle('hidden');
-  }
-</script>
 
-<style>
-  #chatBotBox {
-    font-family: Arial, sans-serif;
-  }
+  <!-- Fire Village Bot -->
+  <script>
+    // Form submission handler
+    document.getElementById('registrationForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Show confirmation message
+      document.getElementById('confirmationOverlay').style.display = 'flex';
+      
+      // Here you would normally submit the form to your backend
+      // For demo purposes, we're just showing the confirmation
+      
+      // Reset form after submission
+      this.reset();
+    });
 
-  .chat-box {
-    width: 300px;
-    height: 400px;
-    position: fixed;
-    bottom: 90px;
-    right: 30px;
-    background: #1a1a1a;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 0 15px #facc15;
-    z-index: 9999;
-  }
-
-  .chat-header {
-    background: #facc15;
-    color: #000;
-    font-weight: bold;
-    padding: 10px;
-    text-align: center;
-  }
-
-  .chat-messages {
-    padding: 10px;
-    height: 300px;
-    overflow-y: auto;
-    color: #fff;
-    font-size: 14px;
-  }
-
-  .chat-input {
-    display: flex;
-    padding: 10px;
-    background: #111;
-  }
-
-  .chat-input input {
-    flex: 1;
-    border: none;
-    padding: 5px;
-    font-size: 14px;
-  }
-
-  .chat-input button {
-    background: #facc15;
-    color: #000;
-    font-weight: bold;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-
-  .bot-toggle {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background: #facc15;
-    color: #000;
-    padding: 10px 16px;
-    border-radius: 50px;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 9999;
-    box-shadow: 0 0 10px #facc15;
-  }
-</style>
-
-<div id="chatBotBox" class="chat-box hidden">
-  <div class="chat-header">Fire Village Bot</div>
-  <div class="chat-messages" id="chatArea">
-    <p><strong>Bot:</strong> Hello Gamer! Need help with tournament registration, payment, or timing?</p>
-    <p><strong>Bot:</strong> Type your question or click one of these:</p>
-    <p>- Registration help<br>- Payment info<br>- Match timing<br>- Instagram support</p>
-  </div>
-  <div class="chat-input">
-    <input type="text" id="userInput" placeholder="Type your question..." onkeydown="if(event.key === 'Enter') sendMessage()">
-    <button onclick="sendMessage()">Send</button>
-  </div>
-</div>
-
-<div class="bot-toggle" onclick="toggleBot()">💬</div>
-
-<script>
-  function sendMessage() {
-    const input = document.getElementById('userInput');
-    const msg = input.value.trim();
-    if (!msg) return;
-
-    const chat = document.getElementById('chatArea');
-    chat.innerHTML += `<p><strong>You:</strong> ${msg}</p>`;
-
-    // Basic Bot Logic
-    let reply = "Sorry, I didn't get that.";
-
-    if (msg.toLowerCase().includes("register")) {
-      reply = "To register, go to the Register page and fill out your team details. Need help? Message us on Instagram @firevillage.in";
-    } else if (msg.toLowerCase().includes("payment")) {
-      reply = "All payments are online. Make sure to pay 24 hours before the match. For issues, contact firevillage.in@gmail.com.";
-    } else if (msg.toLowerCase().includes("timing") || msg.toLowerCase().includes("match")) {
-      reply = "Match timings will be shared via email 24 hours before. Check your inbox or spam folder.";
-    } else if (msg.toLowerCase().includes("instagram")) {
-      reply = "Sure! Drop us a message on Instagram: https://instagram.com/firevillage.in";
-    } else if (msg.toLowerCase().includes("email")) {
-      reply = "Our support email is firevillage.in@gmail.com. We reply 24/7!";
+    function closeConfirmation() {
+      document.getElementById('confirmationOverlay').style.display = 'none';
+      window.location.href = 'tournaments.html'; // Redirect to tournaments page
     }
 
-    chat.innerHTML += `<p><strong>Bot:</strong> ${reply}</p>`;
-    input.value = "";
-    chat.scrollTop = chat.scrollHeight;
-  }
-</script>
+    // Chat bot functions
+    function toggleBot() {
+      const bot = document.getElementById('chatBotBox');
+      bot.classList.toggle('hidden');
+    }
+
+    function sendMessage() {
+      const input = document.getElementById('userInput');
+      const msg = input.value.trim();
+      if (!msg) return;
+
+      const chat = document.getElementById('chatArea');
+      chat.innerHTML += `<p><strong>You:</strong> ${msg}</p>`;
+
+      // Enhanced Bot Logic
+      let reply = "For faster support, please email us at firevillage.in@gmail.com or message on Instagram @firevillage.in";
+
+      if (msg.toLowerCase().includes("register")) {
+        reply = "Registration is simple! Just fill the form on this page. After submission, we'll contact you within 24 hours with payment details.";
+      } else if (msg.toLowerCase().includes("payment")) {
+        reply = "Payment must be completed within 24 hours of registration to secure your spot. We accept UPI, Paytm and Google Pay.";
+      } else if (msg.toLowerCase().includes("timing") || msg.toLowerCase().includes("match")) {
+        reply = "Match schedules are sent by email 24 hours before the tournament. Make sure to check your spam folder if you don't see our email.";
+      } else if (msg.toLowerCase().includes("instagram")) {
+        reply = "Follow us on Instagram for updates: <a href='https://instagram.com/firevillage.in' class='text-yellow-400'>@firevillage.in</a>";
+      } else if (msg.toLowerCase().includes("email")) {
+        reply = "Our support team is available 24/7 at firevillage.in@gmail.com. Average response time is under 2 hours!";
+      } else if (msg.toLowerCase().includes("gameplay")) {
+        reply = "After registration, we'll schedule a friendly match to evaluate your gameplay. This helps us create balanced tournaments!";
+      }
+
+      chat.innerHTML += `<p><strong>Bot:</strong> ${reply}</p>`;
+      input.value = "";
+      chat.scrollTop = chat.scrollHeight;
+    }
+  </script>
+</body>
+</html>
