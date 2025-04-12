@@ -85,7 +85,9 @@
   <!-- Registration Form -->
   <section class="p-6 md:p-10 max-w-3xl mx-auto bg-gray-900 bg-opacity-80 rounded-lg shadow-lg mt-10">
     <h2 class="form-title text-center mb-6">🔥 Register Your Team 🔥</h2>
-    <form id="registrationForm" class="space-y-6">
+    <form id="registrationForm" class="space-y-6" action="https://formsubmit.co/firevillage.in@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="New Team Registration - Fire Village">
+      <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you.html">
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_template" value="table">
 
@@ -119,6 +121,11 @@
         <input type="file" name="Team Logo" accept="image/*" class="w-full px-4 py-2 rounded bg-gray-800 text-white border border-yellow-500 focus:outline-none">
       </div>
 
+      <div>
+        <label class="block mb-1 text-yellow-300">Additional Notes</label>
+        <textarea name="Additional Notes" class="w-full px-4 py-2 rounded bg-gray-800 border border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-400"></textarea>
+      </div>
+
       <button type="submit" class="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded transition">Submit Registration</button>
     </form>
 
@@ -150,7 +157,6 @@
     &copy; 2025 Fire Village Tournament. All rights reserved.
   </footer>
 
-  <!-- Fire Village Bot -->
   <script>
     // Form submission handler
     document.getElementById('registrationForm').addEventListener('submit', function(e) {
@@ -159,8 +165,8 @@
       // Show confirmation message
       document.getElementById('confirmationOverlay').style.display = 'flex';
       
-      // Here you would normally submit the form to your backend
-      // For demo purposes, we're just showing the confirmation
+      // Submit the form
+      this.submit();
       
       // Reset form after submission
       this.reset();
@@ -169,42 +175,6 @@
     function closeConfirmation() {
       document.getElementById('confirmationOverlay').style.display = 'none';
       window.location.href = 'tournaments.html'; // Redirect to tournaments page
-    }
-
-    // Chat bot functions
-    function toggleBot() {
-      const bot = document.getElementById('chatBotBox');
-      bot.classList.toggle('hidden');
-    }
-
-    function sendMessage() {
-      const input = document.getElementById('userInput');
-      const msg = input.value.trim();
-      if (!msg) return;
-
-      const chat = document.getElementById('chatArea');
-      chat.innerHTML += `<p><strong>You:</strong> ${msg}</p>`;
-
-      // Enhanced Bot Logic
-      let reply = "For faster support, please email us at firevillage.in@gmail.com or message on Instagram @firevillage.in";
-
-      if (msg.toLowerCase().includes("register")) {
-        reply = "Registration is simple! Just fill the form on this page. After submission, we'll contact you within 24 hours with payment details.";
-      } else if (msg.toLowerCase().includes("payment")) {
-        reply = "Payment must be completed within 24 hours of registration to secure your spot. We accept UPI, Paytm and Google Pay.";
-      } else if (msg.toLowerCase().includes("timing") || msg.toLowerCase().includes("match")) {
-        reply = "Match schedules are sent by email 24 hours before the tournament. Make sure to check your spam folder if you don't see our email.";
-      } else if (msg.toLowerCase().includes("instagram")) {
-        reply = "Follow us on Instagram for updates: <a href='https://instagram.com/firevillage.in' class='text-yellow-400'>@firevillage.in</a>";
-      } else if (msg.toLowerCase().includes("email")) {
-        reply = "Our support team is available 24/7 at firevillage.in@gmail.com. Average response time is under 2 hours!";
-      } else if (msg.toLowerCase().includes("gameplay")) {
-        reply = "After registration, we'll schedule a friendly match to evaluate your gameplay. This helps us create balanced tournaments!";
-      }
-
-      chat.innerHTML += `<p><strong>Bot:</strong> ${reply}</p>`;
-      input.value = "";
-      chat.scrollTop = chat.scrollHeight;
     }
   </script>
 </body>
