@@ -79,18 +79,21 @@
   </div>
 
   <!-- Navbar -->
-    </button>
-    <ul id="navMenu" class="hidden sm:flex flex-wrap justify-center gap-3 sm:gap-6 text-sm sm:text-base font-medium mt-2 sm:mt-0">
-      <li><a href="index.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Home</a></li>
-      <li><a href="tournaments.html" class="bg-yellow-500 text-black font-bold px-3 py-1 rounded-full hover:bg-yellow-400 transition">Tournaments</a></li>
-      <li><a href="leaderboard.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Leaderboard</a></li>
-      <li><a href="teams.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Teams</a></li>
-      <li><a href="register.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Register</a></li>
-      <li><a href="contact.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Contact</a></li>
-      <li><a href="about.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">About</a></li>   
-    </ul>
-  </nav>
-       <button onclick="showAdminLogin()" class="ml-4 btn-primary px-4 py-2 rounded-lg font-bold text-sm transition-all">
+  <nav class="relative z-50 bg-black bg-opacity-80 px-4 py-3 border-b border-yellow-500 sticky top-0">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <div class="flex items-center">
+        <img src="./assets/logo.png" alt="Fire Village Logo" class="h-10 sm:h-12 w-auto" loading="lazy">
+        <span class="ml-3 text-yellow-400 heading-font text-xl tracking-wider">FIRE VILLAGE</span>
+      </div>
+      <div class="hidden md:flex items-center space-x-6">
+        <li><a href="index.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Home</a></li>
+        <li><a href="tournaments.html" class="bg-yellow-500 text-black font-bold px-3 py-1 rounded-full hover:bg-yellow-400 transition">Tournaments</a></li>
+        <li><a href="leaderboard.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Leaderboard</a></li>
+        <li><a href="teams.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Teams</a></li>
+        <li><a href="register.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Register</a></li>
+        <li><a href="contact.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Contact</a></li>
+        <li><a href="about.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">About</a></li>  
+        <button onclick="showAdminLogin()" class="ml-4 btn-primary px-4 py-2 rounded-lg font-bold text-sm transition-all">
           <i class="fas fa-lock mr-1"></i> Admin
         </button>
       </div>
@@ -100,15 +103,14 @@
     </div>
     
     <!-- Mobile Menu -->
-    </button>
-    <ul id="navMenu" class="hidden sm:flex flex-wrap justify-center gap-3 sm:gap-6 text-sm sm:text-base font-medium mt-2 sm:mt-0">
-      <li><a href="index.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Home</a></li>
-      <li><a href="tournaments.html" class="bg-yellow-500 text-black font-bold px-3 py-1 rounded-full hover:bg-yellow-400 transition">Tournaments</a></li>
-      <li><a href="leaderboard.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Leaderboard</a></li>
-      <li><a href="teams.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Teams</a></li>
-      <li><a href="register.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Register</a></li>
-      <li><a href="contact.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Contact</a></li>
-      <li><a href="about.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">About</a></li>   
+    <div id="mobileMenu" class="hidden md:hidden bg-black bg-opacity-90 mt-3 py-2 px-4 rounded-lg">
+        <li><a href="index.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Home</a></li>
+        <li><a href="tournaments.html" class="bg-yellow-500 text-black font-bold px-3 py-1 rounded-full hover:bg-yellow-400 transition">Tournaments</a></li>
+        <li><a href="leaderboard.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Leaderboard</a></li>
+        <li><a href="teams.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Teams</a></li>
+        <li><a href="register.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Register</a></li>
+        <li><a href="contact.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Contact</a></li>
+        <li><a href="about.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">About</a></li>  
       <button onclick="showAdminLogin()" class="w-full text-left py-2 btn-primary px-4 rounded-lg font-bold mt-2 mb-1">
         <i class="fas fa-lock mr-2"></i> Admin Login
       </button>
@@ -256,6 +258,7 @@
                 </div>
               </div>
               
+              
               <!-- Submit Button -->
               <button type="submit" class="btn-primary w-full py-4 rounded-lg font-bold text-lg mt-6 transition-all">
                 <i class="fas fa-paper-plane mr-2"></i> COMPLETE REGISTRATION
@@ -331,20 +334,10 @@
                   <div class="team-badge w-8 h-8 flex items-center justify-center bg-gray-500 text-white font-bold mr-3">2</div>
                   <span>2nd Place</span>
                 </div>
-                <span class="font-bold">₹600</span>
-              </div>
-              <div class="flex justify-between items-center p-3 bg-black bg-opacity-30 rounded-lg border border-gray-800">
-                <div class="flex items-center">
-                  <div class="team-badge w-8 h-8 flex items-center justify-center bg-gray-500 text-white font-bold mr-3">3</div>
-                  <span>3rd Place</span>
-                </div>
-                <span class="font-bold">₹200</span>
-              </div>
-            </div>
-            
+                <span class="font-bold">₹600</span>           
             <div class="mt-4 bg-black bg-opacity-40 rounded-lg p-3 border border-yellow-500 border-opacity-20">
               <p class="text-yellow-400 text-sm font-semibold mb-1"><i class="fas fa-star mr-1"></i> BONUS PRIZES</p>
-              <p class="text-xs text-gray-300">Most Kills: ₹100 | MVP: ₹100</p>
+              <p class="text-xs text-gray-300">MVP: ₹100</p>
             </div>
           </div>
         </div>
@@ -387,7 +380,7 @@
       <div class="flex flex-col md:flex-row justify-between items-center">
         <div class="mb-6 md:mb-0">
           <div class="flex items-center">
-            <img src="https://via.placeholder.com/40" alt="Fire Village Logo" class="h-10">
+            <img src="./assets/logo.png" alt="Fire Village Logo" class="h-10 sm:h-12 w-auto" loading="lazy">
             <span class="ml-3 text-yellow-400 heading-font text-xl tracking-wider">FIRE VILLAGE</span>
           </div>
           <p class="text-gray-500 text-sm mt-2">India's most competitive Free Fire tournament platform</p>
