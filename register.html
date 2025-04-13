@@ -64,6 +64,10 @@
       justify-content: center;
       font-size: 10px;
     }
+    .verified-player-box {
+      background: rgba(25, 135, 84, 0.2);
+      border-left: 4px solid var(--primary);
+    }
     @media (max-width: 768px) {
       .mobile-flex-col {
         flex-direction: column;
@@ -131,19 +135,19 @@
           <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
             <div class="bg-black bg-opacity-40 p-3 rounded-lg border border-gray-800">
               <p class="text-gray-400 text-sm">Date</p>
-              <p class="font-bold text-lg">18 May 2025</p>
+              <p class="font-bold text-lg" id="tournament-date">18 May 2025</p>
             </div>
             <div class="bg-black bg-opacity-40 p-3 rounded-lg border border-gray-800">
               <p class="text-gray-400 text-sm">Time</p>
-              <p class="font-bold text-lg">3:00 PM IST</p>
+              <p class="font-bold text-lg" id="tournament-time">3:00 PM IST</p>
             </div>
             <div class="bg-black bg-opacity-40 p-3 rounded-lg border border-gray-800">
               <p class="text-gray-400 text-sm">Entry Fee</p>
-              <p class="font-bold text-lg">₹400</p>
+              <p class="font-bold text-lg" id="entry-fee">₹400</p>
             </div>
             <div class="bg-black bg-opacity-40 p-3 rounded-lg border border-gray-800">
               <p class="text-gray-400 text-sm">Prize Pool</p>
-              <p class="font-bold text-lg">₹2,000</p>
+              <p class="font-bold text-lg" id="prize-pool">₹2,000</p>
             </div>
           </div>
           
@@ -175,9 +179,12 @@
                 <div class="text-xs text-gray-400">SEC</div>
               </div>
             </div>
-            <button class="btn-primary w-full py-3 rounded-lg font-bold mt-2 transition-all">
+            <button id="joinButton" class="btn-primary w-full py-3 rounded-lg font-bold mt-2 transition-all">
               <i class="fas fa-play mr-2"></i> JOIN TOURNAMENT
             </button>
+            <div id="registrationClosed" class="hidden text-red-400 text-sm mt-2">
+              <i class="fas fa-exclamation-circle mr-1"></i> Registration closed!
+            </div>
           </div>
         </div>
       </div>
@@ -194,12 +201,14 @@
           </div>
           
           <div class="p-6">
-            <!-- Verified Player Alert -->
-            <div id="verifiedAlert" class="hidden bg-green-900 bg-opacity-40 border border-green-500 rounded-lg p-3 mb-6 flex items-center">
-              <i class="fas fa-check-circle text-green-400 mr-3 text-xl"></i>
-              <div>
-                <p class="font-bold text-green-400" id="verifiedPlayerName">PLAYER_NAME</p>
-                <p class="text-sm text-gray-300">Your registration is verified!</p>
+            <!-- Verified Player Box -->
+            <div id="verifiedPlayerBox" class="hidden verified-player-box p-3 rounded-lg mb-6">
+              <div class="flex items-center">
+                <i class="fas fa-check-circle text-yellow-400 mr-3 text-xl"></i>
+                <div>
+                  <p class="font-bold text-yellow-400" id="verifiedPlayerName">PLAYER_NAME</p>
+                  <p class="text-sm text-gray-300">Your registration is verified and confirmed!</p>
+                </div>
               </div>
             </div>
             
@@ -256,8 +265,8 @@
                     <input type="file" id="teamLogo" class="hidden" accept="image/*">
                   </label>
                 </div>
+                <p class="text-xs text-gray-500 mt-1">Supports: <div class=""></div> JPG , <div class=""></div>PNG (Max 2MB)</p>
               </div>
-              
               
               <!-- Submit Button -->
               <button type="submit" class="btn-primary w-full py-4 rounded-lg font-bold text-lg mt-6 transition-all">
@@ -327,17 +336,19 @@
                   <div class="team-badge w-8 h-8 flex items-center justify-center bg-yellow-500 text-black font-bold mr-3">1</div>
                   <span>1st Place</span>
                 </div>
-                <span class="font-bold text-yellow-400">₹1,200</span>
+                <span class="font-bold text-yellow-400">₹2,000</span>
               </div>
               <div class="flex justify-between items-center p-3 bg-black bg-opacity-30 rounded-lg border border-gray-800">
                 <div class="flex items-center">
                   <div class="team-badge w-8 h-8 flex items-center justify-center bg-gray-500 text-white font-bold mr-3">2</div>
                   <span>2nd Place</span>
                 </div>
-                <span class="font-bold">₹600</span>           
+                <span class="font-bold">₹800</span>
+              </div>
+            
             <div class="mt-4 bg-black bg-opacity-40 rounded-lg p-3 border border-yellow-500 border-opacity-20">
               <p class="text-yellow-400 text-sm font-semibold mb-1"><i class="fas fa-star mr-1"></i> BONUS PRIZES</p>
-              <p class="text-xs text-gray-300">MVP: ₹100</p>
+              <p class="text-xs text-gray-300">MVP: ₹200</p>
             </div>
           </div>
         </div>
@@ -365,7 +376,7 @@
               </li>
               <li class="flex items-start">
                 <span class="text-yellow-400 font-bold mr-2">4.</span>
-                <span>Top 3 teams after 3 matches win prizes</span>
+                <span>Top 2 teams win prizes</span>
               </li>
             </ol>
           </div>
@@ -463,6 +474,37 @@
         </div>
       </div>
       
+      <!-- Tournament Settings -->
+      <div class="bg-black bg-opacity-40 rounded-lg p-4 mb-6 border border-yellow-500 border-opacity-30">
+        <h3 class="text-yellow-400 heading-font text-lg mb-3 flex items-center">
+          <i class="fas fa-cog mr-2"></i> TOURNAMENT SETTINGS
+        </h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-gray-400 text-sm font-semibold mb-2">Tournament Date</label>
+            <input type="date" id="adminTournamentDate" class="w-full bg-black bg-opacity-40 border border-gray-800 focus:border-yellow-500 rounded-lg px-4 py-2 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-gray-400 text-sm font-semibold mb-2">Tournament Time</label>
+            <input type="time" id="adminTournamentTime" class="w-full bg-black bg-opacity-40 border border-gray-800 focus:border-yellow-500 rounded-lg px-4 py-2 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-gray-400 text-sm font-semibold mb-2">Entry Fee (₹)</label>
+            <input type="number" id="adminEntryFee" class="w-full bg-black bg-opacity-40 border border-gray-800 focus:border-yellow-500 rounded-lg px-4 py-2 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-gray-400 text-sm font-semibold mb-2">Prize Pool (₹)</label>
+            <input type="number" id="adminPrizePool" class="w-full bg-black bg-opacity-40 border border-gray-800 focus:border-yellow-500 rounded-lg px-4 py-2 focus:outline-none">
+          </div>
+        </div>
+        
+        <button onclick="saveTournamentSettings()" class="btn-primary px-4 py-2 rounded-lg font-bold mt-4">
+          <i class="fas fa-save mr-2"></i> Save Settings
+        </button>
+      </div>
+      
+      <!-- Player Management -->
       <div class="mb-6">
         <h3 class="text-yellow-400 heading-font text-lg mb-3">Player Management</h3>
         <div class="bg-black bg-opacity-40 rounded-lg overflow-hidden border border-gray-800">
@@ -472,6 +514,7 @@
                 <tr>
                   <th class="px-4 py-3 text-left text-sm text-yellow-400">Player Name</th>
                   <th class="px-4 py-3 text-left text-sm text-yellow-400">UID</th>
+                  <th class="px-4 py-3 text-left text-sm text-yellow-400">WhatsApp</th>
                   <th class="px-4 py-3 text-left text-sm text-yellow-400">Status</th>
                   <th class="px-4 py-3 text-left text-sm text-yellow-400">Actions</th>
                 </tr>
@@ -518,9 +561,59 @@
     let registrations = JSON.parse(localStorage.getItem('registrations')) || [];
     const ADMIN_PASSWORD = "2580aauFVT";
     
+    // Tournament settings
+    let tournamentSettings = JSON.parse(localStorage.getItem('tournamentSettings')) || {
+      date: "2025-05-18",
+      time: "15:00",
+      entryFee: "400",
+      prizePool: "2000"
+    };
+    
+    // Initialize tournament settings
+    function initTournamentSettings() {
+      document.getElementById('tournament-date').textContent = formatDate(tournamentSettings.date);
+      document.getElementById('tournament-time').textContent = formatTime(tournamentSettings.time);
+      document.getElementById('entry-fee').textContent = `₹${tournamentSettings.entryFee}`;
+      document.getElementById('prize-pool').textContent = `₹${tournamentSettings.prizePool}`;
+      
+      // Set admin panel values
+      document.getElementById('adminTournamentDate').value = tournamentSettings.date;
+      document.getElementById('adminTournamentTime').value = tournamentSettings.time;
+      document.getElementById('adminEntryFee').value = tournamentSettings.entryFee;
+      document.getElementById('adminPrizePool').value = tournamentSettings.prizePool;
+    }
+    
+    function formatDate(dateString) {
+      const options = { day: 'numeric', month: 'long', year: 'numeric' };
+      return new Date(dateString).toLocaleDateString('en-US', options);
+    }
+    
+    function formatTime(timeString) {
+      const [hours, minutes] = timeString.split(':');
+      const period = hours >= 12 ? 'PM' : 'AM';
+      const hours12 = hours % 12 || 12;
+      return `${hours12}:${minutes} ${period} IST`;
+    }
+    
+    // Save tournament settings
+    function saveTournamentSettings() {
+      tournamentSettings = {
+        date: document.getElementById('adminTournamentDate').value,
+        time: document.getElementById('adminTournamentTime').value,
+        entryFee: document.getElementById('adminEntryFee').value,
+        prizePool: document.getElementById('adminPrizePool').value
+      };
+      
+      localStorage.setItem('tournamentSettings', JSON.stringify(tournamentSettings));
+      initTournamentSettings();
+      
+      // Show success message
+      alert('Tournament settings saved successfully!');
+    }
+    
     // Countdown Timer
     function updateCountdown() {
-      const endDate = new Date("May 18, 2025 15:00:00").getTime();
+      const endDate = new Date(`${tournamentSettings.date}T${tournamentSettings.time}:00`).getTime();
       const now = new Date().getTime();
       const distance = endDate - now;
       
@@ -534,14 +627,24 @@
       document.getElementById("countdown-minutes").innerHTML = minutes.toString().padStart(2, "0");
       document.getElementById("countdown-seconds").innerHTML = seconds.toString().padStart(2, "0");
       
+      // Update join button status
+      const joinButton = document.getElementById('joinButton');
+      const registrationClosed = document.getElementById('registrationClosed');
+      
       if (distance < 0) {
-        clearInterval(countdownTimer);
-        document.getElementById("countdown").innerHTML = "REGISTRATION CLOSED";
+        joinButton.disabled = true;
+        joinButton.classList.remove('btn-primary');
+        joinButton.classList.add('bg-gray-600', 'cursor-not-allowed');
+        registrationClosed.classList.remove('hidden');
+      } else {
+        joinButton.disabled = false;
+        joinButton.classList.add('btn-primary');
+        joinButton.classList.remove('bg-gray-600', 'cursor-not-allowed');
+        registrationClosed.classList.add('hidden');
       }
     }
     
     const countdownTimer = setInterval(updateCountdown, 1000);
-    updateCountdown();
     
     // Check for verified player
     function checkVerifiedPlayer() {
@@ -549,9 +652,11 @@
       const verifiedPlayer = urlParams.get('verified');
       
       if (verifiedPlayer) {
-        document.getElementById('verifiedAlert').classList.remove('hidden');
-        document.getElementById('verifiedPlayerName').textContent = verifiedPlayer;
-        document.getElementById('playerName').value = verifiedPlayer;
+        const verifiedBox = document.getElementById('verifiedPlayerBox');
+        const verifiedName = document.getElementById('verifiedPlayerName');
+        
+        verifiedBox.classList.remove('hidden');
+        verifiedName.textContent = verifiedPlayer;
         
         // Mark as verified in local storage
         registrations = registrations.map(reg => {
@@ -593,7 +698,7 @@
       // Update stats
       document.getElementById('totalRegistrations').textContent = registrations.length;
       document.getElementById('verifiedPlayers').textContent = registrations.filter(r => r.verified).length;
-      document.getElementById('totalPayments').textContent = registrations.length * 400;
+      document.getElementById('totalPayments').textContent = registrations.length * tournamentSettings.entryFee;
       
       // Populate players list
       const playersList = document.getElementById('playersList');
@@ -606,6 +711,7 @@
         row.innerHTML = `
           <td class="px-4 py-3">${player.playerName}</td>
           <td class="px-4 py-3">${player.playerUID}</td>
+          <td class="px-4 py-3">${player.whatsappNumber}</td>
           <td class="px-4 py-3">
             ${player.verified ? 
               '<span class="px-2 py-1 bg-green-900 bg-opacity-40 text-green-400 rounded-full text-xs">Verified</span>' : 
@@ -702,7 +808,11 @@
     }
     
     // Initialize
-    document.addEventListener('DOMContentLoaded', checkVerifiedPlayer);
+    document.addEventListener('DOMContentLoaded', function() {
+      initTournamentSettings();
+      updateCountdown();
+      checkVerifiedPlayer();
+    });
     
     // Close modals when clicking outside
     window.addEventListener('click', function(event) {
