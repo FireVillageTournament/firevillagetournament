@@ -3,50 +3,339 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Fire Village Registration</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <title>Fire Village - Tournament Registration</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
+      font-family: 'Roboto', sans-serif;
+    }
+    .heading-font {
       font-family: 'Orbitron', sans-serif;
+    }
+    .gradient-bg {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    }
+    .input-focus:focus {
+      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3);
     }
   </style>
 </head>
-<body class="bg-black text-white font-sans scroll-smooth">
+<body class="gradient-bg text-white min-h-screen">
   <!-- Navbar -->
-  <nav class="bg-gray-900 px-4 sm:px-6 py-3 flex flex-col sm:flex-row justify-between items-center shadow-lg sticky top-0 z-50">
+  <nav class="bg-gray-900 px-4 sm:px-6 py-3 flex flex-col sm:flex-row justify-between items-center shadow-lg sticky top-0 z-50 border-b border-yellow-400">
     <div class="flex items-center">
       <img src="./assets/logo.png" alt="Fire Village Logo" class="h-10 sm:h-12 w-auto">
-      <span class="ml-2 text-yellow-400 font-heading text-xl sm:text-2xl title-font">FIRE VILLAGE</span>
+      <span class="ml-2 text-yellow-400 heading-font text-xl sm:text-2xl font-bold">FIRE VILLAGE</span>
     </div>
     <ul class="flex flex-wrap justify-center gap-2 sm:gap-4 text-xs sm:text-base font-medium mt-2 sm:mt-0 text-center">
-      <li><a href="index.html" class="nav-link hover:text-yellow-400 px-2 py-1 rounded transition">Home</a></li>
-      <li><a href="tournaments.html" class="nav-link active-nav text-black font-bold px-3 py-1 rounded-full transition bg-yellow-400">Tournaments</a></li>
-      <li><a href="leaderboard.html" class="nav-link hover:text-yellow-400 px-2 py-1 rounded transition">Leaderboard</a></li>
-      <li><a href="teams.html" class="nav-link hover:text-yellow-400 px-2 py-1 rounded transition">Teams</a></li>
-      <li><a href="register.html" class="nav-link hover:text-yellow-400 px-2 py-1 rounded transition">Register</a></li>
-      <li><a href="contact.html" class="nav-link hover:text-yellow-400 px-2 py-1 rounded transition">Contact</a></li>
-      <li><a href="about.html" class="nav-link hover:text-yellow-400 px-2 py-1 rounded transition">About</a></li>
+      <li><a href="index.html" class="nav-link hover:text-yellow-400 px-2 py-1 rounded transition duration-300"><i class="fas fa-home mr-1"></i> Home</a></li>
+      <li><a href="tournaments.html" class="nav-link text-black font-bold px-3 py-1 rounded-full transition duration-300 bg-yellow-400 hover:bg-yellow-300"><i class="fas fa-trophy mr-1"></i> Tournaments</a></li>
+      <li><a href="leaderboard.html" class="nav-link hover:text-yellow-400 px-2 py-1 rounded transition duration-300"><i class="fas fa-ranking-star mr-1"></i> Leaderboard</a></li>
+      <li><a href="teams.html" class="nav-link hover:text-yellow-400 px-2 py-1 rounded transition duration-300"><i class="fas fa-users mr-1"></i> Teams</a></li>
+      <li><a href="register.html" class="nav-link hover:text-yellow-400 px-2 py-1 rounded transition duration-300"><i class="fas fa-user-plus mr-1"></i> Register</a></li>
+      <li><a href="contact.html" class="nav-link hover:text-yellow-400 px-2 py-1 rounded transition duration-300"><i class="fas fa-envelope mr-1"></i> Contact</a></li>
+      <li><a href="about.html" class="nav-link hover:text-yellow-400 px-2 py-1 rounded transition duration-300"><i class="fas fa-info-circle mr-1"></i> About</a></li>
     </ul>
   </nav>
 
-  <!-- Registration Form -->
-  <div class="max-w-lg mx-auto mt-10 bg-gray-800 px-4 py-8 sm:px-8 rounded-xl shadow-md">
-    <h1 class="text-center text-xl sm:text-2xl font-bold text-orange-500 mb-6">Free Fire Tournament Registration</h1>
-    <form action="https://formsubmit.co/firevillage.in@gmail.com" method="POST" class="space-y-4">
-      <input type="text" name="player_name" placeholder="Player Name (In-Game Name)" required class="w-full p-3 bg-gray-700 rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-400" />
-      <input type="text" name="freefire_id" placeholder="Free Fire ID" required class="w-full p-3 bg-gray-700 rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-400" />
-      <input type="text" name="whatsapp_number" placeholder="WhatsApp Number" required class="w-full p-3 bg-gray-700 rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-400" />
-      <input type="text" name="team_name" placeholder="Team Name (if any)" class="w-full p-3 bg-gray-700 rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-400" />
-      <textarea name="message" rows="3" placeholder="Anything else you want to say?" class="w-full p-3 bg-gray-700 rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-400"></textarea>
+  <!-- Main Content -->
+  <main class="container mx-auto px-4 py-8">
+    <!-- Tournament Info Banner -->
+    <div class="bg-gray-800 rounded-xl p-6 mb-8 border-l-4 border-yellow-400 shadow-lg">
+      <div class="flex flex-col md:flex-row items-center">
+        <div class="md:w-2/3 mb-4 md:mb-0">
+          <h2 class="text-yellow-400 heading-font text-2xl font-bold mb-2">Upcoming Tournament</h2>
+          <div class="grid grid-cols-2 gap-4 mb-4">
+            <div>
+              <p class="text-gray-400 text-sm">Date:</p>
+              <p class="font-medium">15 June 2023</p>
+            </div>
+            <div>
+              <p class="text-gray-400 text-sm">Time:</p>
+              <p class="font-medium">7:00 PM IST</p>
+            </div>
+            <div>
+              <p class="text-gray-400 text-sm">Entry Fee:</p>
+              <p class="font-medium">₹50 per team</p>
+            </div>
+            <div>
+              <p class="text-gray-400 text-sm">Prize Pool:</p>
+              <p class="font-medium">₹5,000</p>
+            </div>
+          </div>
+          <p class="text-sm text-gray-300">Register before 14 June to secure your spot. Limited slots available!</p>
+        </div>
+        <div class="md:w-1/3 flex justify-center">
+          <div class="bg-gray-900 p-4 rounded-lg border border-yellow-400 text-center">
+            <p class="text-yellow-400 font-bold mb-2">Registration Closes In:</p>
+            <div class="heading-font text-2xl" id="countdown">
+              <span id="days">00</span>d <span id="hours">00</span>h <span id="minutes">00</span>m <span id="seconds">00</span>s
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_template" value="table">
-      <button type="submit" class="w-full bg-orange-500 hover:bg-orange-400 text-black font-bold py-3 rounded transition">Submit Registration</button>
-    </form>
-    <p class="text-center text-gray-400 text-sm mt-4">
-      All submissions will go directly to <strong>firevillage.in@gmail.com</strong> 📩
-    </p>
-  </div>
+    <div class="flex flex-col lg:flex-row gap-8">
+      <!-- Registration Form -->
+      <div class="lg:w-2/3">
+        <div class="bg-gray-800 rounded-xl p-6 sm:p-8 shadow-lg border border-gray-700">
+          <div class="flex items-center mb-6">
+            <div class="bg-yellow-400 w-1 h-8 mr-3 rounded-full"></div>
+            <h1 class="text-yellow-400 heading-font text-2xl font-bold">Tournament Registration</h1>
+          </div>
+          
+          <form action="https://formsubmit.co/firevillage.in@gmail.com" method="POST" class="space-y-5">
+            <div>
+              <label for="player_name" class="block text-sm font-medium text-gray-300 mb-1">Player Name (In-Game Name) *</label>
+              <input type="text" id="player_name" name="player_name" required 
+                     class="w-full p-3 bg-gray-700 rounded-lg border border-gray-600 focus:outline-none input-focus placeholder-gray-400">
+            </div>
+            
+            <div>
+              <label for="freefire_id" class="block text-sm font-medium text-gray-300 mb-1">Free Fire ID *</label>
+              <input type="text" id="freefire_id" name="freefire_id" required 
+                     class="w-full p-3 bg-gray-700 rounded-lg border border-gray-600 focus:outline-none input-focus placeholder-gray-400">
+            </div>
+            
+            <div>
+              <label for="whatsapp_number" class="block text-sm font-medium text-gray-300 mb-1">WhatsApp Number *</label>
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                  <span class="text-gray-400">+91</span>
+                </div>
+                <input type="tel" id="whatsapp_number" name="whatsapp_number" required 
+                       class="w-full p-3 bg-gray-700 rounded-lg border border-gray-600 focus:outline-none input-focus placeholder-gray-400 pl-12">
+              </div>
+            </div>
+            
+            <div>
+              <label for="team_name" class="block text-sm font-medium text-gray-300 mb-1">Team Name (if any)</label>
+              <input type="text" id="team_name" name="team_name" 
+                     class="w-full p-3 bg-gray-700 rounded-lg border border-gray-600 focus:outline-none input-focus placeholder-gray-400">
+            </div>
+            
+            <div>
+              <label for="player_level" class="block text-sm font-medium text-gray-300 mb-1">Player Level</label>
+              <select id="player_level" name="player_level" 
+                      class="w-full p-3 bg-gray-700 rounded-lg border border-gray-600 focus:outline-none input-focus text-gray-300">
+                <option value="">Select your level</option>
+                <option value="beginner">Beginner (1-30)</option>
+                <option value="intermediate">Intermediate (31-60)</option>
+                <option value="advanced">Advanced (61-80)</option>
+                <option value="pro">Pro (80+)</option>
+              </select>
+            </div>
+            
+            <div>
+              <label for="team_size" class="block text-sm font-medium text-gray-300 mb-1">Team Size</label>
+              <div class="flex flex-wrap gap-3">
+                <label class="inline-flex items-center">
+                  <input type="radio" name="team_size" value="solo" class="form-radio text-yellow-500 bg-gray-700 border-gray-600">
+                  <span class="ml-2">Solo</span>
+                </label>
+                <label class="inline-flex items-center">
+                  <input type="radio" name="team_size" value="duo" class="form-radio text-yellow-500 bg-gray-700 border-gray-600">
+                  <span class="ml-2">Duo</span>
+                </label>
+                <label class="inline-flex items-center">
+                  <input type="radio" name="team_size" value="squad" class="form-radio text-yellow-500 bg-gray-700 border-gray-600" checked>
+                  <span class="ml-2">Squad</span>
+                </label>
+              </div>
+            </div>
+            
+            <div>
+              <label for="payment_method" class="block text-sm font-medium text-gray-300 mb-1">Payment Method *</label>
+              <select id="payment_method" name="payment_method" required 
+                      class="w-full p-3 bg-gray-700 rounded-lg border border-gray-600 focus:outline-none input-focus text-gray-300">
+                <option value="">Select payment method</option>
+                <option value="upi">UPI (Google Pay/PhonePe/PayTM)</option>
+                <option value="paypal">PayPal</option>
+                <option value="bank_transfer">Bank Transfer</option>
+              </select>
+            </div>
+            
+            <div>
+              <label for="message" class="block text-sm font-medium text-gray-300 mb-1">Additional Information</label>
+              <textarea id="message" name="message" rows="3" 
+                        class="w-full p-3 bg-gray-700 rounded-lg border border-gray-600 focus:outline-none input-focus placeholder-gray-400"></textarea>
+            </div>
+            
+            <div class="flex items-center">
+              <input id="terms" name="terms" type="checkbox" required 
+                     class="w-4 h-4 bg-gray-700 rounded border-gray-600 focus:ring-yellow-500 focus:ring-2">
+              <label for="terms" class="ml-2 text-sm text-gray-300">
+                I agree to the <a href="#" class="text-yellow-400 hover:underline">terms and conditions</a> *
+              </label>
+            </div>
+
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_subject" value="New Tournament Registration">
+            
+            <button type="submit" 
+                    class="w-full bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-3 px-4 rounded-lg transition duration-300 flex items-center justify-center">
+              <i class="fas fa-paper-plane mr-2"></i> Submit Registration
+            </button>
+          </form>
+          
+          <p class="text-center text-gray-400 text-sm mt-6">
+            <i class="fas fa-envelope mr-1"></i> All submissions will be sent to <strong class="text-yellow-400">firevillage.in@gmail.com</strong>
+          </p>
+        </div>
+      </div>
+      
+      <!-- Tournament Rules and Info -->
+      <div class="lg:w-1/3">
+        <div class="bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-700 mb-6">
+          <div class="flex items-center mb-4">
+            <div class="bg-yellow-400 w-1 h-8 mr-3 rounded-full"></div>
+            <h2 class="text-yellow-400 heading-font text-xl font-bold">Tournament Rules</h2>
+          </div>
+          <ul class="space-y-3 text-sm text-gray-300">
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-yellow-400 mt-1 mr-2"></i>
+              <span>All players must have a valid Free Fire account</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-yellow-400 mt-1 mr-2"></i>
+              <span>No hacking or cheating of any kind</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-yellow-400 mt-1 mr-2"></i>
+              <span>Teams must report 15 minutes before match time</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-yellow-400 mt-1 mr-2"></i>
+              <span>Disconnections during match will not be compensated</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-yellow-400 mt-1 mr-2"></i>
+              <span>Decisions by organizers are final</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-yellow-400 mt-1 mr-2"></i>
+              <span>Entry fee is non-refundable</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-700">
+          <div class="flex items-center mb-4">
+            <div class="bg-yellow-400 w-1 h-8 mr-3 rounded-full"></div>
+            <h2 class="text-yellow-400 heading-font text-xl font-bold">Prize Distribution</h2>
+          </div>
+          <div class="space-y-4">
+            <div class="flex items-center justify-between bg-gray-700 p-3 rounded-lg">
+              <div class="flex items-center">
+                <div class="bg-yellow-500 text-black font-bold rounded-full w-6 h-6 flex items-center justify-center mr-3">1</div>
+                <span>1st Place</span>
+              </div>
+              <span class="font-bold">₹2,500</span>
+            </div>
+            <div class="flex items-center justify-between bg-gray-700 p-3 rounded-lg">
+              <div class="flex items-center">
+                <div class="bg-gray-500 text-white font-bold rounded-full w-6 h-6 flex items-center justify-center mr-3">2</div>
+                <span>2nd Place</span>
+              </div>
+              <span class="font-bold">₹1,500</span>
+            </div>
+            <div class="flex items-center justify-between bg-gray-700 p-3 rounded-lg">
+              <div class="flex items-center">
+                <div class="bg-amber-700 text-white font-bold rounded-full w-6 h-6 flex items-center justify-center mr-3">3</div>
+                <span>3rd Place</span>
+              </div>
+              <span class="font-bold">₹1,000</span>
+            </div>
+          </div>
+          
+          <div class="mt-6 bg-yellow-400 bg-opacity-10 border border-yellow-400 rounded-lg p-4">
+            <h3 class="text-yellow-400 font-bold mb-2"><i class="fas fa-info-circle mr-1"></i> Important Notes</h3>
+            <ul class="text-xs text-gray-300 space-y-1">
+              <li class="flex items-start">
+                <i class="fas fa-circle text-yellow-400 text-[6px] mt-1.5 mr-2"></i>
+                <span>Payment must be completed within 1 hour of registration</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-circle text-yellow-400 text-[6px] mt-1.5 mr-2"></i>
+                <span>Send payment screenshot to our WhatsApp after registration</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-circle text-yellow-400 text-[6px] mt-1.5 mr-2"></i>
+                <span>Room ID and password will be shared 30 minutes before match</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 mt-12 py-8 px-4 border-t border-gray-800">
+    <div class="container mx-auto">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-4 md:mb-0">
+          <div class="flex items-center">
+            <img src="./assets/logo.png" alt="Fire Village Logo" class="h-8 w-auto">
+            <span class="ml-2 text-yellow-400 heading-font text-lg font-bold">FIRE VILLAGE</span>
+          </div>
+          <p class="text-gray-400 text-sm mt-2">India's premier Free Fire tournament platform</p>
+        </div>
+        
+        <div class="flex space-x-6">
+          <a href="#" class="text-gray-400 hover:text-yellow-400 transition duration-300">
+            <i class="fab fa-facebook-f text-lg"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-yellow-400 transition duration-300">
+            <i class="fab fa-instagram text-lg"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-yellow-400 transition duration-300">
+            <i class="fab fa-discord text-lg"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-yellow-400 transition duration-300">
+            <i class="fab fa-youtube text-lg"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-yellow-400 transition duration-300">
+            <i class="fab fa-whatsapp text-lg"></i>
+          </a>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 mt-6 pt-6 text-center text-gray-500 text-sm">
+        <p>&copy; 2023 Fire Village. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Countdown timer
+    function updateCountdown() {
+      const endDate = new Date("June 14, 2023 23:59:59").getTime();
+      const now = new Date().getTime();
+      const distance = endDate - now;
+      
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+      document.getElementById("days").innerHTML = days.toString().padStart(2, '0');
+      document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
+      document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
+      document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
+      
+      if (distance < 0) {
+        clearInterval(countdownTimer);
+        document.getElementById("countdown").innerHTML = "REGISTRATION CLOSED";
+      }
+    }
+    
+    updateCountdown();
+    const countdownTimer = setInterval(updateCountdown, 1000);
+  </script>
 </body>
 </html>
