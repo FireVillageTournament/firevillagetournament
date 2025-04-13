@@ -125,17 +125,22 @@
         <img src="./assets/logo.png" alt="Fire Village Logo" class="h-10 w-auto">
         <span class="ml-2 font-bold text-yellow-400 text-xl">FIRE VILLAGE</span>
       </div>
-      
-      <!-- Desktop Navigation -->
-      <nav class="hidden md:block">
-        <ul class="flex space-x-6">
-          <li><a href="index.html" class="nav-link text-gray-300 hover:text-yellow-400">Home</a></li>
-          <li><a href="tournaments.html" class="nav-link px-3 py-1 rounded-full bg-yellow-500 text-black font-bold">Tournaments</a></li>
-          <li><a href="leaderboard.html" class="nav-link text-gray-300 hover:text-yellow-400">Leaderboard</a></li>
-          <li><a href="teams.html" class="nav-link text-gray-300 hover:text-yellow-400">Teams</a></li>
-          <li><a href="register.html" class="nav-link text-gray-300 hover:text-yellow-400">Register</a></li>
-        </ul>
-      </nav>
+  <!-- Navbar -->
+  <nav class="bg-gray-900 px-4 sm:px-6 py-3 flex flex-col sm:flex-row justify-between items-center shadow-lg sticky top-0 z-50 border-b border-yellow-400">
+    <div class="flex items-center">
+      <img src="./assets/logo.png" alt="Fire Village Logo" class="h-10 sm:h-12 w-auto">
+      <span class="ml-2 text-yellow-400 heading-font text-xl sm:text-2xl font-bold">FIRE VILLAGE</span>
+    </div>
+    <ul class="flex flex-wrap justify-center gap-2 sm:gap-4 text-xs sm:text-base font-medium mt-2 sm:mt-0 text-center">
+      <li><a href="index.html" class="nav-link hover:text-yellow-400 px-2 py-1 rounded transition duration-300"><i class="fas fa-home mr-1"></i> Home</a></li>
+      <li><a href="tournaments.html" class="nav-link text-black font-bold px-3 py-1 rounded-full transition duration-300 bg-yellow-400 hover:bg-yellow-300"><i class="fas fa-trophy mr-1"></i> Tournaments</a></li>
+      <li><a href="leaderboard.html" class="nav-link hover:text-yellow-400 px-2 py-1 rounded transition duration-300"><i class="fas fa-ranking-star mr-1"></i> Leaderboard</a></li>
+      <li><a href="teams.html" class="nav-link hover:text-yellow-400 px-2 py-1 rounded transition duration-300"><i class="fas fa-users mr-1"></i> Teams</a></li>
+      <li><a href="register.html" class="nav-link hover:text-yellow-400 px-2 py-1 rounded transition duration-300"><i class="fas fa-user-plus mr-1"></i> Register</a></li>
+      <li><a href="contact.html" class="nav-link hover:text-yellow-400 px-2 py-1 rounded transition duration-300"><i class="fas fa-envelope mr-1"></i> Contact</a></li>
+      <li><a href="about.html" class="nav-link hover:text-yellow-400 px-2 py-1 rounded transition duration-300"><i class="fas fa-info-circle mr-1"></i> About</a></li>
+    </ul>
+  </nav>
       
       <!-- Mobile Menu Button -->
       <button id="menu-btn" class="md:hidden focus:outline-none">
