@@ -1,340 +1,558 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Fire Village - Tournament Registration</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fire Village Tournament</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    :root {
+      --primary: #f59e0b;
+      --dark: #0f172a;
+      --darker: #020617;
+    }
     body {
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--darker);
+      color: #e2e8f0;
     }
     .heading-font {
       font-family: 'Orbitron', sans-serif;
+      letter-spacing: 0.05em;
     }
-    .gradient-bg {
-      background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    .glass-panel {
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
     .input-focus:focus {
       box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3);
     }
+    .badge-solo { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
+    .badge-duo { background: rgba(16, 185, 129, 0.15); color: #10b981; }
+    .badge-squad { background: rgba(139, 92, 246, 0.15); color: #8b5cf6; }
+    @media (max-width: 768px) {
+      .sidebar { transform: translateX(-100%); transition: transform 0.3s ease; }
+      .sidebar.mobile-open { transform: translateX(0); }
+    }
   </style>
 </head>
-<body class="gradient-bg text-white min-h-screen">
-  <!-- Navbar -->
-  <nav class="bg-gray-900 px-4 sm:px-6 py-3 flex flex-col sm:flex-row justify-between items-center shadow-lg sticky top-0 z-50 border-b border-yellow-400">
-    <div class="flex items-center">
-      <img src="./assets/logo.png" alt="Fire Village Logo" class="h-10 sm:h-12 w-auto">
-      <span class="ml-2 text-yellow-400 heading-font text-xl sm:text-2xl font-bold">FIRE VILLAGE</span>
-    </div>
-    <ul class="flex flex-wrap justify-center gap-2 sm:gap-4 text-xs sm:text-base font-medium mt-2 sm:mt-0 text-center">
-      <li><a href="index.html" class="nav-link hover:text-yellow-400 px-2 py-1 rounded transition duration-300"><i class="fas fa-home mr-1"></i> Home</a></li>
-      <li><a href="tournaments.html" class="nav-link text-black font-bold px-3 py-1 rounded-full transition duration-300 bg-yellow-400 hover:bg-yellow-300"><i class="fas fa-trophy mr-1"></i> Tournaments</a></li>
-      <li><a href="leaderboard.html" class="nav-link hover:text-yellow-400 px-2 py-1 rounded transition duration-300"><i class="fas fa-ranking-star mr-1"></i> Leaderboard</a></li>
-      <li><a href="teams.html" class="nav-link hover:text-yellow-400 px-2 py-1 rounded transition duration-300"><i class="fas fa-users mr-1"></i> Teams</a></li>
-      <li><a href="register.html" class="nav-link hover:text-yellow-400 px-2 py-1 rounded transition duration-300"><i class="fas fa-user-plus mr-1"></i> Register</a></li>
-      <li><a href="contact.html" class="nav-link hover:text-yellow-400 px-2 py-1 rounded transition duration-300"><i class="fas fa-envelope mr-1"></i> Contact</a></li>
-      <li><a href="about.html" class="nav-link hover:text-yellow-400 px-2 py-1 rounded transition duration-300"><i class="fas fa-info-circle mr-1"></i> About</a></li>
-    </ul>
-  </nav>
-
-  <!-- Main Content -->
-  <main class="container mx-auto px-4 py-8">
-    <!-- Tournament Info Banner -->
-    <div class="bg-gray-800 rounded-xl p-6 mb-8 border-l-4 border-yellow-400 shadow-lg">
-      <div class="flex flex-col md:flex-row items-center">
-        <div class="md:w-2/3 mb-4 md:mb-0">
-          <h2 class="text-yellow-400 heading-font text-2xl font-bold mb-2">Upcoming Tournament</h2>
-          <div class="grid grid-cols-2 gap-4 mb-4">
-            <div>
-              <p class="text-gray-400 text-sm">Date:</p>
-              <p class="font-medium">18 May 2025</p>
-            </div>
-            <div>
-              <p class="text-gray-400 text-sm">Time:</p>
-              <p class="font-medium">03:00 PM IST</p>
-            </div>
-            <div>
-              <p class="text-gray-400 text-sm">Entry Fee:</p>
-              <p class="font-medium">₹400 per team</p>
-            </div>
-            <div>
-              <p class="text-gray-400 text-sm">Prize Pool:</p>
-              <p class="font-medium">₹2,000</p>
-            </div>
-          </div>
-          <p class="text-sm text-gray-300">Register before 17 May to secure your spot. Limited slots available!</p>
+<body class="min-h-screen">
+  <!-- Login Screen (for admin) -->
+  <div id="loginScreen" class="fixed inset-0 flex items-center justify-center bg-gray-900 z-50 p-4 hidden">
+    <div class="glass-panel p-8 rounded-xl shadow-2xl max-w-md w-full border border-yellow-500/30">
+      <div class="flex flex-col items-center mb-8">
+        <div class="flex items-center mb-4">
+          <img src="./assets/logo.png" alt="FVT Logo" class="h-12">
+          <span class="ml-3 text-yellow-400 heading-font text-2xl">FVT ADMIN</span>
         </div>
-        <div class="md:w-1/3 flex justify-center">
-          <div class="bg-gray-900 p-4 rounded-lg border border-yellow-400 text-center">
-            <p class="text-yellow-400 font-bold mb-2">Registration Closes In:</p>
-            <div class="heading-font text-2xl" id="countdown">
-              <span id="days">00</span>d <span id="hours">00</span>h <span id="minutes">00</span>m <span id="seconds">00</span>s
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="flex flex-col lg:flex-row gap-8">
-      <!-- Registration Form -->
-      <div class="lg:w-2/3">
-        <div class="bg-gray-800 rounded-xl p-6 sm:p-8 shadow-lg border border-gray-700">
-          <div class="flex items-center mb-6">
-            <div class="bg-yellow-400 w-1 h-8 mr-3 rounded-full"></div>
-            <h1 class="text-yellow-400 heading-font text-2xl font-bold">Tournament Registration</h1>
-          </div>
-          
-          <form action="https://formsubmit.co/firevillage.in@gmail.com" method="POST" class="space-y-5">
-            <div>
-              <label for="player_name" class="block text-sm font-medium text-gray-300 mb-1">Player Name (In-Game Name) *</label>
-              <input type="text" id="player_name" name="player_name" required 
-                     class="w-full p-3 bg-gray-700 rounded-lg border border-gray-600 focus:outline-none input-focus placeholder-gray-400">
-            </div>
-            
-            <div>
-              <label for="freefire_id" class="block text-sm font-medium text-gray-300 mb-1">Free Fire ID *</label>
-              <input type="text" id="freefire_id" name="freefire_id" required 
-                     class="w-full p-3 bg-gray-700 rounded-lg border border-gray-600 focus:outline-none input-focus placeholder-gray-400">
-            </div>
-            
-            <div>
-              <label for="whatsapp_number" class="block text-sm font-medium text-gray-300 mb-1">WhatsApp Number *</label>
-              <div class="relative">
-                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                  <span class="text-gray-400">+91</span>
-                </div>
-                <input type="tel" id="whatsapp_number" name="whatsapp_number" required 
-                       class="w-full p-3 bg-gray-700 rounded-lg border border-gray-600 focus:outline-none input-focus placeholder-gray-400 pl-12">
-              </div>
-            </div>
-            
-            <div>
-              <label for="team_name" class="block text-sm font-medium text-gray-300 mb-1">Team Name (if any)</label>
-              <input type="text" id="team_name" name="team_name" 
-                     class="w-full p-3 bg-gray-700 rounded-lg border border-gray-600 focus:outline-none input-focus placeholder-gray-400">
-            </div>
-            
-            <div>
-              <label for="player_level" class="block text-sm font-medium text-gray-300 mb-1">Player Level</label>
-              <select id="player_level" name="player_level" 
-                      class="w-full p-3 bg-gray-700 rounded-lg border border-gray-600 focus:outline-none input-focus text-gray-300">
-                <option value="">Select your level</option>
-                <option value="beginner">Beginner (1-30)</option>
-                <option value="intermediate">Intermediate (31-60)</option>
-                <option value="advanced">Advanced (61-80)</option>
-                <option value="pro">Pro (80+)</option>
-              </select>
-            </div>
-            
-            <div>
-              <label for="team_size" class="block text-sm font-medium text-gray-300 mb-1">Team Size</label>
-              <div class="flex flex-wrap gap-3">
-                <label class="inline-flex items-center">
-                  <input type="radio" name="team_size" value="solo" class="form-radio text-yellow-500 bg-gray-700 border-gray-600">
-                  <span class="ml-2">Solo</span>
-                </label>
-                <label class="inline-flex items-center">
-                  <input type="radio" name="team_size" value="duo" class="form-radio text-yellow-500 bg-gray-700 border-gray-600">
-                  <span class="ml-2">Duo</span>
-                </label>
-                <label class="inline-flex items-center">
-                  <input type="radio" name="team_size" value="squad" class="form-radio text-yellow-500 bg-gray-700 border-gray-600" checked>
-                  <span class="ml-2">Squad</span>
-                </label>
-              </div>
-            </div>
-            
-            <div>
-              <label for="payment_method" class="block text-sm font-medium text-gray-300 mb-1">Payment Method *</label>
-              <select id="payment_method" name="payment_method" required 
-                      class="w-full p-3 bg-gray-700 rounded-lg border border-gray-600 focus:outline-none input-focus text-gray-300">
-                <option value="">Select payment method</option>
-                <option value="upi">UPI (Google Pay/PhonePe/PayTM)</option>
-                <option value="paypal">PayPal</option>
-                <option value="bank_transfer">Bank Transfer</option>
-              </select>
-            </div>
-            
-            <div>
-              <label for="message" class="block text-sm font-medium text-gray-300 mb-1">Additional Information</label>
-              <textarea id="message" name="message" rows="3" 
-                        class="w-full p-3 bg-gray-700 rounded-lg border border-gray-600 focus:outline-none input-focus placeholder-gray-400"></textarea>
-            </div>
-            
-            <div class="flex items-center">
-              <input id="terms" name="terms" type="checkbox" required 
-                     class="w-4 h-4 bg-gray-700 rounded border-gray-600 focus:ring-yellow-500 focus:ring-2">
-              <label for="terms" class="ml-2 text-sm text-gray-300">
-                I agree to the <a href="#" class="text-yellow-400 hover:underline">terms and conditions</a> *
-              </label>
-            </div>
-
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_template" value="table">
-            <input type="hidden" name="_subject" value="New Tournament Registration">
-            
-            <button type="submit" 
-                    class="w-full bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-3 px-4 rounded-lg transition duration-300 flex items-center justify-center">
-              <i class="fas fa-paper-plane mr-2"></i> Submit Registration
-            </button>
-          </form>
-          
-          <p class="text-center text-gray-400 text-sm mt-6">
-            <i class="fas fa-envelope mr-1"></i> All submissions will be sent to <strong class="text-yellow-400">firevillage.in@gmail.com</strong>
-          </p>
-        </div>
+        <p class="text-gray-400 text-center">Fire Village Tournament Management</p>
       </div>
       
-      <!-- Tournament Rules and Info -->
-      <div class="lg:w-1/3">
-        <div class="bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-700 mb-6">
-          <div class="flex items-center mb-4">
-            <div class="bg-yellow-400 w-1 h-8 mr-3 rounded-full"></div>
-            <h2 class="text-yellow-400 heading-font text-xl font-bold">Tournament Rules</h2>
+      <div class="space-y-6">
+        <div class="relative">
+          <input type="password" id="adminPassword" 
+                class="w-full p-3 bg-gray-800/50 rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 pl-12"
+                placeholder="Enter admin password">
+          <div class="absolute inset-y-0 left-0 flex items-center pl-4">
+            <i class="fas fa-key text-yellow-400"></i>
           </div>
-          <ul class="space-y-3 text-sm text-gray-300">
-            <li class="flex items-start">
-              <i class="fas fa-check-circle text-yellow-400 mt-1 mr-2"></i>
-              <span>All players must have a valid Free Fire account</span>
-            </li>
-            <li class="flex items-start">
-              <i class="fas fa-check-circle text-yellow-400 mt-1 mr-2"></i>
-              <span>No hacking or cheating of any kind</span>
-            </li>
-            <li class="flex items-start">
-              <i class="fas fa-check-circle text-yellow-400 mt-1 mr-2"></i>
-              <span>Teams must report 15 minutes before match time</span>
-            </li>
-            <li class="flex items-start">
-              <i class="fas fa-check-circle text-yellow-400 mt-1 mr-2"></i>
-              <span>Disconnections during match will not be compensated</span>
-            </li>
-            <li class="flex items-start">
-              <i class="fas fa-check-circle text-yellow-400 mt-1 mr-2"></i>
-              <span>Decisions by organizers are final</span>
-            </li>
-            <li class="flex items-start">
-              <i class="fas fa-check-circle text-yellow-400 mt-1 mr-2"></i>
-              <span>Entry fee is non-refundable</span>
-            </li>
-          </ul>
         </div>
         
-        <div class="bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-700">
-          <div class="flex items-center mb-4">
-            <div class="bg-yellow-400 w-1 h-8 mr-3 rounded-full"></div>
-            <h2 class="text-yellow-400 heading-font text-xl font-bold">Prize Distribution</h2>
+        <button onclick="checkAdminLogin()"
+                class="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 text-black font-bold py-3 px-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-yellow-500/20 flex items-center justify-center">
+          <i class="fas fa-lock-open mr-2"></i> Access Dashboard
+        </button>
+        
+        <div id="adminErrorMsg" class="bg-red-900/50 border border-red-700 rounded-lg p-3 text-red-300 text-sm hidden">
+          <div class="flex items-center">
+            <i class="fas fa-exclamation-circle mr-2"></i>
+            <span>Invalid password. Please try again.</span>
           </div>
-          <div class="space-y-4">
-            <div class="flex items-center justify-between bg-gray-700 p-3 rounded-lg">
-              <div class="flex items-center">
-                <div class="bg-yellow-500 text-black font-bold rounded-full w-6 h-6 flex items-center justify-center mr-3">1</div>
-                <span>1st Place</span>
-              </div>
-              <span class="font-bold">₹2,000</span>
-            </div>
-            <div class="flex items-center justify-between bg-gray-700 p-3 rounded-lg">
-              <div class="flex items-center">
-                <div class="bg-gray-500 text-white font-bold rounded-full w-6 h-6 flex items-center justify-center mr-3">2</div>
-                <span>2nd Place</span>
-              </div>
-              <span class="font-bold">₹500</span>
-            </div>
-            <div class="flex items-center justify-between bg-gray-700 p-3 rounded-lg">
-              <div class="flex items-center">
-                <div class="bg-gray-500 text-white font-bold rounded-full w-6 h-6 flex items-center justify-center mr-3">2</div>
-                <span>MVP</span>
-              </div>
-              <span class="font-bold">₹200</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content (Registration Page) -->
+  <div id="registrationPage">
+    <!-- Navbar -->
+    <nav class="bg-gray-900 px-4 py-3 border-b border-yellow-400 sticky top-0 z-50">
+      <div class="max-w-6xl mx-auto flex justify-between items-center">
+        <div class="flex items-center">
+          <img src="./assets/logo.png" alt="Logo" class="h-10">
+          <span class="ml-2 text-yellow-400 heading-font text-xl">FIRE VILLAGE</span>
+        </div>
+        <button onclick="showAdminLogin()" class="bg-yellow-500 hover:bg-yellow-400 text-black px-4 py-2 rounded-lg text-sm font-bold">
+          <i class="fas fa-lock mr-1"></i> Admin
+        </button>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 py-8">
+      <div class="flex flex-col lg:flex-row gap-8">
+        <!-- Registration Form -->
+        <div class="lg:w-2/3">
+          <div class="glass-panel rounded-xl p-6 border border-gray-700 shadow-lg">
+            <div class="flex items-center mb-6">
+              <div class="bg-yellow-400 w-1 h-8 mr-3 rounded-full"></div>
+              <h1 class="text-yellow-400 heading-font text-2xl">Tournament Registration</h1>
             </div>
             
-          <div class="mt-6 bg-yellow-400 bg-opacity-10 border border-yellow-400 rounded-lg p-4">
-            <h3 class="text-yellow-400 font-bold mb-2"><i class="fas fa-info-circle mr-1"></i> Important Notes</h3>
-            <ul class="text-xs text-gray-300 space-y-1">
+            <!-- Verified Player Notification -->
+            <div id="verifiedNotification" class="hidden bg-green-900/30 border border-green-700 rounded-lg p-3 mb-6 flex items-center">
+              <i class="fas fa-check-circle text-green-400 mr-2"></i>
+              <span class="text-sm" id="verifiedPlayerName"></span>
+            </div>
+            
+            <form id="registrationForm" class="space-y-4">
+              <!-- Player Name -->
+              <div class="relative">
+                <label class="block text-sm font-medium text-gray-400 mb-1">Player Name (In-Game Name) *</label>
+                <input type="text" id="player_name" required 
+                      class="w-full p-3 bg-gray-700/50 rounded-lg border border-gray-600 focus:outline-none input-focus placeholder-gray-500">
+              </div>
+              
+              <!-- WhatsApp Number -->
+              <div class="relative">
+                <label class="block text-sm font-medium text-gray-400 mb-1">WhatsApp Number *</label>
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
+                    +91
+                  </div>
+                  <input type="tel" id="whatsapp_number" required 
+                        class="w-full p-3 bg-gray-700/50 rounded-lg border border-gray-600 focus:outline-none input-focus placeholder-gray-500 pl-12">
+                </div>
+              </div>
+              
+              <!-- Team Name -->
+              <div>
+                <label class="block text-sm font-medium text-gray-400 mb-1">Team Name (if any)</label>
+                <input type="text" id="team_name" 
+                      class="w-full p-3 bg-gray-700/50 rounded-lg border border-gray-600 focus:outline-none input-focus placeholder-gray-500">
+              </div>
+              
+              <!-- Team Size -->
+              <div>
+                <label class="block text-sm font-medium text-gray-400 mb-2">Team Size</label>
+                <div class="grid grid-cols-3 gap-2">
+                  <label class="flex items-center justify-center p-3 bg-gray-700/50 rounded-lg border border-gray-600 hover:border-yellow-400 cursor-pointer">
+                    <input type="radio" name="team_size" value="solo" class="hidden peer">
+                    <div class="peer-checked:text-yellow-400">Solo</div>
+                  </label>
+                  <label class="flex items-center justify-center p-3 bg-gray-700/50 rounded-lg border border-gray-600 hover:border-yellow-400 cursor-pointer">
+                    <input type="radio" name="team_size" value="duo" class="hidden peer">
+                    <div class="peer-checked:text-yellow-400">Duo</div>
+                  </label>
+                  <label class="flex items-center justify-center p-3 bg-gray-700/50 rounded-lg border border-gray-600 hover:border-yellow-400 cursor-pointer">
+                    <input type="radio" name="team_size" value="squad" class="hidden peer" checked>
+                    <div class="peer-checked:text-yellow-400">Squad</div>
+                  </label>
+                </div>
+              </div>
+              
+              <!-- Submit Button -->
+              <button type="submit" class="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 text-black font-bold py-3 px-4 rounded-lg transition-all duration-300 mt-6">
+                <i class="fas fa-paper-plane mr-2"></i> Submit Registration
+              </button>
+            </form>
+          </div>
+        </div>
+        
+        <!-- Tournament Info -->
+        <div class="lg:w-1/3 space-y-6">
+          <!-- Rules -->
+          <div class="glass-panel rounded-xl p-6 border border-gray-700">
+            <h2 class="text-yellow-400 heading-font text-xl mb-4 flex items-center">
+              <i class="fas fa-list-check mr-2"></i> Tournament Rules
+            </h2>
+            <ul class="space-y-3 text-sm">
               <li class="flex items-start">
-                <i class="fas fa-circle text-yellow-400 text-[6px] mt-1.5 mr-2"></i>
-                <span>Payment must be completed within 1 hour of registration</span>
+                <i class="fas fa-check text-yellow-400 mt-1 mr-2 text-xs"></i>
+                <span>Valid Free Fire account required</span>
               </li>
               <li class="flex items-start">
-                <i class="fas fa-circle text-yellow-400 text-[6px] mt-1.5 mr-2"></i>
-                <span>Send payment screenshot to our WhatsApp after registration</span>
+                <i class="fas fa-check text-yellow-400 mt-1 mr-2 text-xs"></i>
+                <span>No hacking/cheating allowed</span>
               </li>
               <li class="flex items-start">
-                <i class="fas fa-circle text-yellow-400 text-[6px] mt-1.5 mr-2"></i>
-                <span>Room ID and password will be shared 30 minutes before match</span>
+                <i class="fas fa-check text-yellow-400 mt-1 mr-2 text-xs"></i>
+                <span>Report 15 mins before match</span>
               </li>
             </ul>
           </div>
+          
+          <!-- Prizes -->
+          <div class="glass-panel rounded-xl p-6 border border-gray-700">
+            <h2 class="text-yellow-400 heading-font text-xl mb-4 flex items-center">
+              <i class="fas fa-trophy mr-2"></i> Prize Pool
+            </h2>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center p-3 bg-gray-700/30 rounded-lg">
+                <div class="flex items-center">
+                  <div class="bg-yellow-500 text-black font-bold rounded-full w-6 h-6 flex items-center justify-center mr-3">1</div>
+                  <span>1st Place</span>
+                </div>
+                <span class="font-bold">₹2,000</span>
+              </div>
+              <div class="flex justify-between items-center p-3 bg-gray-700/30 rounded-lg">
+                <div class="flex items-center">
+                  <div class="bg-gray-500 text-white font-bold rounded-full w-6 h-6 flex items-center justify-center mr-3">2</div>
+                  <span>2nd Place</span>
+                </div>
+                <span class="font-bold">₹500</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </main>
+    </main>
 
-  <!-- Footer -->
-  <footer class="bg-gray-900 mt-12 py-8 px-4 border-t border-gray-800">
-    <div class="container mx-auto">
-      <div class="flex flex-col md:flex-row justify-between items-center">
-        <div class="mb-4 md:mb-0">
-          <div class="flex items-center">
-            <img src="./assets/logo.png" alt="Fire Village Logo" class="h-8 w-auto">
-            <span class="ml-2 text-yellow-400 heading-font text-lg font-bold">FIRE VILLAGE</span>
+    <!-- Footer -->
+    <footer class="bg-gray-900 mt-12 py-6 px-4 border-t border-gray-800">
+      <div class="max-w-6xl mx-auto text-center text-gray-500 text-sm">
+        <p>© 2023 Fire Village Tournaments. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Admin Dashboard (Hidden by default) -->
+  <div id="adminDashboard" class="hidden min-h-screen">
+    <!-- Sidebar -->
+    <div id="sidebar" class="fixed inset-y-0 left-0 w-64 p-4 border-r border-gray-800 z-40 overflow-y-auto bg-gray-900">
+      <div class="flex items-center mb-8 pl-2">
+        <img src="./assets/logo.png" alt="FVT Logo" class="h-8">
+        <span class="ml-3 text-yellow-400 heading-font text-xl">FVT ADMIN</span>
+      </div>
+      
+      <nav class="space-y-1 mb-8">
+        <a href="#" class="nav-item active flex items-center p-3 rounded-lg">
+          <i class="fas fa-users w-6 text-center mr-3 text-yellow-400"></i>
+          <span>Registrations</span>
+          <span class="ml-auto bg-yellow-500/10 text-yellow-400 text-xs px-2 py-1 rounded-full" id="regCount">0</span>
+        </a>
+        <a href="#" class="nav-item flex items-center p-3 rounded-lg">
+          <i class="fas fa-check-circle w-6 text-center mr-3 text-gray-400"></i>
+          <span>Verify Players</span>
+        </a>
+      </nav>
+      
+      <div class="absolute bottom-4 left-4 right-4">
+        <button onclick="logoutAdmin()"
+                class="w-full flex items-center justify-center p-3 rounded-lg bg-gray-800 hover:bg-red-500/10 hover:text-red-400 text-gray-300 transition">
+          <i class="fas fa-sign-out-alt mr-2"></i> Logout
+        </button>
+      </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="ml-64 min-h-screen">
+      <header class="flex items-center justify-between p-4 bg-gray-900/50 border-b border-gray-800">
+        <h1 class="text-xl heading-font flex items-center">
+          <i class="fas fa-users text-yellow-400 mr-3"></i>
+          <span>Player Registrations</span>
+        </h1>
+        
+        <div class="flex items-center space-x-4">
+          <div class="relative">
+            <input type="text" placeholder="Search players..." id="searchInput"
+                  class="pl-10 pr-4 py-2 bg-gray-800 rounded-lg border border-gray-700 focus:outline-none focus:ring-1 focus:ring-yellow-500 w-64">
+            <i class="fas fa-search absolute left-3 top-2.5 text-gray-500"></i>
           </div>
-          <p class="text-gray-400 text-sm mt-2">India's premier Free Fire tournament platform</p>
+          
+          <button id="verifyBtn" class="bg-yellow-500 hover:bg-yellow-400 text-black px-4 py-2 rounded-lg text-sm font-bold">
+            <i class="fas fa-check-circle mr-1"></i> Verify Selected
+          </button>
+        </div>
+      </header>
+      
+      <main class="p-4 lg:p-6">
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+          <div class="glass-panel p-4 rounded-lg border-l-4 border-yellow-400">
+            <p class="text-gray-400 text-sm mb-1">Total Registrations</p>
+            <p class="text-2xl font-bold" id="totalReg">0</p>
+          </div>
+          <div class="glass-panel p-4 rounded-lg border-l-4 border-green-400">
+            <p class="text-gray-400 text-sm mb-1">Verified Players</p>
+            <p class="text-2xl font-bold" id="verifiedCount">0</p>
+          </div>
+          <div class="glass-panel p-4 rounded-lg border-l-4 border-blue-400">
+            <p class="text-gray-400 text-sm mb-1">Pending Verification</p>
+            <p class="text-2xl font-bold" id="pendingCount">0</p>
+          </div>
         </div>
         
-        <div class="flex space-x-6">
-          <a href="#" class="text-gray-400 hover:text-yellow-400 transition duration-300">
-            <i class="fab fa-facebook-f text-lg"></i>
-          </a>
-          <a href="#" class="text-gray-400 hover:text-yellow-400 transition duration-300">
-            <i class="fab fa-instagram text-lg"></i>
-          </a>
-          <a href="#" class="text-gray-400 hover:text-yellow-400 transition duration-300">
-            <i class="fab fa-discord text-lg"></i>
-          </a>
-          <a href="#" class="text-gray-400 hover:text-yellow-400 transition duration-300">
-            <i class="fab fa-youtube text-lg"></i>
-          </a>
-          <a href="#" class="text-gray-400 hover:text-yellow-400 transition duration-300">
-            <i class="fab fa-whatsapp text-lg"></i>
-          </a>
+        <!-- Registrations Table -->
+        <div class="glass-panel rounded-lg border border-gray-800 overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full">
+              <thead class="bg-gray-800/50">
+                <tr>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                    <input type="checkbox" id="selectAll" class="rounded border-gray-600">
+                  </th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Player</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">WhatsApp</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Team</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Type</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Status</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-800" id="registrationsTable">
+                <!-- Data will be loaded here -->
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
-      
-      <div class="border-t border-gray-800 mt-6 pt-6 text-center text-gray-500 text-sm">
-        <p>&copy; 2023 Fire Village. All rights reserved.</p>
-      </div>
+      </main>
     </div>
-  </footer>
+  </div>
 
   <script>
-    // Countdown timer
-    function updateCountdown() {
-      const endDate = new Date("May18, 2025 23:59:59").getTime();
-      const now = new Date().getTime();
-      const distance = endDate - now;
-      
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      
-      document.getElementById("days").innerHTML = days.toString().padStart(2, '0');
-      document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
-      document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
-      document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
-      
-      if (distance < 0) {
-        clearInterval(countdownTimer);
-        document.getElementById("countdown").innerHTML = "REGISTRATION CLOSED";
+    // Admin Configuration
+    const ADMIN_PASSWORD = "2580aauFVT";
+    let registrations = [];
+
+    // DOM Elements
+    const loginScreen = document.getElementById('loginScreen');
+    const registrationPage = document.getElementById('registrationPage');
+    const adminDashboard = document.getElementById('adminDashboard');
+    const passwordInput = document.getElementById('adminPassword');
+    const errorMsg = document.getElementById('adminErrorMsg');
+    
+    // Admin Functions
+    function showAdminLogin() {
+      loginScreen.classList.remove('hidden');
+      passwordInput.focus();
+    }
+    
+    function checkAdminLogin() {
+      if (passwordInput.value === ADMIN_PASSWORD) {
+        loginScreen.classList.add('hidden');
+        registrationPage.classList.add('hidden');
+        adminDashboard.classList.remove('hidden');
+        loadRegistrations();
+      } else {
+        errorMsg.classList.remove('hidden');
+        passwordInput.classList.add('border-red-500');
+        setTimeout(() => {
+          errorMsg.classList.add('hidden');
+          passwordInput.classList.remove('border-red-500');
+        }, 3000);
       }
     }
     
-    updateCountdown();
-    const countdownTimer = setInterval(updateCountdown, 1000);
+    function logoutAdmin() {
+      loginScreen.classList.add('hidden');
+      registrationPage.classList.remove('hidden');
+      adminDashboard.classList.add('hidden');
+      passwordInput.value = '';
+    }
+    
+    // Registration Functions
+    function checkVerifiedPlayer() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const verifiedPlayer = urlParams.get('verified');
+      
+      if (verifiedPlayer) {
+        document.getElementById('verifiedNotification').classList.remove('hidden');
+        document.getElementById('verifiedPlayerName').textContent = `${verifiedPlayer} - Registration Verified!`;
+        document.getElementById('player_name').value = verifiedPlayer;
+        document.getElementById('player_name').readOnly = true;
+      }
+    }
+    
+    // Form submission
+    document.getElementById('registrationForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const playerName = document.getElementById('player_name').value;
+      const whatsapp = document.getElementById('whatsapp_number').value;
+      const teamName = document.getElementById('team_name').value;
+      const teamSize = document.querySelector('input[name="team_size"]:checked').value;
+      
+      // In a real app, you would send this to your backend
+      const newRegistration = {
+        id: Date.now(),
+        name: playerName,
+        whatsapp: whatsapp,
+        team: teamName || '-',
+        type: teamSize,
+        status: 'Pending',
+        registered: new Date().toLocaleString()
+      };
+      
+      // Add to local storage for demo
+      registrations.push(newRegistration);
+      localStorage.setItem('fvtRegistrations', JSON.stringify(registrations));
+      
+      alert('Registration submitted successfully!');
+      this.reset();
+      
+      // If coming from admin verification, keep the name
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('verified')) {
+        document.getElementById('player_name').value = urlParams.get('verified');
+      }
+    });
+    
+    // Load registrations for admin
+    function loadRegistrations() {
+      // Get from local storage for demo (replace with your backend)
+      const storedRegs = localStorage.getItem('fvtRegistrations');
+      registrations = storedRegs ? JSON.parse(storedRegs) : [];
+      
+      renderRegistrations();
+      updateStats();
+    }
+    
+    function renderRegistrations() {
+      const tableBody = document.getElementById('registrationsTable');
+      tableBody.innerHTML = '';
+      
+      registrations.forEach(reg => {
+        const row = document.createElement('tr');
+        row.className = 'data-row hover:bg-gray-800/30';
+        row.innerHTML = `
+          <td class="px-6 py-4 whitespace-nowrap">
+            <input type="checkbox" data-id="${reg.id}" class="reg-checkbox rounded border-gray-600 ${reg.status === 'Verified' ? 'opacity-50' : ''}" ${reg.status === 'Verified' ? 'disabled' : ''}>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <div class="flex items-center">
+              <div class="flex-shrink-0 h-10 w-10 bg-gray-700 rounded-full flex items-center justify-center">
+                <i class="fas fa-user ${reg.status === 'Verified' ? 'text-green-400' : 'text-gray-400'}"></i>
+              </div>
+              <div class="ml-4">
+                <div class="font-medium">${reg.name}</div>
+                <div class="text-sm text-gray-400">ID: ${reg.id}</div>
+              </div>
+            </div>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <div class="text-sm">+91 ${reg.whatsapp}</div>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <div class="text-sm">${reg.team}</div>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <span class="px-2 py-1 text-xs rounded-full ${getTypeBadgeClass(reg.type)}">${reg.type}</span>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <span class="px-2 py-1 text-xs rounded-full ${reg.status === 'Verified' ? 'bg-green-900/30 text-green-400' : 'bg-yellow-900/30 text-yellow-400'}">${reg.status}</span>
+          </td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+    
+    function updateStats() {
+      document.getElementById('totalReg').textContent = registrations.length;
+      document.getElementById('regCount').textContent = registrations.length;
+      
+      const verified = registrations.filter(r => r.status === "Verified").length;
+      document.getElementById('verifiedCount').textContent = verified;
+      
+      const pending = registrations.filter(r => r.status === "Pending").length;
+      document.getElementById('pendingCount').textContent = pending;
+    }
+    
+    function getTypeBadgeClass(type) {
+      switch(type) {
+        case 'Solo': return 'badge-solo';
+        case 'Duo': return 'badge-duo';
+        case 'Squad': return 'badge-squad';
+        default: return 'bg-gray-700 text-gray-300';
+      }
+    }
+    
+    // Verify selected players
+    document.getElementById('verifyBtn').addEventListener('click', () => {
+      const selectedIds = [];
+      document.querySelectorAll('.reg-checkbox:checked').forEach(checkbox => {
+        selectedIds.push(parseInt(checkbox.dataset.id));
+      });
+      
+      if (selectedIds.length === 0) {
+        alert("Please select at least one player to verify");
+        return;
+      }
+      
+      if (confirm(`Verify ${selectedIds.length} selected players?`)) {
+        // Update status in our data
+        registrations.forEach(reg => {
+          if (selectedIds.includes(reg.id)) {
+            reg.status = "Verified";
+          }
+        });
+        
+        // Save to local storage
+        localStorage.setItem('fvtRegistrations', JSON.stringify(registrations));
+        
+        // Update UI
+        renderRegistrations();
+        updateStats();
+        
+        // Generate verification links
+        selectedIds.forEach(id => {
+          const player = registrations.find(r => r.id === id);
+          if (player) {
+            const verificationLink = `${window.location.origin}${window.location.pathname}?verified=${encodeURIComponent(player.name)}`;
+            console.log(`Verification link for ${player.name}: ${verificationLink}`);
+          }
+        });
+        
+        alert(`${selectedIds.length} players verified successfully!`);
+      }
+    });
+    
+    // Search functionality
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      const searchTerm = e.target.value.toLowerCase();
+      const filtered = registrations.filter(reg => 
+        reg.name.toLowerCase().includes(searchTerm) || 
+        reg.whatsapp.includes(searchTerm) ||
+        reg.team.toLowerCase().includes(searchTerm)
+      );
+      
+      // For demo, we'll just filter the displayed rows
+      document.querySelectorAll('.data-row').forEach(row => {
+        const name = row.querySelector('.font-medium').textContent.toLowerCase();
+        const whatsapp = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+        const team = row.querySelector('td:nth-child(4)').textContent.toLowerCase();
+        
+        if (name.includes(searchTerm) || whatsapp.includes(searchTerm) || team.includes(searchTerm)) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    });
+    
+    // Select all checkbox
+    document.getElementById('selectAll').addEventListener('change', (e) => {
+      document.querySelectorAll('.reg-checkbox:not(:disabled)').forEach(checkbox => {
+        checkbox.checked = e.target.checked;
+      });
+    });
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      checkVerifiedPlayer();
+      
+      // For demo, load sample data if none exists
+      if (!localStorage.getItem('fvtRegistrations')) {
+        registrations = [
+          { id: 1, name: "NinjaFF", whatsapp: "9876543210", team: "Shadow Clan", type: "Squad", status: "Pending", registered: "10 May, 3:45 PM" },
+          { id: 2, name: "ProGamer", whatsapp: "8765432109", team: "-", type: "Solo", status: "Pending", registered: "10 May, 2:30 PM" },
+          { id: 3, name: "DuoKing", whatsapp: "7654321098", team: "Dynamic Duo", type: "Duo", status: "Verified", registered: "10 May, 1:15 PM" }
+        ];
+        localStorage.setItem('fvtRegistrations', JSON.stringify(registrations));
+      }
+    });
   </script>
 </body>
 </html>
