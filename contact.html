@@ -8,21 +8,23 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
-<body class="bg-black text-white font-sans">
-  <!-- Navbar -->
-  <nav class="bg-gray-900 p-4 flex justify-between items-center shadow-md">
-    <img src="./assets/logo.png" alt="Fire Village Logo" class="h-12 w-auto">
-    <ul class="flex gap-4 text-sm md:text-base">
-      <li><a href="index.html" class="hover:text-yellow-400">Home</a></li>
-      <li><a href="tournaments.html" class="hover:text-yellow-400">Tournaments</a></li>
-      <li><a href="leaderboard.html" class="hover:text-yellow-400">Leaderboard</a></li>
-      <li><a href="teams.html" class="hover:text-yellow-400">Teams</a></li>
-      <li><a href="register.html" class="hover:text-yellow-400">Register</a></li>
-      <li><a href="contact.html" class="text-yellow-400 font-semibold">Contact</a></li>
-      <li><a href="about.html" class="hover:text-yellow-400">About</a></li>
+ <!-- Navbar -->
+  <nav class="bg-gray-900 px-4 sm:px-6 py-3 flex flex-col sm:flex-row justify-between items-center shadow-lg sticky top-0 z-50">
+    <div class="flex items-center">
+      <img src="./assets/logo.png" alt="Fire Village Logo" class="h-10 sm:h-12 w-auto">
+      <span class="ml-2 text-yellow-400 font-heading text-xl sm:text-2xl">FIRE VILLAGE</span>
+    </div>
+    <ul class="flex flex-wrap justify-center gap-3 sm:gap-6 text-sm sm:text-base font-medium mt-2 sm:mt-0">
+      <li><a href="index.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Home</a></li>
+      <li><a href="tournaments.html" class="bg-yellow-500 text-black font-bold px-3 py-1 rounded-full hover:bg-yellow-400 transition">Tournaments</a></li>
+      <li><a href="leaderboard.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Leaderboard</a></li>
+      <li><a href="teams.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Teams</a></li>
+      <li><a href="register.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Register</a></li>
+      <li><a href="contact.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Contact</a></li>
+      <li><a href="about.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">About</a></li>   
     </ul>
   </nav>
-
+ 
   <!-- Contact Section -->
   <section class="p-6 md:p-10 max-w-4xl mx-auto">
     <h2 class="text-3xl font-bold text-yellow-400 mb-6">📞 Contact Us</h2>
