@@ -265,7 +265,38 @@
                     <input type="file" id="teamLogo" class="hidden" accept="image/*">
                   </label>
                 </div>
-                <p class="text-xs text-gray-500 mt-1">Supports: <div class=""></div> JPG , <div class=""></div>PNG (Max 2MB)</p>
+                <p class="text-xs text-gray-500 mt-1">Supports: JPG, PNG (Max 2MB)</p>
+              </div>
+              
+              <!-- Payment Info -->
+              <div class="pt-4 border-t border-gray-800">
+                <h3 class="text-yellow-400 heading-font text-lg mb-4 flex items-center">
+                  <i class="fas fa-wallet mr-2"></i> PAYMENT DETAILS
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <label class="block text-gray-400 text-sm font-semibold mb-2">Payment Method *</label>
+                    <select id="paymentMethod" class="w-full bg-black bg-opacity-40 border border-gray-800 focus:border-yellow-500 rounded-lg px-4 py-3 focus:outline-none" required>
+                      <option value="">Select method</option>
+                      <option value="upi">UPI (GPay/PhonePe/PayTM)</option>
+                      <option value="paypal">PayPal</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-gray-400 text-sm font-semibold mb-2">Transaction ID *</label>
+                    <input type="text" id="transactionId" class="w-full bg-black bg-opacity-40 border border-gray-800 focus:border-yellow-500 rounded-lg px-4 py-3 focus:outline-none" placeholder="Enter payment ID" required>
+                  </div>
+                </div>
+                
+                <div class="bg-black bg-opacity-30 rounded-lg p-3 border border-yellow-500 border-opacity-20">
+                  <p class="text-sm text-gray-300 mb-2"><i class="fas fa-info-circle text-yellow-400 mr-2"></i> Contact us for payment details:</p>
+                  <ul class="text-xs text-gray-400 space-y-1">
+                    <li><i class="fab fa-whatsapp text-green-400 mr-1"></i> Mail: firevillage.in@gmail.com</li>
+                    <li><i class="fab fa-instagram text-pink-400 mr-1"></i> Instagram: @firevillage.in </li>
+                    <li><i class="fas fa-phone text-blue-400 mr-1"></i> Telegram: @firevillageINbot</li>
+                  </ul>
+                </div>
               </div>
               
               <!-- Submit Button -->
@@ -336,19 +367,19 @@
                   <div class="team-badge w-8 h-8 flex items-center justify-center bg-yellow-500 text-black font-bold mr-3">1</div>
                   <span>1st Place</span>
                 </div>
-                <span class="font-bold text-yellow-400">₹2,000</span>
+                <span class="font-bold text-yellow-400">₹1,200</span>
               </div>
               <div class="flex justify-between items-center p-3 bg-black bg-opacity-30 rounded-lg border border-gray-800">
                 <div class="flex items-center">
                   <div class="team-badge w-8 h-8 flex items-center justify-center bg-gray-500 text-white font-bold mr-3">2</div>
                   <span>2nd Place</span>
                 </div>
-                <span class="font-bold">₹800</span>
+                <span class="font-bold">₹600</span>
               </div>
             
             <div class="mt-4 bg-black bg-opacity-40 rounded-lg p-3 border border-yellow-500 border-opacity-20">
               <p class="text-yellow-400 text-sm font-semibold mb-1"><i class="fas fa-star mr-1"></i> BONUS PRIZES</p>
-              <p class="text-xs text-gray-300">MVP: ₹200</p>
+              <p class="text-xs text-gray-300">MVP: ₹100</p>
             </div>
           </div>
         </div>
