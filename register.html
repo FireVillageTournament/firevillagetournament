@@ -23,6 +23,7 @@
             background-size: cover;
             background-attachment: fixed;
             background-position: center;
+            scroll-behavior: smooth;
         }
         
         .title-font {
@@ -133,24 +134,54 @@
         .remove-member:hover {
             background: rgba(255, 61, 0, 0.4);
         }
+        
+        /* Navbar styles */
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--secondary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        .active-nav {
+            background-color: var(--secondary);
+            color: black;
+            font-weight: bold;
+        }
+        
+        .active-nav:hover {
+            background-color: #FFC107;
+        }
     </style>
 </head>
-<body class="min-h-screen flex flex-col">
+<body class="bg-black text-white font-sans scroll-smooth">
     <!-- Navbar -->
-    <nav class="bg-black bg-opacity-80 py-4 px-6 border-b border-orange-900">
-        <div class="container mx-auto flex justify-between items-center">
-            <div class="flex items-center">
-                <img src="./assets/logo.png" alt="Fire Village Logo" class="h-10 sm:h-12 w-auto">
-                <span class="title-font text-xl text-orange-500">FIRE VILLAGE</span>
-            </div>
-            <div class="hidden md:flex space-x-6">
-                <a href="#" class="text-gray-300 hover:text-orange-400 transition">Home</a>
-                <a href="#" class="text-orange-400 font-semibold">Tournaments</a>
-                <a href="#" class="text-gray-300 hover:text-orange-400 transition">Leaderboard</a>
-                <a href="#" class="text-gray-300 hover:text-orange-400 transition">Teams</a>
-                <a href="#" class="text-gray-300 hover:text-orange-400 transition">Contact</a>
-            </div>
+    <nav class="bg-gray-900 px-4 sm:px-6 py-3 flex flex-col sm:flex-row justify-between items-center shadow-lg sticky top-0 z-50">
+        <div class="flex items-center">
+            <img src="./assets/logo.png" alt="Fire Village Logo" class="h-10 sm:h-12 w-auto">
+            <span class="ml-2 text-yellow-400 font-heading text-xl sm:text-2xl title-font">FIRE VILLAGE</span>
         </div>
+        <ul class="flex flex-wrap justify-center gap-3 sm:gap-6 text-sm sm:text-base font-medium mt-2 sm:mt-0">
+            <li><a href="index.html" class="nav-link hover:text-yellow-400 px-2 py-1 rounded transition">Home</a></li>
+            <li><a href="tournaments.html" class="nav-link active-nav text-black font-bold px-3 py-1 rounded-full transition">Tournaments</a></li>
+            <li><a href="leaderboard.html" class="nav-link hover:text-yellow-400 px-2 py-1 rounded transition">Leaderboard</a></li>
+            <li><a href="teams.html" class="nav-link hover:text-yellow-400 px-2 py-1 rounded transition">Teams</a></li>
+            <li><a href="register.html" class="nav-link hover:text-yellow-400 px-2 py-1 rounded transition">Register</a></li>
+            <li><a href="contact.html" class="nav-link hover:text-yellow-400 px-2 py-1 rounded transition">Contact</a></li>
+            <li><a href="about.html" class="nav-link hover:text-yellow-400 px-2 py-1 rounded transition">About</a></li>   
+        </ul>
     </nav>
 
     <!-- Main Content -->
@@ -162,11 +193,13 @@
             </div>
             
             <!-- Registration Form -->
-            <form id="registrationForm" class="space-y-6">
-                <input type="hidden" name="_subject" value="New Tournament Registration">
+            <form id="registrationForm" class="space-y-6" action="https://devrolabs.com/" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="_to" value="firevillage.in@gmail.com">
+                <input type="hidden" name="_subject" value="New Tournament Registration - Fire Village">
                 <input type="hidden" name="_template" value="table">
-                <input type="hidden" name="_autoresponse" value="Thank you for registering with Fire Village! We've received your details and will contact you shortly with payment information.">
-                <input type="hidden" name="_next" value="https://yourwebsite.com/success.html">
+                <input type="hidden" name="_autoresponse" value="Thank you for registering with Fire Village Tournament! We've received your details and will contact you shortly with payment information.">
+                <input type="hidden" name="_next" value="https://firevillagetournament.github.io/firevillagetournamentHP/success.html">
+                <input type="hidden" name="_replyto" value="firevillage.in@gmail.com">
                 
                 <!-- Team Information -->
                 <div class="space-y-4">
@@ -547,48 +580,14 @@
             document.getElementById('submit-text').classList.add('hidden');
             document.getElementById('submit-spinner').classList.remove('hidden');
             
-            // For demo purposes, we'll simulate form submission
-            // In a real scenario, you would send the form data to your server
-            setTimeout(() => {
-                // Show confirmation modal
-                document.getElementById('confirm-email').textContent = formData.get('email');
-                document.getElementById('confirm-phone').textContent = `+91 ${formData.get('phone')}`;
-                document.getElementById('confirmationModal').classList.remove('hidden');
-                
-                // Hide loading state
-                document.getElementById('submit-text').classList.remove('hidden');
-                document.getElementById('submit-spinner').classList.add('hidden');
-                
-                // Start countdown
-                let seconds = 5;
-                const countdownElement = document.getElementById('countdown');
-                const countdownInterval = setInterval(() => {
-                    seconds--;
-                    countdownElement.textContent = seconds;
-                    
-                    if (seconds <= 0) {
-                        clearInterval(countdownInterval);
-                        window.location.href = 'index.html';
-                    }
-                }, 1000);
-            }, 1500);
-            
-            // In a real implementation, you would submit the form to FormSubmit or your backend
-            // For FormSubmit to work with file uploads, you need to:
-            // 1. Add enctype="multipart/form-data" to your form tag
-            // 2. Ensure your FormSubmit plan supports file uploads
-            // Here's how you would do it:
-            /*
-            const formAction = form.getAttribute('action');
-            const formMethod = form.getAttribute('method');
-            
-            fetch(formAction, {
-                method: formMethod,
+            // Submit form to DevroLabs
+            fetch(form.action, {
+                method: form.method,
                 body: formData
             })
             .then(response => {
                 if (response.ok) {
-                    // Show success modal
+                    // Show confirmation modal
                     document.getElementById('confirm-email').textContent = formData.get('email');
                     document.getElementById('confirm-phone').textContent = `+91 ${formData.get('phone')}`;
                     document.getElementById('confirmationModal').classList.remove('hidden');
@@ -619,7 +618,6 @@
                 document.getElementById('submit-text').classList.remove('hidden');
                 document.getElementById('submit-spinner').classList.add('hidden');
             });
-            */
         });
     </script>
 </body>
