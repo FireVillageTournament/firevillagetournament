@@ -68,6 +68,12 @@
       background: rgba(25, 135, 84, 0.2);
       border-left: 4px solid var(--primary);
     }
+    .admin-row-even {
+      background: rgba(15, 20, 35, 0.5);
+    }
+    .admin-row-odd {
+      background: rgba(10, 14, 23, 0.7);
+    }
     @media (max-width: 768px) {
       .mobile-flex-col {
         flex-direction: column;
@@ -463,6 +469,10 @@
       
       <div class="space-y-4">
         <div>
+          <label class="block text-gray-400 text-sm font-semibold mb-2">Admin Username</label>
+          <input type="text" id="adminUsername" class="w-full bg-gray-800 border border-gray-700 focus:border-yellow-500 rounded-lg px-4 py-3 focus:outline-none" placeholder="Enter admin username">
+        </div>
+        <div>
           <label class="block text-gray-400 text-sm font-semibold mb-2">Password</label>
           <input type="password" id="adminPassword" class="w-full bg-gray-800 border border-gray-700 focus:border-yellow-500 rounded-lg px-4 py-3 focus:outline-none" placeholder="Enter admin password">
         </div>
@@ -472,7 +482,7 @@
         </button>
         
         <div id="adminError" class="text-red-400 text-sm text-center mt-2 hidden">
-          <i class="fas fa-exclamation-circle mr-1"></i> Incorrect password!
+          <i class="fas fa-exclamation-circle mr-1"></i> Incorrect credentials!
         </div>
       </div>
     </div>
@@ -480,17 +490,17 @@
 
   <!-- Admin Dashboard Modal -->
   <div id="adminDashboard" class="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center hidden">
-    <div class="bg-gray-900 border-2 border-yellow-500 rounded-xl p-6 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+    <div class="bg-gray-900 border-2 border-yellow-500 rounded-xl p-6 max-w-6xl w-full mx-4 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center mb-6">
         <h2 class="text-yellow-400 heading-font text-2xl flex items-center">
-          <i class="fas fa-user-shield mr-3"></i> ADMIN DASHBOARD
+          <i class="fas fa-user-shield mr-3"></i> ADMIN DASHBOARD (<span id="currentAdminName"></span>)
         </h2>
         <button onclick="hideAdminDashboard()" class="text-gray-400 hover:text-yellow-400 text-xl">
           <i class="fas fa-times"></i>
         </button>
       </div>
       
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
         <div class="bg-black bg-opacity-40 p-4 rounded-lg border border-yellow-500 border-opacity-30">
           <h3 class="text-yellow-400 heading-font text-lg mb-2">Total Registrations</h3>
           <p class="text-3xl font-bold" id="totalRegistrations">0</p>
@@ -500,8 +510,35 @@
           <p class="text-3xl font-bold" id="verifiedPlayers">0</p>
         </div>
         <div class="bg-black bg-opacity-40 p-4 rounded-lg border border-yellow-500 border-opacity-30">
+          <h3 class="text-yellow-400 heading-font text-lg mb-2">Pending Players</h3>
+          <p class="text-3xl font-bold" id="pendingPlayers">0</p>
+        </div>
+        <div class="bg-black bg-opacity-40 p-4 rounded-lg border border-yellow-500 border-opacity-30">
           <h3 class="text-yellow-400 heading-font text-lg mb-2">Total Payments</h3>
           <p class="text-3xl font-bold">₹<span id="totalPayments">0</span></p>
+        </div>
+      </div>
+      
+      <!-- Search and Bulk Actions -->
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+        <div class="relative w-full md:w-1/2">
+          <input type="text" id="adminSearch" class="w-full bg-black bg-opacity-40 border border-gray-800 rounded-lg pl-10 pr-4 py-2 focus:border-yellow-500 focus:outline-none" placeholder="Search players..." oninput="searchPlayers()">
+          <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+        </div>
+        
+        <div class="flex flex-wrap gap-2 w-full md:w-auto">
+          <button onclick="verifySelectedPlayers()" class="px-3 py-2 bg-green-600 hover:bg-green-500 rounded-lg text-sm">
+            <i class="fas fa-check mr-1"></i> Verify Selected
+          </button>
+          <button onclick="messageSelectedPlayers()" class="px-3 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-sm">
+            <i class="fas fa-envelope mr-1"></i> Message Selected
+          </button>
+          <button onclick="deleteSelectedPlayers()" class="px-3 py-2 bg-red-600 hover:bg-red-500 rounded-lg text-sm">
+            <i class="fas fa-trash mr-1"></i> Delete Selected
+          </button>
+          <button onclick="exportRegistrations()" class="px-3 py-2 bg-purple-600 hover:bg-purple-500 rounded-lg text-sm">
+            <i class="fas fa-download mr-1"></i> Export Data
+          </button>
         </div>
       </div>
       
@@ -543,9 +580,13 @@
             <table class="w-full">
               <thead class="bg-black bg-opacity-60">
                 <tr>
+                  <th class="px-4 py-3 text-left text-sm text-yellow-400 w-8">
+                    <input type="checkbox" id="selectAllPlayers" onclick="toggleSelectAll()">
+                  </th>
                   <th class="px-4 py-3 text-left text-sm text-yellow-400">Player Name</th>
                   <th class="px-4 py-3 text-left text-sm text-yellow-400">UID</th>
                   <th class="px-4 py-3 text-left text-sm text-yellow-400">WhatsApp</th>
+                  <th class="px-4 py-3 text-left text-sm text-yellow-400">Team</th>
                   <th class="px-4 py-3 text-left text-sm text-yellow-400">Status</th>
                   <th class="px-4 py-3 text-left text-sm text-yellow-400">Actions</th>
                 </tr>
@@ -557,14 +598,123 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Edit Player Modal -->
+  <div id="editPlayerModal" class="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center hidden">
+    <div class="bg-gray-900 border-2 border-yellow-500 rounded-xl p-6 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-yellow-400 heading-font text-xl flex items-center">
+          <i class="fas fa-user-edit mr-3"></i> EDIT PLAYER
+        </h2>
+        <button onclick="hideEditPlayerModal()" class="text-gray-400 hover:text-yellow-400 text-xl">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div>
+          <label class="block text-gray-400 text-sm font-semibold mb-2">Player Name</label>
+          <input type="text" id="editPlayerName" class="w-full bg-black bg-opacity-40 border border-gray-800 rounded-lg px-4 py-2 focus:border-yellow-500 focus:outline-none">
+        </div>
+        <div>
+          <label class="block text-gray-400 text-sm font-semibold mb-2">Free Fire UID</label>
+          <input type="text" id="editPlayerUID" class="w-full bg-black bg-opacity-40 border border-gray-800 rounded-lg px-4 py-2 focus:border-yellow-500 focus:outline-none">
+        </div>
+        <div>
+          <label class="block text-gray-400 text-sm font-semibold mb-2">WhatsApp Number</label>
+          <input type="text" id="editWhatsappNumber" class="w-full bg-black bg-opacity-40 border border-gray-800 rounded-lg px-4 py-2 focus:border-yellow-500 focus:outline-none">
+        </div>
+        <div>
+          <label class="block text-gray-400 text-sm font-semibold mb-2">Player Level</label>
+          <select id="editPlayerLevel" class="w-full bg-black bg-opacity-40 border border-gray-800 rounded-lg px-4 py-2 focus:border-yellow-500 focus:outline-none">
+            <option value="bronze">Bronze</option>
+            <option value="silver">Silver</option>
+            <option value="gold">Gold</option>
+            <option value="platinum">Platinum</option>
+            <option value="diamond">Diamond</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-gray-400 text-sm font-semibold mb-2">Team Name</label>
+          <input type="text" id="editTeamName" class="w-full bg-black bg-opacity-40 border border-gray-800 rounded-lg px-4 py-2 focus:border-yellow-500 focus:outline-none">
+        </div>
+        <div>
+          <label class="block text-gray-400 text-sm font-semibold mb-2">Payment Method</label>
+          <select id="editPaymentMethod" class="w-full bg-black bg-opacity-40 border border-gray-800 rounded-lg px-4 py-2 focus:border-yellow-500 focus:outline-none">
+            <option value="upi">UPI</option>
+            <option value="paypal">PayPal</option>
+          </select>
+        </div>
+        <div class="md:col-span-2">
+          <label class="block text-gray-400 text-sm font-semibold mb-2">Transaction ID</label>
+          <input type="text" id="editTransactionId" class="w-full bg-black bg-opacity-40 border border-gray-800 rounded-lg px-4 py-2 focus:border-yellow-500 focus:outline-none">
+        </div>
+      </div>
       
       <div class="flex justify-end space-x-3">
-        <button onclick="hideAdminDashboard()" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg font-semibold transition">
-          Close
+        <button onclick="hideEditPlayerModal()" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg font-semibold">
+          Cancel
         </button>
-        <button onclick="exportRegistrations()" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg font-semibold transition">
-          <i class="fas fa-download mr-2"></i> Export Data
+        <button onclick="savePlayerEdits()" class="px-4 py-2 bg-green-600 hover:bg-green-500 rounded-lg font-semibold">
+          <i class="fas fa-save mr-2"></i> Save Changes
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Message Player Modal -->
+  <div id="messagePlayerModal" class="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center hidden">
+    <div class="bg-gray-900 border-2 border-yellow-500 rounded-xl p-6 max-w-md w-full mx-4">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-yellow-400 heading-font text-xl">SEND MESSAGE</h3>
+        <button onclick="hideMessagePlayerModal()" class="text-gray-400 hover:text-yellow-400 text-xl">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="mb-4">
+        <p class="text-gray-300">Recipients: <span id="messageRecipientsCount" class="font-bold">0</span> players</p>
+      </div>
+      
+      <div class="mb-4">
+        <label class="block text-gray-400 text-sm font-semibold mb-2">Message Type</label>
+        <select id="messageType" class="w-full bg-black bg-opacity-40 border border-gray-800 rounded-lg px-4 py-2 focus:border-yellow-500 focus:outline-none">
+          <option value="verification">Verification Approved</option>
+          <option value="room_details">Room ID & Password</option>
+          <option value="custom">Custom Message</option>
+        </select>
+      </div>
+      
+      <div id="roomDetailsSection" class="mb-4">
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-gray-400 text-sm font-semibold mb-1">Room ID</label>
+            <input type="text" id="roomId" class="w-full bg-black bg-opacity-40 border border-gray-800 rounded-lg px-3 py-2">
+          </div>
+          <div>
+            <label class="block text-gray-400 text-sm font-semibold mb-1">Password</label>
+            <input type="text" id="roomPassword" class="w-full bg-black bg-opacity-40 border border-gray-800 rounded-lg px-3 py-2">
+          </div>
+        </div>
+        <div class="mt-2">
+          <label class="block text-gray-400 text-sm font-semibold mb-1">Match Time</label>
+          <input type="text" id="matchTime" class="w-full bg-black bg-opacity-40 border border-gray-800 rounded-lg px-3 py-2" placeholder="e.g. 3:00 PM IST">
+        </div>
+      </div>
+      
+      <div id="customMessageSection" class="mb-4 hidden">
+        <label class="block text-gray-400 text-sm font-semibold mb-1">Custom Message</label>
+        <textarea id="customMessage" class="w-full bg-black bg-opacity-40 border border-gray-800 rounded-lg px-3 py-2 h-24"></textarea>
+      </div>
+      
+      <button onclick="sendPlayerMessage()" class="btn-primary w-full py-3 rounded-lg font-bold">
+        <i class="fas fa-paper-plane mr-2"></i> SEND MESSAGE
+      </button>
+      
+      <div id="messageSentAlert" class="hidden mt-3 p-2 bg-green-900 bg-opacity-40 text-green-400 rounded text-sm text-center">
+        <i class="fas fa-check-circle mr-1"></i> Message sent successfully!
       </div>
     </div>
   </div>
@@ -579,7 +729,7 @@
       </div>
       
       <h2 class="text-green-400 heading-font text-2xl mb-4">REGISTRATION SUCCESSFUL!</h2>
-      <p class="text-gray-300 mb-6">Thank you for registering. Our team will contact you shortly for verification.</p>
+      <p class="text-gray-300 mb-6" id="successMessage">Thank you for registering. Our team will contact you shortly for verification.</p>
       
       <button onclick="hideSuccessModal()" class="btn-primary px-6 py-2 rounded-lg font-bold">
         Continue
@@ -588,11 +738,15 @@
   </div>
 
   <script>
-    // Sample data storage (in a real app, this would be server-side)
-    let registrations = JSON.parse(localStorage.getItem('registrations')) || [];
-    const ADMIN_PASSWORD = "2580aauFVT";
+    // Enhanced Admin System
+    const ADMIN_CREDENTIALS = {
+      "admin1": "FireVillage@123",
+      "admin2": "Secure@2580",
+      "admin3": "Tournament@2023"
+    };
     
-    // Tournament settings
+    let currentAdmin = null;
+    let registrations = JSON.parse(localStorage.getItem('registrations')) || [];
     let tournamentSettings = JSON.parse(localStorage.getItem('tournamentSettings')) || {
       date: "2025-05-18",
       time: "15:00",
@@ -637,8 +791,6 @@
       
       localStorage.setItem('tournamentSettings', JSON.stringify(tournamentSettings));
       initTournamentSettings();
-      
-      // Show success message
       alert('Tournament settings saved successfully!');
     }
     
@@ -703,20 +855,23 @@
     // Admin Functions
     function showAdminLogin() {
       document.getElementById('adminLoginModal').classList.remove('hidden');
-      document.getElementById('adminPassword').focus();
+      document.getElementById('adminUsername').focus();
     }
     
     function hideAdminLogin() {
       document.getElementById('adminLoginModal').classList.add('hidden');
+      document.getElementById('adminUsername').value = '';
       document.getElementById('adminPassword').value = '';
       document.getElementById('adminError').classList.add('hidden');
     }
     
     function checkAdminLogin() {
+      const username = document.getElementById('adminUsername').value;
       const password = document.getElementById('adminPassword').value;
       const errorElement = document.getElementById('adminError');
       
-      if (password === ADMIN_PASSWORD) {
+      if (ADMIN_CREDENTIALS[username] && ADMIN_CREDENTIALS[username] === password) {
+        currentAdmin = username;
         hideAdminLogin();
         showAdminDashboard();
       } else {
@@ -726,50 +881,89 @@
     }
     
     function showAdminDashboard() {
+      document.getElementById('currentAdminName').textContent = currentAdmin.toUpperCase();
+      
       // Update stats
       document.getElementById('totalRegistrations').textContent = registrations.length;
       document.getElementById('verifiedPlayers').textContent = registrations.filter(r => r.verified).length;
+      document.getElementById('pendingPlayers').textContent = registrations.filter(r => !r.verified).length;
       document.getElementById('totalPayments').textContent = registrations.length * tournamentSettings.entryFee;
       
       // Populate players list
-      const playersList = document.getElementById('playersList');
-      playersList.innerHTML = '';
-      
-      registrations.forEach((player, index) => {
-        const row = document.createElement('tr');
-        row.className = index % 2 === 0 ? 'bg-black bg-opacity-20' : 'bg-black bg-opacity-10';
-        
-        row.innerHTML = `
-          <td class="px-4 py-3">${player.playerName}</td>
-          <td class="px-4 py-3">${player.playerUID}</td>
-          <td class="px-4 py-3">${player.whatsappNumber}</td>
-          <td class="px-4 py-3">
-            ${player.verified ? 
-              '<span class="px-2 py-1 bg-green-900 bg-opacity-40 text-green-400 rounded-full text-xs">Verified</span>' : 
-              '<span class="px-2 py-1 bg-yellow-900 bg-opacity-40 text-yellow-400 rounded-full text-xs">Pending</span>'}
-          </td>
-          <td class="px-4 py-3">
-            ${!player.verified ? 
-              `<button onclick="verifyPlayer('${player.playerName}')" class="px-2 py-1 bg-green-600 hover:bg-green-500 rounded text-xs mr-2">
-                <i class="fas fa-check mr-1"></i> Verify
-              </button>` : ''}
-            <button onclick="deletePlayer('${player.playerName}')" class="px-2 py-1 bg-red-600 hover:bg-red-500 rounded text-xs">
-              <i class="fas fa-trash mr-1"></i> Delete
-            </button>
-          </td>
-        `;
-        
-        playersList.appendChild(row);
-      });
+      refreshPlayersList();
       
       document.getElementById('adminDashboard').classList.remove('hidden');
     }
     
     function hideAdminDashboard() {
       document.getElementById('adminDashboard').classList.add('hidden');
+      currentAdmin = null;
     }
     
-    function verifyPlayer(playerName) {
+    function refreshPlayersList(filter = '') {
+      const playersList = document.getElementById('playersList');
+      playersList.innerHTML = '';
+      
+      const filteredRegistrations = registrations.filter(reg => 
+        reg.playerName.toLowerCase().includes(filter.toLowerCase()) || 
+        reg.playerUID.includes(filter) ||
+        reg.whatsappNumber.includes(filter) ||
+        (reg.teamName && reg.teamName.toLowerCase().includes(filter.toLowerCase()))
+      );
+      
+      filteredRegistrations.forEach((player, index) => {
+        const row = document.createElement('tr');
+        row.className = index % 2 === 0 ? 'admin-row-even' : 'admin-row-odd';
+        
+        row.innerHTML = `
+          <td class="px-4 py-3">
+            <input type="checkbox" class="player-checkbox" data-player="${player.playerName}">
+          </td>
+          <td class="px-4 py-3">${player.playerName}</td>
+          <td class="px-4 py-3">${player.playerUID}</td>
+          <td class="px-4 py-3">${player.whatsappNumber}</td>
+          <td class="px-4 py-3">${player.teamName || '-'}</td>
+          <td class="px-4 py-3">
+            ${player.verified ? 
+              '<span class="px-2 py-1 bg-green-900 bg-opacity-40 text-green-400 rounded-full text-xs">Verified</span>' : 
+              '<span class="px-2 py-1 bg-yellow-900 bg-opacity-40 text-yellow-400 rounded-full text-xs">Pending</span>'}
+          </td>
+          <td class="px-4 py-3">
+            <div class="flex flex-wrap gap-1">
+              <button onclick="editPlayer('${player.playerName}')" class="px-2 py-1 bg-blue-600 hover:bg-blue-500 rounded text-xs">
+                <i class="fas fa-edit mr-1"></i> Edit
+              </button>
+              ${!player.verified ? 
+                `<button onclick="verifyPlayer('${player.playerName}')" class="px-2 py-1 bg-green-600 hover:bg-green-500 rounded text-xs">
+                  <i class="fas fa-check mr-1"></i> Verify
+                </button>` : ''}
+              <button onclick="messagePlayer('${player.playerName}', '${player.whatsappNumber}')" class="px-2 py-1 bg-purple-600 hover:bg-purple-500 rounded text-xs">
+                <i class="fas fa-envelope mr-1"></i> Message
+              </button>
+              <button onclick="deletePlayer('${player.playerName}')" class="px-2 py-1 bg-red-600 hover:bg-red-500 rounded text-xs">
+                <i class="fas fa-trash mr-1"></i> Delete
+              </button>
+            </div>
+          </td>
+        `;
+        
+        playersList.appendChild(row);
+      });
+      
+      // Update select all checkbox
+      document.getElementById('selectAllPlayers').checked = false;
+    }
+    
+    function toggleSelectAll() {
+      const checkboxes = document.querySelectorAll('.player-checkbox');
+      const selectAll = document.getElementById('selectAllPlayers').checked;
+      
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = selectAll;
+      });
+    }
+    
+    function verifyPlayer(playerName, showAlert = true) {
       registrations = registrations.map(reg => {
         if (reg.playerName === playerName) {
           return {...reg, verified: true};
@@ -778,6 +972,7 @@
       });
       localStorage.setItem('registrations', JSON.stringify(registrations));
       showAdminDashboard();
+      if (showAlert) alert(`${playerName} has been verified!`);
     }
     
     function deletePlayer(playerName) {
@@ -785,11 +980,189 @@
         registrations = registrations.filter(reg => reg.playerName !== playerName);
         localStorage.setItem('registrations', JSON.stringify(registrations));
         showAdminDashboard();
+        alert(`${playerName} has been deleted!`);
       }
     }
     
+    function editPlayer(playerName) {
+      const player = registrations.find(p => p.playerName === playerName);
+      if (!player) return;
+      
+      // Show edit modal with player data
+      document.getElementById('editPlayerName').value = player.playerName;
+      document.getElementById('editPlayerUID').value = player.playerUID;
+      document.getElementById('editWhatsappNumber').value = player.whatsappNumber;
+      document.getElementById('editPlayerLevel').value = player.playerLevel || 'bronze';
+      document.getElementById('editTeamName').value = player.teamName || '';
+      document.getElementById('editPaymentMethod').value = player.paymentMethod || 'upi';
+      document.getElementById('editTransactionId').value = player.transactionId;
+      
+      document.getElementById('editPlayerModal').classList.remove('hidden');
+    }
+    
+    function hideEditPlayerModal() {
+      document.getElementById('editPlayerModal').classList.add('hidden');
+    }
+    
+    function savePlayerEdits() {
+      const originalName = document.getElementById('editPlayerName').value;
+      const playerIndex = registrations.findIndex(p => p.playerName === originalName);
+      
+      if (playerIndex !== -1) {
+        registrations[playerIndex] = {
+          ...registrations[playerIndex],
+          playerName: document.getElementById('editPlayerName').value,
+          playerUID: document.getElementById('editPlayerUID').value,
+          whatsappNumber: document.getElementById('editWhatsappNumber').value,
+          playerLevel: document.getElementById('editPlayerLevel').value,
+          teamName: document.getElementById('editTeamName').value,
+          paymentMethod: document.getElementById('editPaymentMethod').value,
+          transactionId: document.getElementById('editTransactionId').value
+        };
+        
+        localStorage.setItem('registrations', JSON.stringify(registrations));
+        hideEditPlayerModal();
+        showAdminDashboard();
+        alert('Player information updated successfully!');
+      }
+    }
+    
+    function verifySelectedPlayers() {
+      const checkboxes = document.querySelectorAll('.player-checkbox:checked');
+      if (checkboxes.length === 0) {
+        alert('Please select at least one player to verify!');
+        return;
+      }
+      
+      checkboxes.forEach(checkbox => {
+        const playerName = checkbox.getAttribute('data-player');
+        verifyPlayer(playerName, false);
+      });
+      
+      alert(`${checkboxes.length} players verified successfully!`);
+    }
+    
+    function deleteSelectedPlayers() {
+      const checkboxes = document.querySelectorAll('.player-checkbox:checked');
+      if (checkboxes.length === 0) {
+        alert('Please select at least one player to delete!');
+        return;
+      }
+      
+      if (confirm(`Are you sure you want to delete ${checkboxes.length} selected players?`)) {
+        checkboxes.forEach(checkbox => {
+          const playerName = checkbox.getAttribute('data-player');
+          registrations = registrations.filter(reg => reg.playerName !== playerName);
+        });
+        
+        localStorage.setItem('registrations', JSON.stringify(registrations));
+        showAdminDashboard();
+        alert(`${checkboxes.length} players deleted successfully!`);
+      }
+    }
+    
+    function messagePlayer(playerName, whatsappNumber) {
+      document.getElementById('messageRecipientsCount').textContent = '1';
+      document.getElementById('messagePlayerModal').classList.remove('hidden');
+      document.getElementById('messageSentAlert').classList.add('hidden');
+      document.getElementById('customMessageSection').classList.add('hidden');
+      document.getElementById('roomDetailsSection').classList.remove('hidden');
+      
+      // Store selected players (single in this case)
+      window.selectedPlayersForMessage = [{ playerName, whatsappNumber }];
+    }
+    
+    function messageSelectedPlayers() {
+      const checkboxes = document.querySelectorAll('.player-checkbox:checked');
+      if (checkboxes.length === 0) {
+        alert('Please select at least one player to message!');
+        return;
+      }
+      
+      document.getElementById('messageRecipientsCount').textContent = checkboxes.length;
+      document.getElementById('messagePlayerModal').classList.remove('hidden');
+      document.getElementById('messageSentAlert').classList.add('hidden');
+      document.getElementById('customMessageSection').classList.add('hidden');
+      document.getElementById('roomDetailsSection').classList.remove('hidden');
+      
+      // Store selected players
+      window.selectedPlayersForMessage = Array.from(checkboxes).map(checkbox => {
+        const row = checkbox.closest('tr');
+        return {
+          playerName: row.cells[1].textContent,
+          whatsappNumber: row.cells[3].textContent
+        };
+      });
+    }
+    
+    function hideMessagePlayerModal() {
+      document.getElementById('messagePlayerModal').classList.add('hidden');
+      window.selectedPlayersForMessage = null;
+    }
+    
+    // Handle message type change
+    document.getElementById('messageType').addEventListener('change', function() {
+      const messageType = this.value;
+      const roomSection = document.getElementById('roomDetailsSection');
+      const customSection = document.getElementById('customMessageSection');
+      
+      if (messageType === 'room_details') {
+        roomSection.classList.remove('hidden');
+        customSection.classList.add('hidden');
+      } else if (messageType === 'custom') {
+        roomSection.classList.add('hidden');
+        customSection.classList.remove('hidden');
+      } else {
+        roomSection.classList.add('hidden');
+        customSection.classList.add('hidden');
+      }
+    });
+    
+    function sendPlayerMessage() {
+      const messageType = document.getElementById('messageType').value;
+      let message = '';
+      
+      if (messageType === 'verification') {
+        message = `Dear Player,\n\nYour registration for Fire Village Tournament has been verified!\n\nThank you for participating.`;
+      } 
+      else if (messageType === 'room_details') {
+        const roomId = document.getElementById('roomId').value;
+        const roomPassword = document.getElementById('roomPassword').value;
+        const matchTime = document.getElementById('matchTime').value;
+        
+        message = `Tournament Room Details:\n\nRoom ID: ${roomId}\nPassword: ${roomPassword}\nMatch Time: ${matchTime}\n\nGood luck!`;
+      }
+      else if (messageType === 'custom') {
+        message = document.getElementById('customMessage').value;
+      }
+      
+      // In a real app, this would send via WhatsApp API or other service
+      // For demo, we'll just show a success message
+      const recipients = window.selectedPlayersForMessage || [];
+      recipients.forEach(player => {
+        console.log(`Message to ${player.whatsappNumber}: ${message}`);
+        
+        // If verification message, mark as verified
+        if (messageType === 'verification') {
+          verifyPlayer(player.playerName, false);
+        }
+      });
+      
+      // Show success message
+      const alertDiv = document.getElementById('messageSentAlert');
+      alertDiv.classList.remove('hidden');
+      setTimeout(() => {
+        alertDiv.classList.add('hidden');
+        hideMessagePlayerModal();
+      }, 3000);
+    }
+    
+    function searchPlayers() {
+      const searchTerm = document.getElementById('adminSearch').value;
+      refreshPlayersList(searchTerm);
+    }
+    
     function exportRegistrations() {
-      // In a real app, this would export to CSV/Excel
       const dataStr = JSON.stringify(registrations, null, 2);
       const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
       
@@ -821,7 +1194,15 @@
       registrations.push(formData);
       localStorage.setItem('registrations', JSON.stringify(registrations));
       
-      // Show success message
+      // Show success message with WhatsApp contact info
+      const successMessage = document.getElementById('successMessage');
+      successMessage.innerHTML = `
+        Thank you for registering!<br><br>
+        Our team will contact you shortly on WhatsApp for verification.<br><br>
+        <span class="text-yellow-400">WhatsApp: +91 ${formData.whatsappNumber}</span><br>
+        Tournament Time: ${formatDate(tournamentSettings.date)} at ${formatTime(tournamentSettings.time)}
+      `;
+      
       document.getElementById('successModal').classList.remove('hidden');
       
       // Reset form
@@ -852,6 +1233,12 @@
       }
       if (event.target === document.getElementById('adminDashboard')) {
         hideAdminDashboard();
+      }
+      if (event.target === document.getElementById('editPlayerModal')) {
+        hideEditPlayerModal();
+      }
+      if (event.target === document.getElementById('messagePlayerModal')) {
+        hideMessagePlayerModal();
       }
       if (event.target === document.getElementById('successModal')) {
         hideSuccessModal();
