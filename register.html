@@ -457,28 +457,121 @@
   </footer>
 
   <!-- Admin Login Modal -->
-  <div id="adminLoginModal" class="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center hidden">
-    <div class="bg-gray-900 border-2 border-yellow-500 rounded-xl p-8 max-w-md w-full mx-4">
-      <div class="flex justify-center mb-6">
-        <div class="bg-yellow-500 p-3 rounded-full">
-          <i class="fas fa-lock text-2xl text-black"></i>
-        </div>
+<div id="adminLoginModal" class="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center hidden">
+  <div class="bg-gray-900 border-2 border-yellow-500 rounded-xl p-8 max-w-md w-full mx-4">
+    <div class="flex justify-center mb-6">
+      <div class="bg-yellow-500 p-3 rounded-full">
+        <i class="fas fa-lock text-2xl text-black"></i>
+      </div>
+    </div>
+    
+    <h2 class="text-yellow-400 heading-font text-2xl text-center mb-6">ADMIN ACCESS</h2>
+    
+    <div class="space-y-4">
+      <div>
+        <label class="block text-gray-400 text-sm font-semibold mb-2">Username</label>
+        <input type="text" id="adminUsername" class="w-full bg-gray-800 border border-gray-700 focus:border-yellow-500 rounded-lg px-4 py-3 focus:outline-none" placeholder="Enter admin username" value="aauAAU" readonly>
+      </div>
+      <div>
+        <label class="block text-gray-400 text-sm font-semibold mb-2">Password</label>
+        <input type="password" id="adminPassword" class="w-full bg-gray-800 border border-gray-700 focus:border-yellow-500 rounded-lg px-4 py-3 focus:outline-none" placeholder="Enter admin password">
       </div>
       
-      <h2 class="text-yellow-400 heading-font text-2xl text-center mb-6">ADMIN ACCESS</h2>
+      <button onclick="checkAdminLogin()" class="btn-primary w-full py-3 rounded-lg font-bold mt-4">
+        <i class="fas fa-sign-in-alt mr-2"></i> LOGIN
+      </button>
       
-      <div class="space-y-4">
-        <div>
-          <label class="block text-gray-400 text-sm font-semibold mb-2">Admin Username</label>
-          <input type="text" id="adminUsername" class="w-full bg-gray-800 border border-gray-700 focus:border-yellow-500 rounded-lg px-4 py-3 focus:outline-none" placeholder="Enter admin username">
-        </div>
-        <div>
-          <label class="block text-gray-400 text-sm font-semibold mb-2">Password</label>
-          <input type="password" id="adminPassword" class="w-full bg-gray-800 border border-gray-700 focus:border-yellow-500 rounded-lg px-4 py-3 focus:outline-none" placeholder="Enter admin password">
-        </div>
-        
-        <button onclick="checkAdminLogin()" class="btn-primary w-full py-3 rounded-lg font-bold mt-4">
-          <i class="fas fa-sign-in-alt mr-2"></i> LOGIN
+      <div id="adminError" class="text-red-400 text-sm text-center mt-2 hidden">
+        <i class="fas fa-exclamation-circle mr-1"></i> Incorrect password!
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // SINGLE ADMIN CREDENTIALS
+  const ADMIN_USERNAME = "aauAAU";
+  const ADMIN_PASSWORD = "2580aauFVT";
+  
+  // Current admin session
+  let isAdminLoggedIn = false;
+  
+  // Check admin login
+  function checkAdminLogin() {
+    const username = document.getElementById('adminUsername').value;
+    const password = document.getElementById('adminPassword').value;
+    const errorElement = document.getElementById('adminError');
+    
+    if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+      isAdminLoggedIn = true;
+      hideAdminLogin();
+      showAdminDashboard();
+      
+      // Refresh data every 5 seconds to get new registrations
+      setInterval(refreshRegistrationData, 5000);
+    } else {
+      errorElement.classList.remove('hidden');
+      setTimeout(() => errorElement.classList.add('hidden'), 3000);
+    }
+  }
+  
+  // Refresh registration data
+  function refreshRegistrationData() {
+    if (!isAdminLoggedIn) return;
+    
+    // Get latest data from localStorage
+    const latestRegistrations = JSON.parse(localStorage.getItem('registrations')) || [];
+    
+    // Only update if there are changes
+    if (latestRegistrations.length !== registrations.length) {
+      registrations = latestRegistrations;
+      showAdminDashboard();
+    }
+  }
+  
+  // Update form submission to trigger storage event
+  document.getElementById('registrationForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = {
+      playerName: document.getElementById('playerName').value,
+      playerUID: document.getElementById('playerUID').value,
+      whatsappNumber: document.getElementById('whatsappNumber').value,
+      playerLevel: document.getElementById('playerLevel').value,
+      teamName: document.getElementById('teamName').value,
+      paymentMethod: document.getElementById('paymentMethod').value,
+      transactionId: document.getElementById('transactionId').value,
+      registrationDate: new Date().toISOString(),
+      verified: false
+    };
+    
+    // Add to registrations
+    registrations.push(formData);
+    localStorage.setItem('registrations', JSON.stringify(registrations));
+    
+    // Trigger storage event to notify other tabs
+    const event = new Event('storageUpdated');
+    window.dispatchEvent(event);
+    
+    // Show success message
+    document.getElementById('successModal').classList.remove('hidden');
+    this.reset();
+  });
+  
+  // Listen for storage updates from other tabs
+  window.addEventListener('storageUpdated', function() {
+    if (isAdminLoggedIn) {
+      refreshRegistrationData();
+    }
+  });
+  
+  // Also listen for actual storage events (from other browser tabs)
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'registrations' && isAdminLoggedIn) {
+      refreshRegistrationData();
+    }
+  });
+</script>
         </button>
         
         <div id="adminError" class="text-red-400 text-sm text-center mt-2 hidden">
