@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fire Village - Tournament Registration</title>
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Oxanium:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #FFA500;
+            --primary: #FF5E14;
             --secondary: #1A1A2E;
-            --accent: #FF5E14;
+            --accent: #FFA500;
             --text: #FFFFFF;
             --dark: #0F0F1B;
+            --success: #00C853;
+            --danger: #FF3D00;
         }
         
         body {
@@ -19,8 +22,11 @@
             background-color: var(--dark);
             color: var(--text);
             background-image: 
-                radial-gradient(circle at 25% 25%, rgba(255, 94, 20, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 75% 75%, rgba(255, 165, 0, 0.1) 0%, transparent 50%);
+                linear-gradient(rgba(15, 15, 27, 0.9), rgba(15, 15, 27, 0.9)),
+                url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             margin: 0;
             padding: 0;
             min-height: 100vh;
@@ -33,29 +39,31 @@
         }
         
         header {
-            background-color: rgba(15, 15, 27, 0.8);
+            background-color: rgba(15, 15, 27, 0.95);
             backdrop-filter: blur(10px);
             padding: 15px 0;
             border-bottom: 2px solid var(--primary);
             position: sticky;
             top: 0;
             z-index: 100;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
         }
         
         .logo {
             font-family: 'Barlow Condensed', sans-serif;
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: var(--primary);
             text-align: center;
             margin-bottom: 10px;
-            text-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+            text-shadow: 0 0 15px rgba(255, 94, 20, 0.7);
+            letter-spacing: 2px;
         }
         
         .nav-menu {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 15px;
+            gap: 12px;
             font-weight: 600;
             margin-top: 10px;
         }
@@ -63,32 +71,37 @@
         .nav-menu a {
             color: var(--text);
             text-decoration: none;
-            padding: 5px 15px;
+            padding: 6px 16px;
             border-radius: 20px;
             transition: all 0.3s ease;
+            font-size: 0.95rem;
+            border: 1px solid transparent;
         }
         
         .nav-menu a:hover {
             color: var(--primary);
-            background-color: rgba(255, 165, 0, 0.1);
+            border-color: rgba(255, 94, 20, 0.3);
         }
         
         .nav-menu a.active {
             background-color: var(--primary);
             color: #000;
             font-weight: bold;
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(255, 94, 20, 0.5);
         }
         
         .registration-container {
-            background-color: rgba(26, 26, 46, 0.8);
-            border-radius: 10px;
-            padding: 30px;
+            background-color: rgba(26, 26, 46, 0.95);
+            border-radius: 12px;
+            padding: 35px;
             margin: 40px auto;
             max-width: 800px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
             border: 1px solid var(--primary);
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(5px);
         }
         
         .registration-container::before {
@@ -109,44 +122,155 @@
             margin-bottom: 30px;
             text-transform: uppercase;
             letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+            width: 100%;
         }
         
-        .form-group {
+        .registration-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+        
+        /* Success Greeting Styles */
+        .greeting-container {
+            text-align: center;
+            padding: 30px;
+            display: none;
+        }
+        
+        .greeting-icon {
+            font-size: 5rem;
+            color: var(--success);
             margin-bottom: 20px;
+            animation: bounce 1s;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-30px);}
+            60% {transform: translateY(-15px);}
+        }
+        
+        .greeting-title {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .greeting-message {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .player-details {
+            background-color: rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px auto;
+            max-width: 500px;
+            text-align: left;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .detail-row {
+            display: flex;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: var(--primary);
+            width: 150px;
+            flex-shrink: 0;
+        }
+        
+        .detail-value {
+            flex-grow: 1;
+        }
+        
+        .next-steps {
+            margin-top: 30px;
+        }
+        
+        .next-steps h3 {
+            color: var(--primary);
+            font-family: 'Barlow Condensed', sans-serif;
+            margin-bottom: 15px;
+        }
+        
+        .next-steps ul {
+            list-style-type: none;
+            padding: 0;
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        
+        .next-steps li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .next-steps li::before {
+            content: "→";
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+        }
+        
+        /* Form Styles (same as before) */
+        .form-group {
+            margin-bottom: 22px;
+            position: relative;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-weight: 600;
             color: var(--primary);
+            font-size: 0.95rem;
         }
         
         .form-control {
             width: 100%;
-            padding: 12px 15px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 5px;
+            padding: 14px 18px;
+            background-color: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 6px;
             color: var(--text);
             font-family: 'Oxanium', sans-serif;
             transition: all 0.3s ease;
+            font-size: 0.95rem;
         }
         
         .form-control:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(255, 165, 0, 0.3);
-            background-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 3px rgba(255, 94, 20, 0.2);
+            background-color: rgba(255, 255, 255, 0.12);
         }
         
         .btn {
             display: inline-block;
-            padding: 12px 30px;
+            padding: 14px 32px;
             background: linear-gradient(135deg, var(--primary), var(--accent));
             color: #000;
             border: none;
-            border-radius: 5px;
+            border-radius: 6px;
             font-family: 'Barlow Condensed', sans-serif;
             font-size: 1.1rem;
             font-weight: bold;
@@ -154,48 +278,67 @@
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
         }
         
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 165, 0, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 94, 20, 0.4);
+        }
+        
+        .btn:hover::after {
+            left: 100%;
         }
         
         .btn-block {
             display: block;
             width: 100%;
+            margin-top: 10px;
         }
         
         .payment-methods {
-            margin-top: 30px;
-            padding-top: 20px;
+            margin-top: 35px;
+            padding-top: 25px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .payment-methods h3 {
             color: var(--primary);
-            margin-bottom: 15px;
+            margin-bottom: 18px;
             font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.3rem;
         }
         
         .payment-methods ul {
             list-style-type: none;
             padding: 0;
+            margin-bottom: 20px;
         }
         
         .payment-methods li {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
+            font-size: 0.95rem;
         }
         
-        .payment-methods li::before {
-            content: "•";
+        .payment-methods li i {
             color: var(--primary);
-            font-weight: bold;
-            display: inline-block;
+            margin-right: 10px;
             width: 20px;
-            font-size: 1.2rem;
+            text-align: center;
         }
         
         .gamer-id {
@@ -213,16 +356,29 @@
         
         .footer {
             text-align: center;
-            padding: 20px;
-            margin-top: 40px;
+            padding: 25px;
+            margin-top: 50px;
             font-size: 0.9rem;
             color: rgba(255, 255, 255, 0.6);
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(15, 15, 27, 0.8);
+        }
+        
+        .form-note {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
+        .required-field::after {
+            content: " *";
+            color: var(--danger);
         }
         
         @media (max-width: 768px) {
             .registration-container {
-                padding: 20px;
+                padding: 25px;
                 margin: 20px;
             }
             
@@ -230,9 +386,30 @@
                 font-size: 2rem;
             }
             
+            .greeting-title {
+                font-size: 2rem;
+            }
+            
+            .greeting-icon {
+                font-size: 4rem;
+            }
+            
             .gamer-id {
                 flex-direction: column;
-                gap: 10px;
+                gap: 12px;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+            }
+            
+            .detail-row {
+                flex-direction: column;
+            }
+            
+            .detail-label {
+                width: 100%;
+                margin-bottom: 5px;
             }
         }
     </style>
@@ -240,7 +417,7 @@
 <body>
     <header>
         <div class="container">
-            <div class="logo">FIRE VILLAGE</div>
+            <div class="logo">FIRE VILLAGE TOURNAMENTS</div>
             <ul class="nav-menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="tournaments.html">Tournaments</a></li>
@@ -255,91 +432,160 @@
     
     <div class="container">
         <div class="registration-container">
-            <h1 class="registration-title">Tournament Registration</h1>
-            
-            <form id="registrationForm">
-                <div class="form-group">
-                    <label for="playerName">Player Name</label>
-                    <input type="text" id="playerName" class="form-control" required placeholder="Enter your in-game name">
-                </div>
+            <!-- Registration Form -->
+            <div id="registrationFormContainer">
+                <h1 class="registration-title">Tournament Registration</h1>
                 
-                <div class="form-group">
-                    <label for="playerId">Free Fire ID</label>
-                    <div class="gamer-id">
-                        <select id="playerRegion" class="form-control" required>
-                            <option value="" disabled selected>Region</option>
-                            <option value="IND">IND</option>
-                            <option value="EUR">EUR</option>
-                            <option value="NA">NA</option>
-                            <option value="ME">ME</option>
-                            <option value="SA">SA</option>
-                            <option value="SEA">SEA</option>
-                            <option value="MENA">MENA</option>
+                <form id="registrationForm">
+                    <div class="form-group">
+                        <label for="playerName" class="required-field">Player Name</label>
+                        <input type="text" id="playerName" class="form-control" required placeholder="Enter your exact in-game name">
+                        <div class="form-note">Must match your Free Fire profile name</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="playerId" class="required-field">Free Fire ID</label>
+                        <div class="gamer-id">
+                            <select id="playerRegion" class="form-control" required>
+                                <option value="" disabled selected>Region</option>
+                                <option value="IND">IND</option>
+                                <option value="EUR">EUR</option>
+                                <option value="NA">NA</option>
+                                <option value="ME">ME</option>
+                                <option value="SA">SA</option>
+                                <option value="SEA">SEA</option>
+                                <option value="MENA">MENA</option>
+                            </select>
+                            <input type="text" id="playerId" class="form-control" required placeholder="Enter your Free Fire ID" pattern="[0-9]{9}" title="9-digit Free Fire ID">
+                        </div>
+                        <div class="form-note">Example: IND-123456789</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="playerLevel" class="required-field">Free Fire Level</label>
+                        <input type="number" id="playerLevel" class="form-control" required placeholder="Enter your current level" min="1" max="100">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="playerRank" class="required-field">Current Rank</label>
+                        <select id="playerRank" class="form-control" required>
+                            <option value="" disabled selected>Select your rank</option>
+                            <option value="Bronze">Bronze</option>
+                            <option value="Silver">Silver</option>
+                            <option value="Gold">Gold</option>
+                            <option value="Platinum">Platinum</option>
+                            <option value="Diamond">Diamond</option>
+                            <option value="Heroic">Heroic</option>
                         </select>
-                        <input type="text" id="playerId" class="form-control" required placeholder="Enter your Free Fire ID">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="playerEmail" class="required-field">Email Address</label>
+                        <input type="email" id="playerEmail" class="form-control" required placeholder="Enter your active email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="playerPhone" class="required-field">WhatsApp Number</label>
+                        <input type="tel" id="playerPhone" class="form-control" required placeholder="Enter WhatsApp number with country code" pattern="[+][0-9]{11,15}" title="Include country code (e.g., +91xxxxxxxxxx)">
+                        <div class="form-note">This will be used for tournament updates</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="playerDevice" class="required-field">Device Type</label>
+                        <select id="playerDevice" class="form-control" required>
+                            <option value="" disabled selected>Select your device</option>
+                            <option value="Android">Android</option>
+                            <option value="iOS">iPhone/iPad</option>
+                            <option value="Emulator">Emulator</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="paymentMethod" class="required-field">Payment Method</label>
+                        <select id="paymentMethod" class="form-control" required>
+                            <option value="" disabled selected>Select payment method</option>
+                            <option value="Google Pay">Google Pay</option>
+                            <option value="Paytm">Paytm</option>
+                            <option value="PhonePe">PhonePe</option>
+                            <option value="Bank Transfer">Bank Transfer</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="paymentDetails" class="required-field">Payment Details (Transaction ID/UPI ID)</label>
+                        <input type="text" id="paymentDetails" class="form-control" required placeholder="Enter complete transaction details">
+                        <div class="form-note">Include date/time if possible</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="playerReferral">Referral Code (If any)</label>
+                        <input type="text" id="playerReferral" class="form-control" placeholder="Enter referral code">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-block">
+                        <i class="fas fa-paper-plane"></i> SUBMIT REGISTRATION
+                    </button>
+                </form>
+                
+                <div class="payment-methods">
+                    <h3>Payment Information</h3>
+                    <p>Please complete your payment and provide the details above. Contact us if you have any issues:</p>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> Mail: firevillage.in@gmail.com</li>
+                        <li><i class="fab fa-instagram"></i> Instagram: @firevillage.in</li>
+                        <li><i class="fab fa-telegram"></i> Telegram: @firevillageINbot</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Success Greeting (hidden by default) -->
+            <div id="successGreeting" class="greeting-container">
+                <div class="greeting-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h2 class="greeting-title">REGISTRATION SUCCESSFUL!</h2>
+                <p class="greeting-message">
+                    Thank you for registering for the Fire Village Tournament!<br>
+                    Your registration details have been received and our team will verify your information shortly.
+                </p>
+                
+                <div class="player-details">
+                    <h3 style="color: var(--primary); margin-top: 0; text-align: center;">YOUR REGISTRATION DETAILS</h3>
+                    <div class="detail-row">
+                        <div class="detail-label">Player Name:</div>
+                        <div class="detail-value" id="greeting-name">-</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Free Fire ID:</div>
+                        <div class="detail-value" id="greeting-id">-</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Rank/Level:</div>
+                        <div class="detail-value" id="greeting-rank">-</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Contact:</div>
+                        <div class="detail-value" id="greeting-contact">-</div>
+                    </div>
+                    <div class="detail-row" style="border-bottom: none;">
+                        <div class="detail-label">Payment Method:</div>
+                        <div class="detail-value" id="greeting-payment">-</div>
                     </div>
                 </div>
                 
-                <div class="form-group">
-                    <label for="playerLevel">Free Fire Level</label>
-                    <input type="number" id="playerLevel" class="form-control" required placeholder="Enter your current level">
+                <div class="next-steps">
+                    <h3>WHAT HAPPENS NEXT?</h3>
+                    <ul>
+                        <li>Our team will verify your registration within 24 hours</li>
+                        <li>You'll receive a confirmation message on WhatsApp/Email</li>
+                        <li>Tournament details and schedule will be shared 1 day before the event</li>
+                        <li>Join our Telegram group for instant updates</li>
+                    </ul>
                 </div>
                 
-                <div class="form-group">
-                    <label for="playerRank">Current Rank</label>
-                    <select id="playerRank" class="form-control" required>
-                        <option value="" disabled selected>Select your rank</option>
-                        <option value="Bronze">Bronze</option>
-                        <option value="Silver">Silver</option>
-                        <option value="Gold">Gold</option>
-                        <option value="Platinum">Platinum</option>
-                        <option value="Diamond">Diamond</option>
-                        <option value="Heroic">Heroic</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="playerEmail">Email Address</label>
-                    <input type="email" id="playerEmail" class="form-control" required placeholder="Enter your email">
-                </div>
-                
-                <div class="form-group">
-                    <label for="playerPhone">WhatsApp Number (Optional)</label>
-                    <input type="tel" id="playerPhone" class="form-control" placeholder="Enter WhatsApp number for updates">
-                </div>
-                
-                <div class="form-group">
-                    <label for="playerTelegram">Telegram Username</label>
-                    <input type="text" id="playerTelegram" class="form-control" required placeholder="@username">
-                </div>
-                
-                <div class="form-group">
-                    <label for="paymentMethod">Payment Method</label>
-                    <select id="paymentMethod" class="form-control" required>
-                        <option value="" disabled selected>Select payment method</option>
-                        <option value="Google Pay">Google Pay</option>
-                        <option value="Paytm">Paytm</option>
-                        <option value="PhonePe">PhonePe</option>
-                        <option value="Bank Transfer">Bank Transfer</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="paymentDetails">Payment Details (Transaction ID/UPI ID)</label>
-                    <input type="text" id="paymentDetails" class="form-control" required placeholder="Enter transaction details">
-                </div>
-                
-                <button type="submit" class="btn btn-block">Register Now</button>
-            </form>
-            
-            <div class="payment-methods">
-                <h3>Payment Information</h3>
-                <p>Please complete your payment and provide the details above. Contact us if you have any issues:</p>
-                <ul>
-                    <li>Mail: firevillage.in@gmail.com</li>
-                    <li>Instagram: @firevillage.in</li>
-                    <li>Telegram: @firevillageINbot</li>
-                </ul>
+                <button class="btn" onclick="window.location.href='tournaments.html'">
+                    <i class="fas fa-calendar-alt"></i> VIEW UPCOMING TOURNAMENTS
+                </button>
             </div>
         </div>
     </div>
@@ -360,9 +606,10 @@
             const playerRank = document.getElementById('playerRank').value;
             const playerEmail = document.getElementById('playerEmail').value;
             const playerPhone = document.getElementById('playerPhone').value;
-            const playerTelegram = document.getElementById('playerTelegram').value;
+            const playerDevice = document.getElementById('playerDevice').value;
             const paymentMethod = document.getElementById('paymentMethod').value;
             const paymentDetails = document.getElementById('paymentDetails').value;
+            const playerReferral = document.getElementById('playerReferral').value;
             
             // Create player object
             const playerData = {
@@ -371,31 +618,67 @@
                 level: playerLevel,
                 rank: playerRank,
                 email: playerEmail,
-                phone: playerPhone || 'Not provided',
+                phone: playerPhone,
+                device: playerDevice,
                 telegram: playerTelegram,
                 paymentMethod: paymentMethod,
                 paymentDetails: paymentDetails,
+                referral: playerReferral || 'None',
                 registrationDate: new Date().toISOString(),
                 verified: false
             };
             
-            // Send data to server
-            fetch('https://your-server-endpoint.com/api/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(playerData),
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert('Registration successful! We will contact you soon.');
-                document.getElementById('registrationForm').reset();
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-                alert('Registration failed. Please try again or contact us.');
-            });
+            // In a real implementation, you would send this to your server
+            // For this demo, we'll simulate a successful submission
+            setTimeout(() => {
+                // Show success greeting
+                document.getElementById('registrationFormContainer').style.display = 'none';
+                
+                // Fill in the greeting details
+                document.getElementById('greeting-name').textContent = playerData.name;
+                document.getElementById('greeting-id').textContent = playerData.ffid;
+                document.getElementById('greeting-rank').textContent = `${playerData.rank} (Level ${playerData.level})`;
+                document.getElementById('greeting-contact').textContent = `${playerData.email} | ${playerData.phone}`;
+                document.getElementById('greeting-payment').textContent = `${playerData.paymentMethod}: ${playerData.paymentDetails}`;
+                
+                // Show the greeting
+                document.getElementById('successGreeting').style.display = 'block';
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+                
+                // In a real implementation, you would send the data to your server here
+                /*
+                fetch('https://your-server-endpoint.com/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(playerData),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Show success greeting
+                    document.getElementById('registrationFormContainer').style.display = 'none';
+                    
+                    // Fill in the greeting details
+                    document.getElementById('greeting-name').textContent = playerData.name;
+                    document.getElementById('greeting-id').textContent = playerData.ffid;
+                    document.getElementById('greeting-rank').textContent = `${playerData.rank} (Level ${playerData.level})`;
+                    document.getElementById('greeting-contact').textContent = `${playerData.email} | ${playerData.phone}`;
+                    document.getElementById('greeting-payment').textContent = `${playerData.paymentMethod}: ${playerData.paymentDetails}`;
+                    
+                    // Show the greeting
+                    document.getElementById('successGreeting').style.display = 'block';
+                    
+                    // Scroll to top
+                    window.scrollTo(0, 0);
+                })
+                .catch((error) => {
+                    alert('Registration failed. Please try again or contact us.');
+                });
+                */
+            }, 1000);
         });
     </script>
 </body>
