@@ -1,1270 +1,402 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FIRE VILLAGE | Free Fire Tournament</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    :root {
-      --primary: #FF9F0E;
-      --secondary: #FF3D44;
-      --dark: #0A0E17;
-    }
-    body {
-      font-family: 'Rajdhani', sans-serif;
-      background-color: var(--dark);
-      background-image: 
-        radial-gradient(circle at 20% 30%, rgba(255, 61, 68, 0.15) 0%, transparent 25%),
-        radial-gradient(circle at 80% 70%, rgba(255, 159, 14, 0.15) 0%, transparent 25%);
-      color: white;
-    }
-    .heading-font {
-      font-family: 'Orbitron', sans-serif;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-      box-shadow: 0 4px 15px rgba(255, 61, 68, 0.4);
-    }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(255, 61, 68, 0.6);
-    }
-    .card-glass {
-      background: rgba(15, 20, 35, 0.7);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    }
-    .countdown-digit {
-      background: rgba(0, 0, 0, 0.3);
-      border: 1px solid var(--primary);
-      text-shadow: 0 0 10px rgba(255, 159, 14, 0.7);
-    }
-    .team-badge {
-      border-radius: 50%;
-      background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
-      box-shadow: 0 0 15px rgba(255, 159, 14, 0.3);
-    }
-    .verified-badge {
-      position: absolute;
-      top: -8px;
-      right: -8px;
-      background: var(--primary);
-      color: black;
-      border-radius: 50%;
-      width: 20px;
-      height: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-    }
-    .verified-player-box {
-      background: rgba(25, 135, 84, 0.2);
-      border-left: 4px solid var(--primary);
-    }
-    .admin-row-even {
-      background: rgba(15, 20, 35, 0.5);
-    }
-    .admin-row-odd {
-      background: rgba(10, 14, 23, 0.7);
-    }
-    @media (max-width: 768px) {
-      .mobile-flex-col {
-        flex-direction: column;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fire Village - Tournament Registration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Oxanium:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FFA500;
+            --secondary: #1A1A2E;
+            --accent: #FF5E14;
+            --text: #FFFFFF;
+            --dark: #0F0F1B;
+        }
+        
+        body {
+            font-family: 'Oxanium', sans-serif;
+            background-color: var(--dark);
+            color: var(--text);
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(255, 94, 20, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(255, 165, 0, 0.1) 0%, transparent 50%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: rgba(15, 15, 27, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            border-bottom: 2px solid var(--primary);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 2rem;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+        }
+        
+        .nav-menu {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
+        .nav-menu a {
+            color: var(--text);
+            text-decoration: none;
+            padding: 5px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--primary);
+            background-color: rgba(255, 165, 0, 0.1);
+        }
+        
+        .nav-menu a.active {
+            background-color: var(--primary);
+            color: #000;
+            font-weight: bold;
+        }
+        
+        .registration-container {
+            background-color: rgba(26, 26, 46, 0.8);
+            border-radius: 10px;
+            padding: 30px;
+            margin: 40px auto;
+            max-width: 800px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .registration-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+        
+        .registration-title {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            color: var(--text);
+            font-family: 'Oxanium', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(255, 165, 0, 0.3);
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 165, 0, 0.4);
+        }
+        
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+        
+        .payment-methods {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .payment-methods h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-family: 'Barlow Condensed', sans-serif;
+        }
+        
+        .payment-methods ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .payment-methods li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .payment-methods li::before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+            display: inline-block;
+            width: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .gamer-id {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .gamer-id select {
+            flex: 1;
+        }
+        
+        .gamer-id input {
+            flex: 3;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .registration-container {
+                padding: 20px;
+                margin: 20px;
+            }
+            
+            .registration-title {
+                font-size: 2rem;
+            }
+            
+            .gamer-id {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
 </head>
-<body class="min-h-screen">
-  <!-- Animated Background Elements -->
-  <div class="fixed inset-0 overflow-hidden z-0">
-    <div class="absolute top-20 left-20 w-40 h-40 rounded-full bg-orange-500 opacity-10 blur-3xl"></div>
-    <div class="absolute bottom-20 right-20 w-60 h-60 rounded-full bg-red-500 opacity-10 blur-3xl"></div>
-  </div>
-
-  <!-- Navbar -->
-  <nav class="relative z-50 bg-black bg-opacity-80 px-4 py-3 border-b border-yellow-500 sticky top-0">
-    <div class="max-w-7xl mx-auto flex justify-between items-center">
-      <div class="flex items-center">
-        <img src="./assets/logo.png" alt="Fire Village Logo" class="h-10 sm:h-12 w-auto" loading="lazy">
-        <span class="ml-3 text-yellow-400 heading-font text-xl tracking-wider">FIRE VILLAGE</span>
-      </div>
-      <div class="hidden md:flex items-center space-x-6">
-        <li><a href="index.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Home</a></li>
-        <li><a href="tournaments.html" class="bg-yellow-500 text-black font-bold px-3 py-1 rounded-full hover:bg-yellow-400 transition">Tournaments</a></li>
-        <li><a href="leaderboard.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Leaderboard</a></li>
-        <li><a href="teams.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Teams</a></li>
-        <li><a href="register.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Register</a></li>
-        <li><a href="contact.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Contact</a></li>
-        <li><a href="about.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">About</a></li>  
-        <button onclick="showAdminLogin()" class="ml-4 btn-primary px-4 py-2 rounded-lg font-bold text-sm transition-all">
-          <i class="fas fa-lock mr-1"></i> Admin
-        </button>
-      </div>
-      <button class="md:hidden text-yellow-400 text-xl" onclick="toggleMobileMenu()">
-        <i class="fas fa-bars"></i>
-      </button>
-    </div>
-    
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="hidden md:hidden bg-black bg-opacity-90 mt-3 py-2 px-4 rounded-lg">
-        <li><a href="index.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Home</a></li>
-        <li><a href="tournaments.html" class="bg-yellow-500 text-black font-bold px-3 py-1 rounded-full hover:bg-yellow-400 transition">Tournaments</a></li>
-        <li><a href="leaderboard.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Leaderboard</a></li>
-        <li><a href="teams.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Teams</a></li>
-        <li><a href="register.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Register</a></li>
-        <li><a href="contact.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">Contact</a></li>
-        <li><a href="about.html" class="hover:text-yellow-400 px-2 py-1 rounded transition">About</a></li>  
-      <button onclick="showAdminLogin()" class="w-full text-left py-2 btn-primary px-4 rounded-lg font-bold mt-2 mb-1">
-        <i class="fas fa-lock mr-2"></i> Admin Login
-      </button>
-    </div>
-  </nav>
-
-  <!-- Main Content -->
-  <main class="relative z-10 max-w-7xl mx-auto px-4 py-8">
-    <!-- Tournament Banner -->
-    <div class="card-glass rounded-xl overflow-hidden mb-8 border border-yellow-500 border-opacity-30">
-      <div class="p-6 md:p-8 flex flex-col md:flex-row items-center">
-        <div class="md:w-2/3 mb-6 md:mb-0">
-          <div class="flex items-center mb-4">
-            <div class="w-3 h-8 bg-yellow-400 mr-3 rounded-full"></div>
-            <h1 class="text-yellow-400 heading-font text-2xl md:text-3xl">FREE FIRE SQUAD BATTLE</h1>
-          </div>
-          
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-            <div class="bg-black bg-opacity-40 p-3 rounded-lg border border-gray-800">
-              <p class="text-gray-400 text-sm">Date</p>
-              <p class="font-bold text-lg" id="tournament-date">18 May 2025</p>
-            </div>
-            <div class="bg-black bg-opacity-40 p-3 rounded-lg border border-gray-800">
-              <p class="text-gray-400 text-sm">Time</p>
-              <p class="font-bold text-lg" id="tournament-time">3:00 PM IST</p>
-            </div>
-            <div class="bg-black bg-opacity-40 p-3 rounded-lg border border-gray-800">
-              <p class="text-gray-400 text-sm">Entry Fee</p>
-              <p class="font-bold text-lg" id="entry-fee">₹400</p>
-            </div>
-            <div class="bg-black bg-opacity-40 p-3 rounded-lg border border-gray-800">
-              <p class="text-gray-400 text-sm">Prize Pool</p>
-              <p class="font-bold text-lg" id="prize-pool">₹2,000</p>
-            </div>
-          </div>
-          
-          <div class="flex flex-wrap gap-3">
-            <span class="px-3 py-1 bg-red-900 bg-opacity-40 text-red-400 rounded-full text-sm"><i class="fas fa-users mr-1"></i> 4v4</span>
-            <span class="px-3 py-1 bg-blue-900 bg-opacity-40 text-blue-400 rounded-full text-sm"><i class="fas fa-map mr-1"></i> Bermuda</span>
-            <span class="px-3 py-1 bg-purple-900 bg-opacity-40 text-purple-400 rounded-full text-sm"><i class="fas fa-stopwatch mr-1"></i> 15 mins</span>
-          </div>
-        </div>
-        
-        <div class="md:w-1/3 w-full">
-          <div class="bg-black bg-opacity-60 p-4 rounded-xl border border-yellow-500 border-opacity-30 text-center">
-            <h3 class="text-yellow-400 heading-font mb-3">REGISTRATION CLOSES IN</h3>
-            <div class="flex justify-center space-x-2 mb-3">
-              <div class="countdown-digit px-3 py-2 rounded-lg">
-                <div class="heading-font text-2xl" id="countdown-days">00</div>
-                <div class="text-xs text-gray-400">DAYS</div>
-              </div>
-              <div class="countdown-digit px-3 py-2 rounded-lg">
-                <div class="heading-font text-2xl" id="countdown-hours">00</div>
-                <div class="text-xs text-gray-400">HRS</div>
-              </div>
-              <div class="countdown-digit px-3 py-2 rounded-lg">
-                <div class="heading-font text-2xl" id="countdown-minutes">00</div>
-                <div class="text-xs text-gray-400">MINS</div>
-              </div>
-              <div class="countdown-digit px-3 py-2 rounded-lg">
-                <div class="heading-font text-2xl" id="countdown-seconds">00</div>
-                <div class="text-xs text-gray-400">SEC</div>
-              </div>
-            </div>
-            <button id="joinButton" class="btn-primary w-full py-3 rounded-lg font-bold mt-2 transition-all">
-              <i class="fas fa-play mr-2"></i> JOIN TOURNAMENT
-            </button>
-            <div id="registrationClosed" class="hidden text-red-400 text-sm mt-2">
-              <i class="fas fa-exclamation-circle mr-1"></i> Registration closed!
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="flex flex-col lg:flex-row gap-8">
-      <!-- Registration Form -->
-      <div class="lg:w-2/3">
-        <div class="card-glass rounded-xl overflow-hidden border border-yellow-500 border-opacity-30">
-          <div class="bg-black bg-opacity-60 p-4 border-b border-yellow-500 border-opacity-20">
-            <h2 class="text-yellow-400 heading-font text-xl flex items-center">
-              <i class="fas fa-user-edit mr-3"></i> PLAYER REGISTRATION
-            </h2>
-          </div>
-          
-          <div class="p-6">
-            <!-- Verified Player Box -->
-            <div id="verifiedPlayerBox" class="hidden verified-player-box p-3 rounded-lg mb-6">
-              <div class="flex items-center">
-                <i class="fas fa-check-circle text-yellow-400 mr-3 text-xl"></i>
-                <div>
-                  <p class="font-bold text-yellow-400" id="verifiedPlayerName">PLAYER_NAME</p>
-                  <p class="text-sm text-gray-300">Your registration is verified and confirmed!</p>
-                </div>
-              </div>
-            </div>
-            
-            <form id="registrationForm" class="space-y-5">
-              <!-- Player Info -->
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label class="block text-gray-400 text-sm font-semibold mb-2">In-Game Name *</label>
-                  <input type="text" id="playerName" class="w-full bg-black bg-opacity-40 border border-gray-800 focus:border-yellow-500 rounded-lg px-4 py-3 focus:outline-none" placeholder="Your FF ID" required>
-                </div>
-                <div>
-                  <label class="block text-gray-400 text-sm font-semibold mb-2">Free Fire UID *</label>
-                  <input type="text" id="playerUID" class="w-full bg-black bg-opacity-40 border border-gray-800 focus:border-yellow-500 rounded-lg px-4 py-3 focus:outline-none" placeholder="1234567890" required>
-                </div>
-              </div>
-              
-              <!-- Contact Info -->
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label class="block text-gray-400 text-sm font-semibold mb-2">WhatsApp Number *</label>
-                  <div class="relative">
-                    <div class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">+91</div>
-                    <input type="tel" id="whatsappNumber" class="w-full bg-black bg-opacity-40 border border-gray-800 focus:border-yellow-500 rounded-lg pl-12 pr-4 py-3 focus:outline-none" placeholder="9876543210" required>
-                  </div>
-                </div>
-                <div>
-                  <label class="block text-gray-400 text-sm font-semibold mb-2">Player Level</label>
-                  <select id="playerLevel" class="w-full bg-black bg-opacity-40 border border-gray-800 focus:border-yellow-500 rounded-lg px-4 py-3 focus:outline-none">
-                    <option value="">Select your level</option>
-                    <option value="bronze">Bronze (1-20)</option>
-                    <option value="silver">Silver (21-40)</option>
-                    <option value="gold">Gold (41-60)</option>
-                    <option value="platinum">Platinum (61-80)</option>
-                    <option value="diamond">Diamond (80+)</option>
-                  </select>
-                </div>
-              </div>
-              
-              <!-- Team Info -->
-              <div>
-                <label class="block text-gray-400 text-sm font-semibold mb-2">Team Name (Optional)</label>
-                <input type="text" id="teamName" class="w-full bg-black bg-opacity-40 border border-gray-800 focus:border-yellow-500 rounded-lg px-4 py-3 focus:outline-none" placeholder="Team Alpha">
-              </div>
-              
-              <!-- Team Logo Upload -->
-              <div>
-                <label class="block text-gray-400 text-sm font-semibold mb-2">Team Logo (Optional)</label>
-                <div class="flex items-center justify-center w-full">
-                  <label class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-yellow-500 border-opacity-30 rounded-lg cursor-pointer bg-black bg-opacity-20 hover:bg-opacity-30 transition">
-                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                      <i class="fas fa-cloud-upload-alt text-yellow-500 text-2xl mb-2 opacity-70"></i>
-                      <p class="text-sm text-gray-400">Upload Team Logo (Max 2MB)</p>
-                    </div>
-                    <input type="file" id="teamLogo" class="hidden" accept="image/*">
-                  </label>
-                </div>
-                <p class="text-xs text-gray-500 mt-1">Supports: JPG, PNG (Max 2MB)</p>
-              </div>
-              
-              <!-- Payment Info -->
-              <div class="pt-4 border-t border-gray-800">
-                <h3 class="text-yellow-400 heading-font text-lg mb-4 flex items-center">
-                  <i class="fas fa-wallet mr-2"></i> PAYMENT DETAILS
-                </h3>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                  <div>
-                    <label class="block text-gray-400 text-sm font-semibold mb-2">Payment Method *</label>
-                    <select id="paymentMethod" class="w-full bg-black bg-opacity-40 border border-gray-800 focus:border-yellow-500 rounded-lg px-4 py-3 focus:outline-none" required>
-                      <option value="">Select method</option>
-                      <option value="upi">UPI (GPay/PhonePe/PayTM)</option>
-                      <option value="paypal">PayPal</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label class="block text-gray-400 text-sm font-semibold mb-2">Transaction ID *</label>
-                    <input type="text" id="transactionId" class="w-full bg-black bg-opacity-40 border border-gray-800 focus:border-yellow-500 rounded-lg px-4 py-3 focus:outline-none" placeholder="Enter payment ID" required>
-                  </div>
-                </div>
-                
-                <div class="bg-black bg-opacity-30 rounded-lg p-3 border border-yellow-500 border-opacity-20">
-                  <p class="text-sm text-gray-300 mb-2"><i class="fas fa-info-circle text-yellow-400 mr-2"></i> Contact us for payment details:</p>
-                  <ul class="text-xs text-gray-400 space-y-1">
-                    <li><i class="fab fa-whatsapp text-green-400 mr-1"></i> Mail: firevillage.in@gmail.com</li>
-                    <li><i class="fab fa-instagram text-pink-400 mr-1"></i> Instagram: @firevillage.in </li>
-                    <li><i class="fas fa-phone text-blue-400 mr-1"></i> Telegram: @firevillageINbot</li>
-                  </ul>
-                </div>
-              </div>
-              
-              <!-- Submit Button -->
-              <button type="submit" class="btn-primary w-full py-4 rounded-lg font-bold text-lg mt-6 transition-all">
-                <i class="fas fa-paper-plane mr-2"></i> COMPLETE REGISTRATION
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Tournament Details -->
-      <div class="lg:w-1/3 space-y-6">
-        <!-- Rules Card -->
-        <div class="card-glass rounded-xl overflow-hidden border border-yellow-500 border-opacity-30">
-          <div class="bg-black bg-opacity-60 p-4 border-b border-yellow-500 border-opacity-20">
-            <h2 class="text-yellow-400 heading-font text-xl flex items-center">
-              <i class="fas fa-gavel mr-3"></i> TOURNAMENT RULES
-            </h2>
-          </div>
-          <div class="p-6">
-            <ul class="space-y-3">
-              <li class="flex items-start">
-                <div class="team-badge w-6 h-6 flex items-center justify-center text-yellow-400 mr-3 flex-shrink-0">
-                  <i class="fas fa-check text-xs"></i>
-                </div>
-                <span class="text-sm">No emulators - Mobile devices only</span>
-              </li>
-              <li class="flex items-start">
-                <div class="team-badge w-6 h-6 flex items-center justify-center text-yellow-400 mr-3 flex-shrink-0">
-                  <i class="fas fa-check text-xs"></i>
-                </div>
-                <span class="text-sm">No hacking/cheating - Instant ban</span>
-              </li>
-              <li class="flex items-start">
-                <div class="team-badge w-6 h-6 flex items-center justify-center text-yellow-400 mr-3 flex-shrink-0">
-                  <i class="fas fa-check text-xs"></i>
-                </div>
-                <span class="text-sm">Arrive 15 mins before match time</span>
-              </li>
-              <li class="flex items-start">
-                <div class="team-badge w-6 h-6 flex items-center justify-center text-yellow-400 mr-3 flex-shrink-0">
-                  <i class="fas fa-check text-xs"></i>
-                </div>
-                <span class="text-sm">No refunds after registration</span>
-              </li>
-              <li class="flex items-start">
-                <div class="team-badge w-6 h-6 flex items-center justify-center text-yellow-400 mr-3 flex-shrink-0">
-                  <i class="fas fa-check text-xs"></i>
-                </div>
-                <span class="text-sm">Organizer decisions are final</span>
-              </li>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">FIRE VILLAGE</div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="tournaments.html">Tournaments</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+                <li><a href="teams.html">Teams</a></li>
+                <li><a href="register.html" class="active">Register</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="about.html">About</a></li>
             </ul>
-          </div>
         </div>
-        
-        <!-- Prize Pool Card -->
-        <div class="card-glass rounded-xl overflow-hidden border border-yellow-500 border-opacity-30">
-          <div class="bg-black bg-opacity-60 p-4 border-b border-yellow-500 border-opacity-20">
-            <h2 class="text-yellow-400 heading-font text-xl flex items-center">
-              <i class="fas fa-coins mr-3"></i> PRIZE POOL
-            </h2>
-          </div>
-          <div class="p-6">
-            <div class="space-y-3">
-              <div class="flex justify-between items-center p-3 bg-black bg-opacity-30 rounded-lg border border-yellow-500 border-opacity-20">
-                <div class="flex items-center">
-                  <div class="team-badge w-8 h-8 flex items-center justify-center bg-yellow-500 text-black font-bold mr-3">1</div>
-                  <span>1st Place</span>
-                </div>
-                <span class="font-bold text-yellow-400">₹1,200</span>
-              </div>
-              <div class="flex justify-between items-center p-3 bg-black bg-opacity-30 rounded-lg border border-gray-800">
-                <div class="flex items-center">
-                  <div class="team-badge w-8 h-8 flex items-center justify-center bg-gray-500 text-white font-bold mr-3">2</div>
-                  <span>2nd Place</span>
-                </div>
-                <span class="font-bold">₹600</span>
-              </div>
+    </header>
+    
+    <div class="container">
+        <div class="registration-container">
+            <h1 class="registration-title">Tournament Registration</h1>
             
-            <div class="mt-4 bg-black bg-opacity-40 rounded-lg p-3 border border-yellow-500 border-opacity-20">
-              <p class="text-yellow-400 text-sm font-semibold mb-1"><i class="fas fa-star mr-1"></i> BONUS PRIZES</p>
-              <p class="text-xs text-gray-300">MVP: ₹100</p>
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="playerName">Player Name</label>
+                    <input type="text" id="playerName" class="form-control" required placeholder="Enter your in-game name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="playerId">Free Fire ID</label>
+                    <div class="gamer-id">
+                        <select id="playerRegion" class="form-control" required>
+                            <option value="" disabled selected>Region</option>
+                            <option value="IND">IND</option>
+                            <option value="EUR">EUR</option>
+                            <option value="NA">NA</option>
+                            <option value="ME">ME</option>
+                            <option value="SA">SA</option>
+                            <option value="SEA">SEA</option>
+                            <option value="MENA">MENA</option>
+                        </select>
+                        <input type="text" id="playerId" class="form-control" required placeholder="Enter your Free Fire ID">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="playerLevel">Free Fire Level</label>
+                    <input type="number" id="playerLevel" class="form-control" required placeholder="Enter your current level">
+                </div>
+                
+                <div class="form-group">
+                    <label for="playerRank">Current Rank</label>
+                    <select id="playerRank" class="form-control" required>
+                        <option value="" disabled selected>Select your rank</option>
+                        <option value="Bronze">Bronze</option>
+                        <option value="Silver">Silver</option>
+                        <option value="Gold">Gold</option>
+                        <option value="Platinum">Platinum</option>
+                        <option value="Diamond">Diamond</option>
+                        <option value="Heroic">Heroic</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="playerEmail">Email Address</label>
+                    <input type="email" id="playerEmail" class="form-control" required placeholder="Enter your email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="playerPhone">WhatsApp Number (Optional)</label>
+                    <input type="tel" id="playerPhone" class="form-control" placeholder="Enter WhatsApp number for updates">
+                </div>
+                
+                <div class="form-group">
+                    <label for="playerTelegram">Telegram Username</label>
+                    <input type="text" id="playerTelegram" class="form-control" required placeholder="@username">
+                </div>
+                
+                <div class="form-group">
+                    <label for="paymentMethod">Payment Method</label>
+                    <select id="paymentMethod" class="form-control" required>
+                        <option value="" disabled selected>Select payment method</option>
+                        <option value="Google Pay">Google Pay</option>
+                        <option value="Paytm">Paytm</option>
+                        <option value="PhonePe">PhonePe</option>
+                        <option value="Bank Transfer">Bank Transfer</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="paymentDetails">Payment Details (Transaction ID/UPI ID)</label>
+                    <input type="text" id="paymentDetails" class="form-control" required placeholder="Enter transaction details">
+                </div>
+                
+                <button type="submit" class="btn btn-block">Register Now</button>
+            </form>
+            
+            <div class="payment-methods">
+                <h3>Payment Information</h3>
+                <p>Please complete your payment and provide the details above. Contact us if you have any issues:</p>
+                <ul>
+                    <li>Mail: firevillage.in@gmail.com</li>
+                    <li>Instagram: @firevillage.in</li>
+                    <li>Telegram: @firevillageINbot</li>
+                </ul>
             </div>
-          </div>
         </div>
-        
-        <!-- How to Play Card -->
-        <div class="card-glass rounded-xl overflow-hidden border border-yellow-500 border-opacity-30">
-          <div class="bg-black bg-opacity-60 p-4 border-b border-yellow-500 border-opacity-20">
-            <h2 class="text-yellow-400 heading-font text-xl flex items-center">
-              <i class="fas fa-gamepad mr-3"></i> HOW TO PLAY
-            </h2>
-          </div>
-          <div class="p-6">
-            <ol class="space-y-3 text-sm">
-              <li class="flex items-start">
-                <span class="text-yellow-400 font-bold mr-2">1.</span>
-                <span>Complete registration & payment</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-yellow-400 font-bold mr-2">2.</span>
-                <span>Join our WhatsApp group for updates</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-yellow-400 font-bold mr-2">3.</span>
-                <span>Room ID/password shared 30 mins before match</span>
-              </li>
-              <li class="flex items-start">
-                <span class="text-yellow-400 font-bold mr-2">4.</span>
-                <span>Top 2 teams win prizes</span>
-              </li>
-            </ol>
-          </div>
-        </div>
-      </div>
     </div>
-  </main>
-
-  <!-- Footer -->
-  <footer class="relative z-10 bg-black bg-opacity-80 mt-12 py-8 px-4 border-t border-yellow-500 border-opacity-20">
-    <div class="max-w-7xl mx-auto">
-      <div class="flex flex-col md:flex-row justify-between items-center">
-        <div class="mb-6 md:mb-0">
-          <div class="flex items-center">
-            <img src="./assets/logo.png" alt="Fire Village Logo" class="h-10 sm:h-12 w-auto" loading="lazy">
-            <span class="ml-3 text-yellow-400 heading-font text-xl tracking-wider">FIRE VILLAGE</span>
-          </div>
-          <p class="text-gray-500 text-sm mt-2">India's most competitive Free Fire tournament platform</p>
-        </div>
-        
-        <div class="flex space-x-6">
-          <a href="#" class="text-gray-500 hover:text-yellow-400 transition text-xl">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a href="#" class="text-gray-500 hover:text-yellow-400 transition text-xl">
-            <i class="fab fa-youtube"></i>
-          </a>
-          <a href="#" class="text-gray-500 hover:text-yellow-400 transition text-xl">
-            <i class="fab fa-discord"></i>
-          </a>
-          <a href="#" class="text-gray-500 hover:text-yellow-400 transition text-xl">
-            <i class="fab fa-whatsapp"></i>
-          </a>
-        </div>
-      </div>
-      
-      <div class="border-t border-gray-800 mt-8 pt-6 text-center text-gray-600 text-sm">
-        <p>&copy; 2023 Fire Village Tournaments. Not affiliated with Garena.</p>
-      </div>
+    
+    <div class="footer">
+        &copy; 2023 Fire Village Tournaments. All rights reserved.
     </div>
-  </footer>
-
-  <!-- Admin Login Modal -->
-  <div id="adminLoginModal" class="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center hidden">
-    <div class="bg-gray-900 border-2 border-yellow-500 rounded-xl p-8 max-w-md w-full mx-4">
-      <div class="flex justify-center mb-6">
-        <div class="bg-yellow-500 p-3 rounded-full">
-          <i class="fas fa-lock text-2xl text-black"></i>
-        </div>
-      </div>
-      
-      <h2 class="text-yellow-400 heading-font text-2xl text-center mb-6">ADMIN ACCESS</h2>
-      
-      <div class="space-y-4">
-        <div>
-          <label class="block text-gray-400 text-sm font-semibold mb-2">Username</label>
-          <input type="text" id="adminUsername" class="w-full bg-gray-800 border border-gray-700 focus:border-yellow-500 rounded-lg px-4 py-3 focus:outline-none" placeholder="Enter admin username" value="aauAAU" readonly>
-        </div>
-        <div>
-          <label class="block text-gray-400 text-sm font-semibold mb-2">Password</label>
-          <input type="password" id="adminPassword" class="w-full bg-gray-800 border border-gray-700 focus:border-yellow-500 rounded-lg px-4 py-3 focus:outline-none" placeholder="Enter admin password">
-        </div>
-        
-        <button onclick="checkAdminLogin()" class="btn-primary w-full py-3 rounded-lg font-bold mt-4">
-          <i class="fas fa-sign-in-alt mr-2"></i> LOGIN
-        </button>
-        
-        <div id="adminError" class="text-red-400 text-sm text-center mt-2 hidden">
-          <i class="fas fa-exclamation-circle mr-1"></i> Incorrect password!
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Admin Dashboard Modal -->
-  <div id="adminDashboard" class="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center hidden">
-    <div class="bg-gray-900 border-2 border-yellow-500 rounded-xl p-6 max-w-6xl w-full mx-4 max-h-[90vh] overflow-y-auto">
-      <div class="flex justify-between items-center mb-6">
-        <h2 class="text-yellow-400 heading-font text-2xl flex items-center">
-          <i class="fas fa-user-shield mr-3"></i> ADMIN DASHBOARD (<span id="currentAdminName"></span>)
-        </h2>
-        <button onclick="hideAdminDashboard()" class="text-gray-400 hover:text-yellow-400 text-xl">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-        <div class="bg-black bg-opacity-40 p-4 rounded-lg border border-yellow-500 border-opacity-30">
-          <h3 class="text-yellow-400 heading-font text-lg mb-2">Total Registrations</h3>
-          <p class="text-3xl font-bold" id="totalRegistrations">0</p>
-        </div>
-        <div class="bg-black bg-opacity-40 p-4 rounded-lg border border-yellow-500 border-opacity-30">
-          <h3 class="text-yellow-400 heading-font text-lg mb-2">Verified Players</h3>
-          <p class="text-3xl font-bold" id="verifiedPlayers">0</p>
-        </div>
-        <div class="bg-black bg-opacity-40 p-4 rounded-lg border border-yellow-500 border-opacity-30">
-          <h3 class="text-yellow-400 heading-font text-lg mb-2">Pending Players</h3>
-          <p class="text-3xl font-bold" id="pendingPlayers">0</p>
-        </div>
-        <div class="bg-black bg-opacity-40 p-4 rounded-lg border border-yellow-500 border-opacity-30">
-          <h3 class="text-yellow-400 heading-font text-lg mb-2">Total Payments</h3>
-          <p class="text-3xl font-bold">₹<span id="totalPayments">0</span></p>
-        </div>
-      </div>
-      
-      <!-- Search and Bulk Actions -->
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-        <div class="relative w-full md:w-1/2">
-          <input type="text" id="adminSearch" class="w-full bg-black bg-opacity-40 border border-gray-800 rounded-lg pl-10 pr-4 py-2 focus:border-yellow-500 focus:outline-none" placeholder="Search players..." oninput="searchPlayers()">
-          <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
-        </div>
-        
-        <div class="flex flex-wrap gap-2 w-full md:w-auto">
-          <button onclick="verifySelectedPlayers()" class="px-3 py-2 bg-green-600 hover:bg-green-500 rounded-lg text-sm">
-            <i class="fas fa-check mr-1"></i> Verify Selected
-          </button>
-          <button onclick="messageSelectedPlayers()" class="px-3 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-sm">
-            <i class="fas fa-envelope mr-1"></i> Message Selected
-          </button>
-          <button onclick="deleteSelectedPlayers()" class="px-3 py-2 bg-red-600 hover:bg-red-500 rounded-lg text-sm">
-            <i class="fas fa-trash mr-1"></i> Delete Selected
-          </button>
-          <button onclick="exportRegistrations()" class="px-3 py-2 bg-purple-600 hover:bg-purple-500 rounded-lg text-sm">
-            <i class="fas fa-download mr-1"></i> Export Data
-          </button>
-        </div>
-      </div>
-      
-      <!-- Tournament Settings -->
-      <div class="bg-black bg-opacity-40 rounded-lg p-4 mb-6 border border-yellow-500 border-opacity-30">
-        <h3 class="text-yellow-400 heading-font text-lg mb-3 flex items-center">
-          <i class="fas fa-cog mr-2"></i> TOURNAMENT SETTINGS
-        </h3>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-gray-400 text-sm font-semibold mb-2">Tournament Date</label>
-            <input type="date" id="adminTournamentDate" class="w-full bg-black bg-opacity-40 border border-gray-800 focus:border-yellow-500 rounded-lg px-4 py-2 focus:outline-none">
-          </div>
-          <div>
-            <label class="block text-gray-400 text-sm font-semibold mb-2">Tournament Time</label>
-            <input type="time" id="adminTournamentTime" class="w-full bg-black bg-opacity-40 border border-gray-800 focus:border-yellow-500 rounded-lg px-4 py-2 focus:outline-none">
-          </div>
-          <div>
-            <label class="block text-gray-400 text-sm font-semibold mb-2">Entry Fee (₹)</label>
-            <input type="number" id="adminEntryFee" class="w-full bg-black bg-opacity-40 border border-gray-800 focus:border-yellow-500 rounded-lg px-4 py-2 focus:outline-none">
-          </div>
-          <div>
-            <label class="block text-gray-400 text-sm font-semibold mb-2">Prize Pool (₹)</label>
-            <input type="number" id="adminPrizePool" class="w-full bg-black bg-opacity-40 border border-gray-800 focus:border-yellow-500 rounded-lg px-4 py-2 focus:outline-none">
-          </div>
-        </div>
-        
-        <button onclick="saveTournamentSettings()" class="btn-primary px-4 py-2 rounded-lg font-bold mt-4">
-          <i class="fas fa-save mr-2"></i> Save Settings
-        </button>
-      </div>
-      
-      <!-- Player Management -->
-      <div class="mb-6">
-        <h3 class="text-yellow-400 heading-font text-lg mb-3">Player Management</h3>
-        <div class="bg-black bg-opacity-40 rounded-lg overflow-hidden border border-gray-800">
-          <div class="overflow-x-auto">
-            <table class="w-full">
-              <thead class="bg-black bg-opacity-60">
-                <tr>
-                  <th class="px-4 py-3 text-left text-sm text-yellow-400 w-8">
-                    <input type="checkbox" id="selectAllPlayers" onclick="toggleSelectAll()">
-                  </th>
-                  <th class="px-4 py-3 text-left text-sm text-yellow-400">Player Name</th>
-                  <th class="px-4 py-3 text-left text-sm text-yellow-400">UID</th>
-                  <th class="px-4 py-3 text-left text-sm text-yellow-400">WhatsApp</th>
-                  <th class="px-4 py-3 text-left text-sm text-yellow-400">Team</th>
-                  <th class="px-4 py-3 text-left text-sm text-yellow-400">Status</th>
-                  <th class="px-4 py-3 text-left text-sm text-yellow-400">Actions</th>
-                </tr>
-              </thead>
-              <tbody id="playersList" class="divide-y divide-gray-800">
-                <!-- Players will be added here dynamically -->
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Edit Player Modal -->
-  <div id="editPlayerModal" class="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center hidden">
-    <div class="bg-gray-900 border-2 border-yellow-500 rounded-xl p-6 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
-      <div class="flex justify-between items-center mb-6">
-        <h2 class="text-yellow-400 heading-font text-xl flex items-center">
-          <i class="fas fa-user-edit mr-3"></i> EDIT PLAYER
-        </h2>
-        <button onclick="hideEditPlayerModal()" class="text-gray-400 hover:text-yellow-400 text-xl">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-        <div>
-          <label class="block text-gray-400 text-sm font-semibold mb-2">Player Name</label>
-          <input type="text" id="editPlayerName" class="w-full bg-black bg-opacity-40 border border-gray-800 rounded-lg px-4 py-2 focus:border-yellow-500 focus:outline-none">
-        </div>
-        <div>
-          <label class="block text-gray-400 text-sm font-semibold mb-2">Free Fire UID</label>
-          <input type="text" id="editPlayerUID" class="w-full bg-black bg-opacity-40 border border-gray-800 rounded-lg px-4 py-2 focus:border-yellow-500 focus:outline-none">
-        </div>
-        <div>
-          <label class="block text-gray-400 text-sm font-semibold mb-2">WhatsApp Number</label>
-          <input type="text" id="editWhatsappNumber" class="w-full bg-black bg-opacity-40 border border-gray-800 rounded-lg px-4 py-2 focus:border-yellow-500 focus:outline-none">
-        </div>
-        <div>
-          <label class="block text-gray-400 text-sm font-semibold mb-2">Player Level</label>
-          <select id="editPlayerLevel" class="w-full bg-black bg-opacity-40 border border-gray-800 rounded-lg px-4 py-2 focus:border-yellow-500 focus:outline-none">
-            <option value="bronze">Bronze</option>
-            <option value="silver">Silver</option>
-            <option value="gold">Gold</option>
-            <option value="platinum">Platinum</option>
-            <option value="diamond">Diamond</option>
-          </select>
-        </div>
-        <div>
-          <label class="block text-gray-400 text-sm font-semibold mb-2">Team Name</label>
-          <input type="text" id="editTeamName" class="w-full bg-black bg-opacity-40 border border-gray-800 rounded-lg px-4 py-2 focus:border-yellow-500 focus:outline-none">
-        </div>
-        <div>
-          <label class="block text-gray-400 text-sm font-semibold mb-2">Payment Method</label>
-          <select id="editPaymentMethod" class="w-full bg-black bg-opacity-40 border border-gray-800 rounded-lg px-4 py-2 focus:border-yellow-500 focus:outline-none">
-            <option value="upi">UPI</option>
-            <option value="paypal">PayPal</option>
-          </select>
-        </div>
-        <div class="md:col-span-2">
-          <label class="block text-gray-400 text-sm font-semibold mb-2">Transaction ID</label>
-          <input type="text" id="editTransactionId" class="w-full bg-black bg-opacity-40 border border-gray-800 rounded-lg px-4 py-2 focus:border-yellow-500 focus:outline-none">
-        </div>
-      </div>
-      
-      <div class="flex justify-end space-x-3">
-        <button onclick="hideEditPlayerModal()" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg font-semibold">
-          Cancel
-        </button>
-        <button onclick="savePlayerEdits()" class="px-4 py-2 bg-green-600 hover:bg-green-500 rounded-lg font-semibold">
-          <i class="fas fa-save mr-2"></i> Save Changes
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Message Player Modal -->
-  <div id="messagePlayerModal" class="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center hidden">
-    <div class="bg-gray-900 border-2 border-yellow-500 rounded-xl p-6 max-w-md w-full mx-4">
-      <div class="flex justify-between items-center mb-4">
-        <h3 class="text-yellow-400 heading-font text-xl">SEND MESSAGE</h3>
-        <button onclick="hideMessagePlayerModal()" class="text-gray-400 hover:text-yellow-400 text-xl">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-      
-      <div class="mb-4">
-        <p class="text-gray-300">Recipients: <span id="messageRecipientsCount" class="font-bold">0</span> players</p>
-      </div>
-      
-      <div class="mb-4">
-        <label class="block text-gray-400 text-sm font-semibold mb-2">Message Type</label>
-        <select id="messageType" class="w-full bg-black bg-opacity-40 border border-gray-800 rounded-lg px-4 py-2 focus:border-yellow-500 focus:outline-none">
-          <option value="verification">Verification Approved</option>
-          <option value="room_details">Room ID & Password</option>
-          <option value="custom">Custom Message</option>
-        </select>
-      </div>
-      
-      <div id="roomDetailsSection" class="mb-4">
-        <div class="grid grid-cols-2 gap-2">
-          <div>
-            <label class="block text-gray-400 text-sm font-semibold mb-1">Room ID</label>
-            <input type="text" id="roomId" class="w-full bg-black bg-opacity-40 border border-gray-800 rounded-lg px-3 py-2">
-          </div>
-          <div>
-            <label class="block text-gray-400 text-sm font-semibold mb-1">Password</label>
-            <input type="text" id="roomPassword" class="w-full bg-black bg-opacity-40 border border-gray-800 rounded-lg px-3 py-2">
-          </div>
-        </div>
-        <div class="mt-2">
-          <label class="block text-gray-400 text-sm font-semibold mb-1">Match Time</label>
-          <input type="text" id="matchTime" class="w-full bg-black bg-opacity-40 border border-gray-800 rounded-lg px-3 py-2" placeholder="e.g. 3:00 PM IST">
-        </div>
-      </div>
-      
-      <div id="customMessageSection" class="mb-4 hidden">
-        <label class="block text-gray-400 text-sm font-semibold mb-1">Custom Message</label>
-        <textarea id="customMessage" class="w-full bg-black bg-opacity-40 border border-gray-800 rounded-lg px-3 py-2 h-24"></textarea>
-      </div>
-      
-      <button onclick="sendPlayerMessage()" class="btn-primary w-full py-3 rounded-lg font-bold">
-        <i class="fas fa-paper-plane mr-2"></i> SEND MESSAGE
-      </button>
-      
-      <div id="messageSentAlert" class="hidden mt-3 p-2 bg-green-900 bg-opacity-40 text-green-400 rounded text-sm text-center">
-        <i class="fas fa-check-circle mr-1"></i> Message sent successfully!
-      </div>
-    </div>
-  </div>
-
-  <!-- Success Modal -->
-  <div id="successModal" class="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center hidden">
-    <div class="bg-gray-900 border-2 border-green-500 rounded-xl p-8 max-w-md w-full mx-4 text-center">
-      <div class="flex justify-center mb-6">
-        <div class="bg-green-500 p-3 rounded-full">
-          <i class="fas fa-check text-2xl text-black"></i>
-        </div>
-      </div>
-      
-      <h2 class="text-green-400 heading-font text-2xl mb-4">REGISTRATION SUCCESSFUL!</h2>
-      <p class="text-gray-300 mb-6" id="successMessage">Thank you for registering. Our team will contact you shortly for verification.</p>
-      
-      <button onclick="hideSuccessModal()" class="btn-primary px-6 py-2 rounded-lg font-bold">
-        Continue
-      </button>
-    </div>
-  </div>
-
-  <script>
-    // SINGLE ADMIN CREDENTIALS
-    const ADMIN_USERNAME = "aauAAU";
-    const ADMIN_PASSWORD = "2580aauFVT";
     
-    // Current admin session
-    let isAdminLoggedIn = false;
-    let registrations = JSON.parse(localStorage.getItem('registrations')) || [];
-    let tournamentSettings = JSON.parse(localStorage.getItem('tournamentSettings')) || {
-      date: "2025-05-18",
-      time: "15:00",
-      entryFee: "400",
-      prizePool: "2000"
-    };
-    
-    // Initialize tournament settings
-    function initTournamentSettings() {
-      document.getElementById('tournament-date').textContent = formatDate(tournamentSettings.date);
-      document.getElementById('tournament-time').textContent = formatTime(tournamentSettings.time);
-      document.getElementById('entry-fee').textContent = `₹${tournamentSettings.entryFee}`;
-      document.getElementById('prize-pool').textContent = `₹${tournamentSettings.prizePool}`;
-      
-      // Set admin panel values
-      document.getElementById('adminTournamentDate').value = tournamentSettings.date;
-      document.getElementById('adminTournamentTime').value = tournamentSettings.time;
-      document.getElementById('adminEntryFee').value = tournamentSettings.entryFee;
-      document.getElementById('adminPrizePool').value = tournamentSettings.prizePool;
-    }
-    
-    function formatDate(dateString) {
-      const options = { day: 'numeric', month: 'long', year: 'numeric' };
-      return new Date(dateString).toLocaleDateString('en-US', options);
-    }
-    
-    function formatTime(timeString) {
-      const [hours, minutes] = timeString.split(':');
-      const period = hours >= 12 ? 'PM' : 'AM';
-      const hours12 = hours % 12 || 12;
-      return `${hours12}:${minutes} ${period} IST`;
-    }
-    
-    // Save tournament settings
-    function saveTournamentSettings() {
-      tournamentSettings = {
-        date: document.getElementById('adminTournamentDate').value,
-        time: document.getElementById('adminTournamentTime').value,
-        entryFee: document.getElementById('adminEntryFee').value,
-        prizePool: document.getElementById('adminPrizePool').value
-      };
-      
-      localStorage.setItem('tournamentSettings', JSON.stringify(tournamentSettings));
-      initTournamentSettings();
-      alert('Tournament settings saved successfully!');
-    }
-    
-    // Countdown Timer
-    function updateCountdown() {
-      const endDate = new Date(`${tournamentSettings.date}T${tournamentSettings.time}:00`).getTime();
-      const now = new Date().getTime();
-      const distance = endDate - now;
-      
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      
-      document.getElementById("countdown-days").innerHTML = days.toString().padStart(2, "0");
-      document.getElementById("countdown-hours").innerHTML = hours.toString().padStart(2, "0");
-      document.getElementById("countdown-minutes").innerHTML = minutes.toString().padStart(2, "0");
-      document.getElementById("countdown-seconds").innerHTML = seconds.toString().padStart(2, "0");
-      
-      // Update join button status
-      const joinButton = document.getElementById('joinButton');
-      const registrationClosed = document.getElementById('registrationClosed');
-      
-      if (distance < 0) {
-        joinButton.disabled = true;
-        joinButton.classList.remove('btn-primary');
-        joinButton.classList.add('bg-gray-600', 'cursor-not-allowed');
-        registrationClosed.classList.remove('hidden');
-      } else {
-        joinButton.disabled = false;
-        joinButton.classList.add('btn-primary');
-        joinButton.classList.remove('bg-gray-600', 'cursor-not-allowed');
-        registrationClosed.classList.add('hidden');
-      }
-    }
-    
-    const countdownTimer = setInterval(updateCountdown, 1000);
-    
-    // Check for verified player
-    function checkVerifiedPlayer() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const verifiedPlayer = urlParams.get('verified');
-      
-      if (verifiedPlayer) {
-        const verifiedBox = document.getElementById('verifiedPlayerBox');
-        const verifiedName = document.getElementById('verifiedPlayerName');
-        
-        verifiedBox.classList.remove('hidden');
-        verifiedName.textContent = verifiedPlayer;
-        
-        // Mark as verified in local storage
-        registrations = registrations.map(reg => {
-          if (reg.playerName === verifiedPlayer) {
-            return {...reg, verified: true};
-          }
-          return reg;
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const playerName = document.getElementById('playerName').value;
+            const playerRegion = document.getElementById('playerRegion').value;
+            const playerId = document.getElementById('playerId').value;
+            const playerLevel = document.getElementById('playerLevel').value;
+            const playerRank = document.getElementById('playerRank').value;
+            const playerEmail = document.getElementById('playerEmail').value;
+            const playerPhone = document.getElementById('playerPhone').value;
+            const playerTelegram = document.getElementById('playerTelegram').value;
+            const paymentMethod = document.getElementById('paymentMethod').value;
+            const paymentDetails = document.getElementById('paymentDetails').value;
+            
+            // Create player object
+            const playerData = {
+                name: playerName,
+                ffid: `${playerRegion}-${playerId}`,
+                level: playerLevel,
+                rank: playerRank,
+                email: playerEmail,
+                phone: playerPhone || 'Not provided',
+                telegram: playerTelegram,
+                paymentMethod: paymentMethod,
+                paymentDetails: paymentDetails,
+                registrationDate: new Date().toISOString(),
+                verified: false
+            };
+            
+            // Send data to server
+            fetch('https://your-server-endpoint.com/api/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(playerData),
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Registration successful! We will contact you soon.');
+                document.getElementById('registrationForm').reset();
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('Registration failed. Please try again or contact us.');
+            });
         });
-        localStorage.setItem('registrations', JSON.stringify(registrations));
-      }
-    }
-    
-    // Admin Functions
-    function showAdminLogin() {
-      document.getElementById('adminLoginModal').classList.remove('hidden');
-      document.getElementById('adminPassword').focus();
-    }
-    
-    function hideAdminLogin() {
-      document.getElementById('adminLoginModal').classList.add('hidden');
-      document.getElementById('adminPassword').value = '';
-      document.getElementById('adminError').classList.add('hidden');
-    }
-    
-    function checkAdminLogin() {
-      const username = document.getElementById('adminUsername').value;
-      const password = document.getElementById('adminPassword').value;
-      const errorElement = document.getElementById('adminError');
-      
-      if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
-        isAdminLoggedIn = true;
-        hideAdminLogin();
-        showAdminDashboard();
-        
-        // Refresh data every 5 seconds to get new registrations
-        setInterval(refreshRegistrationData, 5000);
-      } else {
-        errorElement.classList.remove('hidden');
-        setTimeout(() => errorElement.classList.add('hidden'), 3000);
-      }
-    }
-    
-    function showAdminDashboard() {
-      document.getElementById('currentAdminName').textContent = ADMIN_USERNAME;
-      
-      // Update stats
-      document.getElementById('totalRegistrations').textContent = registrations.length;
-      document.getElementById('verifiedPlayers').textContent = registrations.filter(r => r.verified).length;
-      document.getElementById('pendingPlayers').textContent = registrations.filter(r => !r.verified).length;
-      document.getElementById('totalPayments').textContent = registrations.length * tournamentSettings.entryFee;
-      
-      // Populate players list
-      refreshPlayersList();
-      
-      document.getElementById('adminDashboard').classList.remove('hidden');
-    }
-    
-    function hideAdminDashboard() {
-      document.getElementById('adminDashboard').classList.add('hidden');
-      isAdminLoggedIn = false;
-    }
-    
-    function refreshPlayersList(filter = '') {
-      const playersList = document.getElementById('playersList');
-      playersList.innerHTML = '';
-      
-      const filteredRegistrations = registrations.filter(reg => 
-        reg.playerName.toLowerCase().includes(filter.toLowerCase()) || 
-        reg.playerUID.includes(filter) ||
-        reg.whatsappNumber.includes(filter) ||
-        (reg.teamName && reg.teamName.toLowerCase().includes(filter.toLowerCase()))
-      );
-      
-      filteredRegistrations.forEach((player, index) => {
-        const row = document.createElement('tr');
-        row.className = index % 2 === 0 ? 'admin-row-even' : 'admin-row-odd';
-        
-        row.innerHTML = `
-          <td class="px-4 py-3">
-            <input type="checkbox" class="player-checkbox" data-player="${player.playerName}">
-          </td>
-          <td class="px-4 py-3">${player.playerName}</td>
-          <td class="px-4 py-3">${player.playerUID}</td>
-          <td class="px-4 py-3">${player.whatsappNumber}</td>
-          <td class="px-4 py-3">${player.teamName || '-'}</td>
-          <td class="px-4 py-3">
-            ${player.verified ? 
-              '<span class="px-2 py-1 bg-green-900 bg-opacity-40 text-green-400 rounded-full text-xs">Verified</span>' : 
-              '<span class="px-2 py-1 bg-yellow-900 bg-opacity-40 text-yellow-400 rounded-full text-xs">Pending</span>'}
-          </td>
-          <td class="px-4 py-3">
-            <div class="flex flex-wrap gap-1">
-              <button onclick="editPlayer('${player.playerName}')" class="px-2 py-1 bg-blue-600 hover:bg-blue-500 rounded text-xs">
-                <i class="fas fa-edit mr-1"></i> Edit
-              </button>
-              ${!player.verified ? 
-                `<button onclick="verifyPlayer('${player.playerName}')" class="px-2 py-1 bg-green-600 hover:bg-green-500 rounded text-xs">
-                  <i class="fas fa-check mr-1"></i> Verify
-                </button>` : ''}
-              <button onclick="messagePlayer('${player.playerName}', '${player.whatsappNumber}')" class="px-2 py-1 bg-purple-600 hover:bg-purple-500 rounded text-xs">
-                <i class="fas fa-envelope mr-1"></i> Message
-              </button>
-              <button onclick="deletePlayer('${player.playerName}')" class="px-2 py-1 bg-red-600 hover:bg-red-500 rounded text-xs">
-                <i class="fas fa-trash mr-1"></i> Delete
-              </button>
-            </div>
-          </td>
-        `;
-        
-        playersList.appendChild(row);
-      });
-      
-      // Update select all checkbox
-      document.getElementById('selectAllPlayers').checked = false;
-    }
-    
-    function toggleSelectAll() {
-      const checkboxes = document.querySelectorAll('.player-checkbox');
-      const selectAll = document.getElementById('selectAllPlayers').checked;
-      
-      checkboxes.forEach(checkbox => {
-        checkbox.checked = selectAll;
-      });
-    }
-    
-    function verifyPlayer(playerName, showAlert = true) {
-      registrations = registrations.map(reg => {
-        if (reg.playerName === playerName) {
-          return {...reg, verified: true};
-        }
-        return reg;
-      });
-      localStorage.setItem('registrations', JSON.stringify(registrations));
-      showAdminDashboard();
-      if (showAlert) alert(`${playerName} has been verified!`);
-    }
-    
-    function deletePlayer(playerName) {
-      if (confirm(`Are you sure you want to delete ${playerName}'s registration?`)) {
-        registrations = registrations.filter(reg => reg.playerName !== playerName);
-        localStorage.setItem('registrations', JSON.stringify(registrations));
-        showAdminDashboard();
-        alert(`${playerName} has been deleted!`);
-      }
-    }
-    
-    function editPlayer(playerName) {
-      const player = registrations.find(p => p.playerName === playerName);
-      if (!player) return;
-      
-      // Show edit modal with player data
-      document.getElementById('editPlayerName').value = player.playerName;
-      document.getElementById('editPlayerUID').value = player.playerUID;
-      document.getElementById('editWhatsappNumber').value = player.whatsappNumber;
-      document.getElementById('editPlayerLevel').value = player.playerLevel || 'bronze';
-      document.getElementById('editTeamName').value = player.teamName || '';
-      document.getElementById('editPaymentMethod').value = player.paymentMethod || 'upi';
-      document.getElementById('editTransactionId').value = player.transactionId;
-      
-      document.getElementById('editPlayerModal').classList.remove('hidden');
-    }
-    
-    function hideEditPlayerModal() {
-      document.getElementById('editPlayerModal').classList.add('hidden');
-    }
-    
-    function savePlayerEdits() {
-      const originalName = document.getElementById('editPlayerName').value;
-      const playerIndex = registrations.findIndex(p => p.playerName === originalName);
-      
-      if (playerIndex !== -1) {
-        registrations[playerIndex] = {
-          ...registrations[playerIndex],
-          playerName: document.getElementById('editPlayerName').value,
-          playerUID: document.getElementById('editPlayerUID').value,
-          whatsappNumber: document.getElementById('editWhatsappNumber').value,
-          playerLevel: document.getElementById('editPlayerLevel').value,
-          teamName: document.getElementById('editTeamName').value,
-          paymentMethod: document.getElementById('editPaymentMethod').value,
-          transactionId: document.getElementById('editTransactionId').value
-        };
-        
-        localStorage.setItem('registrations', JSON.stringify(registrations));
-        hideEditPlayerModal();
-        showAdminDashboard();
-        alert('Player information updated successfully!');
-      }
-    }
-    
-    function verifySelectedPlayers() {
-      const checkboxes = document.querySelectorAll('.player-checkbox:checked');
-      if (checkboxes.length === 0) {
-        alert('Please select at least one player to verify!');
-        return;
-      }
-      
-      checkboxes.forEach(checkbox => {
-        const playerName = checkbox.getAttribute('data-player');
-        verifyPlayer(playerName, false);
-      });
-      
-      alert(`${checkboxes.length} players verified successfully!`);
-    }
-    
-    function deleteSelectedPlayers() {
-      const checkboxes = document.querySelectorAll('.player-checkbox:checked');
-      if (checkboxes.length === 0) {
-        alert('Please select at least one player to delete!');
-        return;
-      }
-      
-      if (confirm(`Are you sure you want to delete ${checkboxes.length} selected players?`)) {
-        checkboxes.forEach(checkbox => {
-          const playerName = checkbox.getAttribute('data-player');
-          registrations = registrations.filter(reg => reg.playerName !== playerName);
-        });
-        
-        localStorage.setItem('registrations', JSON.stringify(registrations));
-        showAdminDashboard();
-        alert(`${checkboxes.length} players deleted successfully!`);
-      }
-    }
-    
-    function messagePlayer(playerName, whatsappNumber) {
-      document.getElementById('messageRecipientsCount').textContent = '1';
-      document.getElementById('messagePlayerModal').classList.remove('hidden');
-      document.getElementById('messageSentAlert').classList.add('hidden');
-      document.getElementById('customMessageSection').classList.add('hidden');
-      document.getElementById('roomDetailsSection').classList.remove('hidden');
-      
-      // Store selected players (single in this case)
-      window.selectedPlayersForMessage = [{ playerName, whatsappNumber }];
-    }
-    
-    function messageSelectedPlayers() {
-      const checkboxes = document.querySelectorAll('.player-checkbox:checked');
-      if (checkboxes.length === 0) {
-        alert('Please select at least one player to message!');
-        return;
-      }
-      
-      document.getElementById('messageRecipientsCount').textContent = checkboxes.length;
-      document.getElementById('messagePlayerModal').classList.remove('hidden');
-      document.getElementById('messageSentAlert').classList.add('hidden');
-      document.getElementById('customMessageSection').classList.add('hidden');
-      document.getElementById('roomDetailsSection').classList.remove('hidden');
-      
-      // Store selected players
-      window.selectedPlayersForMessage = Array.from(checkboxes).map(checkbox => {
-        const row = checkbox.closest('tr');
-        return {
-          playerName: row.cells[1].textContent,
-          whatsappNumber: row.cells[3].textContent
-        };
-      });
-    }
-    
-    function hideMessagePlayerModal() {
-      document.getElementById('messagePlayerModal').classList.add('hidden');
-      window.selectedPlayersForMessage = null;
-    }
-    
-    // Handle message type change
-    document.getElementById('messageType').addEventListener('change', function() {
-      const messageType = this.value;
-      const roomSection = document.getElementById('roomDetailsSection');
-      const customSection = document.getElementById('customMessageSection');
-      
-      if (messageType === 'room_details') {
-        roomSection.classList.remove('hidden');
-        customSection.classList.add('hidden');
-      } else if (messageType === 'custom') {
-        roomSection.classList.add('hidden');
-        customSection.classList.remove('hidden');
-      } else {
-        roomSection.classList.add('hidden');
-        customSection.classList.add('hidden');
-      }
-    });
-    
-    function sendPlayerMessage() {
-      const messageType = document.getElementById('messageType').value;
-      let message = '';
-      
-      if (messageType === 'verification') {
-        message = `Dear Player,\n\nYour registration for Fire Village Tournament has been verified!\n\nThank you for participating.`;
-      } 
-      else if (messageType === 'room_details') {
-        const roomId = document.getElementById('roomId').value;
-        const roomPassword = document.getElementById('roomPassword').value;
-        const matchTime = document.getElementById('matchTime').value;
-        
-        message = `Tournament Room Details:\n\nRoom ID: ${roomId}\nPassword: ${roomPassword}\nMatch Time: ${matchTime}\n\nGood luck!`;
-      }
-      else if (messageType === 'custom') {
-        message = document.getElementById('customMessage').value;
-      }
-      
-      // In a real app, this would send via WhatsApp API or other service
-      // For demo, we'll just show a success message
-      const recipients = window.selectedPlayersForMessage || [];
-      recipients.forEach(player => {
-        console.log(`Message to ${player.whatsappNumber}: ${message}`);
-        
-        // If verification message, mark as verified
-        if (messageType === 'verification') {
-          verifyPlayer(player.playerName, false);
-        }
-      });
-      
-      // Show success message
-      const alertDiv = document.getElementById('messageSentAlert');
-      alertDiv.classList.remove('hidden');
-      setTimeout(() => {
-        alertDiv.classList.add('hidden');
-        hideMessagePlayerModal();
-      }, 3000);
-    }
-    
-    function searchPlayers() {
-      const searchTerm = document.getElementById('adminSearch').value;
-      refreshPlayersList(searchTerm);
-    }
-    
-    function exportRegistrations() {
-      const dataStr = JSON.stringify(registrations, null, 2);
-      const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-      
-      const exportFileDefaultName = `fire-village-registrations-${new Date().toISOString().slice(0,10)}.json`;
-      
-      const linkElement = document.createElement('a');
-      linkElement.setAttribute('href', dataUri);
-      linkElement.setAttribute('download', exportFileDefaultName);
-      linkElement.click();
-    }
-    
-    // Refresh registration data
-    function refreshRegistrationData() {
-      if (!isAdminLoggedIn) return;
-      
-      // Get latest data from localStorage
-      const latestRegistrations = JSON.parse(localStorage.getItem('registrations')) || [];
-      
-      // Only update if there are changes
-      if (latestRegistrations.length !== registrations.length) {
-        registrations = latestRegistrations;
-        showAdminDashboard();
-      }
-    }
-    
-    // Form Submission
-    document.getElementById('registrationForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      const formData = {
-        playerName: document.getElementById('playerName').value,
-        playerUID: document.getElementById('playerUID').value,
-        whatsappNumber: document.getElementById('whatsappNumber').value,
-        playerLevel: document.getElementById('playerLevel').value,
-        teamName: document.getElementById('teamName').value,
-        paymentMethod: document.getElementById('paymentMethod').value,
-        transactionId: document.getElementById('transactionId').value,
-        registrationDate: new Date().toISOString(),
-        verified: false
-      };
-      
-      // Add to registrations
-      registrations.push(formData);
-      localStorage.setItem('registrations', JSON.stringify(registrations));
-      
-      // Show success message with WhatsApp contact info
-      const successMessage = document.getElementById('successMessage');
-      successMessage.innerHTML = `
-        Thank you for registering!<br><br>
-        Our team will contact you shortly on WhatsApp for verification.<br><br>
-        <span class="text-yellow-400">WhatsApp: +91 ${formData.whatsappNumber}</span><br>
-        Tournament Time: ${formatDate(tournamentSettings.date)} at ${formatTime(tournamentSettings.time)}
-      `;
-      
-      document.getElementById('successModal').classList.remove('hidden');
-      
-      // Reset form
-      this.reset();
-    });
-    
-    function hideSuccessModal() {
-      document.getElementById('successModal').classList.add('hidden');
-    }
-    
-    // Mobile Menu Toggle
-    function toggleMobileMenu() {
-      const menu = document.getElementById('mobileMenu');
-      menu.classList.toggle('hidden');
-    }
-    
-    // Initialize
-    document.addEventListener('DOMContentLoaded', function() {
-      initTournamentSettings();
-      updateCountdown();
-      checkVerifiedPlayer();
-    });
-    
-    // Close modals when clicking outside
-    window.addEventListener('click', function(event) {
-      if (event.target === document.getElementById('adminLoginModal')) {
-        hideAdminLogin();
-      }
-      if (event.target === document.getElementById('adminDashboard')) {
-        hideAdminDashboard();
-      }
-      if (event.target === document.getElementById('editPlayerModal')) {
-        hideEditPlayerModal();
-      }
-      if (event.target === document.getElementById('messagePlayerModal')) {
-        hideMessagePlayerModal();
-      }
-      if (event.target === document.getElementById('successModal')) {
-        hideSuccessModal();
-      }
-    });
-    
-    // Listen for storage updates from other tabs
-    window.addEventListener('storage', function(e) {
-      if (e.key === 'registrations' && isAdminLoggedIn) {
-        refreshRegistrationData();
-      }
-    });
-  </script>
+    </script>
 </body>
 </html>
